@@ -1,20 +1,26 @@
 #include <QApplication>
-#include <QObject>
-#include <QPushButton>
+#include <QProgressBar>
+#include <QSlider>
 
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
+	
 	QWidget window;
-	QPushButton *button;
+	window.setFixedSize(800, 600);
 
-	window.setFixedSize(1280, 720);
+	QProgressBar *progressBar = new QProgressBar(&window);
+	progressBar->setRange(0, 100);
+	progressBar->setValue(0);
+	progressBar->setGeometry(10, 550, 780, 40);
 
-	button = new QPushButton("Hello World", &window);
-	button->setGeometry(10, 10, 500, 300);
-	button->setToolTip("This is a tooltip");
+	QSlider *slider = new QSlider(&window);
+	slider->setOrientation(Qt::Horizontal);
+	slider->setRange(0, 100);
+	slider->setValue(0);
+	slider->setGeometry(10, 500, 780, 40);
 
-	QObject::connect(button, SIGNAL(clicked()), QApplication::instance(), SLOT(quit()));
+	QApplication::connect(slider, SIGNAL (valueChanged(int)), progressBar, SLOT (setValue(int)));
 
 	window.show();
 	return app.exec();
