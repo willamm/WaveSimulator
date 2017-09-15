@@ -25,25 +25,26 @@ QT_BEGIN_NAMESPACE
 class Ui_WaveSimClass
 {
 public:
+    QWidget *centralWidget;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
-    QWidget *centralWidget;
     QStatusBar *statusBar;
 
     void setupUi(QMainWindow *WaveSimClass)
     {
         if (WaveSimClass->objectName().isEmpty())
             WaveSimClass->setObjectName(QStringLiteral("WaveSimClass"));
-        WaveSimClass->resize(600, 400);
-        menuBar = new QMenuBar(WaveSimClass);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        WaveSimClass->setMenuBar(menuBar);
-        mainToolBar = new QToolBar(WaveSimClass);
-        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
-        WaveSimClass->addToolBar(mainToolBar);
+        WaveSimClass->resize(483, 370);
         centralWidget = new QWidget(WaveSimClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         WaveSimClass->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(WaveSimClass);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 483, 21));
+        WaveSimClass->setMenuBar(menuBar);
+        mainToolBar = new QToolBar(WaveSimClass);
+        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        WaveSimClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(WaveSimClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         WaveSimClass->setStatusBar(statusBar);
