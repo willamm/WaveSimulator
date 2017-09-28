@@ -6,6 +6,5 @@ WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	
-	QObject::connect(ui.pushButton, SIGNAL (pressed()), this, SLOT(close()));
+	connect(ui.pushButton, &QPushButton::pressed, this, &WaveSim::close);
 }
