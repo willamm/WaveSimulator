@@ -43,7 +43,7 @@ public:
     {
         if (WaveSimClass->objectName().isEmpty())
             WaveSimClass->setObjectName(QStringLiteral("WaveSimClass"));
-        WaveSimClass->resize(483, 370);
+        WaveSimClass->resize(894, 716);
         actionNew = new QAction(WaveSimClass);
         actionNew->setObjectName(QStringLiteral("actionNew"));
         actionOpen = new QAction(WaveSimClass);
@@ -60,7 +60,7 @@ public:
         WaveSimClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WaveSimClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 483, 21));
+        menuBar->setGeometry(QRect(0, 0, 894, 31));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuAbout = new QMenu(menuBar);
