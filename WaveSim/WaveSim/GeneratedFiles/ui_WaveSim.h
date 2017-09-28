@@ -20,6 +20,7 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QTreeView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,6 +34,7 @@ public:
     QAction *actionExit;
     QWidget *centralWidget;
     QPushButton *pushButton;
+    QTreeView *treeView;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuAbout;
@@ -57,6 +59,9 @@ public:
         pushButton = new QPushButton(centralWidget);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(400, 290, 75, 23));
+        treeView = new QTreeView(centralWidget);
+        treeView->setObjectName(QStringLiteral("treeView"));
+        treeView->setGeometry(QRect(10, 80, 256, 551));
         WaveSimClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WaveSimClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));

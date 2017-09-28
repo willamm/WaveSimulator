@@ -1,11 +1,23 @@
-#include "WaveSim.h"
+#include "ObjectTreeModel.h"
 
-#include <QtWidgets/QApplication>
+#include <QApplication>
+#include <QFile>
+#include <QTreeView>
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
-	WaveSim w;
-	w.show();
-	return a.exec();
+	//Q_INIT_RESOURCE(simpletreemodel);
+
+	QApplication app(argc, argv);
+
+	QFile file(":/default.txt");
+	file.open(QIODevice::ReadOnly);
+	ObjectTreeModel model(file.readAll());
+	file.close();
+
+	QTreeView view;
+	view.setModel(&model);
+	view.setWindowTitle(QObject::tr("Simple Tree Model"));
+	view.show();
+	return app.exec();
 }

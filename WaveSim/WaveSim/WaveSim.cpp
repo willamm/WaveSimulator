@@ -1,4 +1,6 @@
 #include "WaveSim.h"
+#include "ObjectTreeModel.h"
+
 #include <QObject>
 #include <QPushButton>
 
