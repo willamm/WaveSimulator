@@ -1,3 +1,6 @@
-First Row	Root
- Second Column	Test
-  Third Column	Test
+Root	Root
+ Geometry	Group
+  Rectangle	Structure
+  Circle	Structure
+ Solvers	Group
+  Wave		Solver

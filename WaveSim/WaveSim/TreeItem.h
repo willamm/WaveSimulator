@@ -3,7 +3,7 @@
 #include <QList>
 #include <QVariant>
 
-class TreeItem
+class TreeItem // TODO: make this class extend QStandardItem? Not sure yet
 {
 public:
 	explicit TreeItem(const QList<QVariant>& data, TreeItem* parentItem = 0);

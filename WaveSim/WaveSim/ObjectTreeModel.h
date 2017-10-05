@@ -4,7 +4,7 @@
 
 #include <QAbstractItemModel>
 
-class ObjectTreeModel : public QAbstractItemModel
+class ObjectTreeModel : public QAbstractItemModel // TODO: extend QStandardItemModel instead?
 {
 	Q_OBJECT
 
