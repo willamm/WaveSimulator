@@ -2,7 +2,6 @@
 #include "ObjectTreeModel.h"
 
 #include <QObject>
-#include <QPushButton>
 
 WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)
@@ -16,12 +15,19 @@ WaveSim::WaveSim(QWidget *parent)
 
 	treeView = new QTreeView;
 	treeView->setModel(treeModel);
-	QVBoxLayout* layout = new QVBoxLayout;
+
+	QLayout* layout = new QHBoxLayout;
 	layout->addWidget(treeView);
+
+	test = new BBTest;
+	test->setWindowFlags(Qt::Widget);
+	layout->addWidget(test);
+
 	QWidget* window = new QWidget;
 	window->setLayout(layout);
 	setCentralWidget(window);
 	
+
 
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }
