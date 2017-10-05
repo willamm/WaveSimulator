@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WaveSim", "WaveSim\WaveSim.vcxproj", "{B12702AD-ABFB-343A-A199-8E24837244A3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A2137E69-967D-4720-8553-49ED14AF19EE} = {A2137E69-967D-4720-8553-49ED14AF19EE}
+	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BBTest", "..\..\..\Source\Repos\QtWaveExperiment\BBTest\BBTest.vcxproj", "{A2137E69-967D-4720-8553-49ED14AF19EE}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BBTest", "..\QtWaveExperiment\BBTest\BBTest.vcxproj", "{A2137E69-967D-4720-8553-49ED14AF19EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

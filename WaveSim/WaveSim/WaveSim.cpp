@@ -1,6 +1,8 @@
 #include "WaveSim.h"
 #include "ObjectTreeModel.h"
 
+#include <QSplitter>
+#include <QBoxLayout>
 #include <QObject>
 
 WaveSim::WaveSim(QWidget *parent)
@@ -14,20 +16,18 @@ WaveSim::WaveSim(QWidget *parent)
 	file.close();
 
 	treeView = new QTreeView;
+	
 	treeView->setModel(treeModel);
-
-	QLayout* layout = new QHBoxLayout;
-	layout->addWidget(treeView);
 
 	test = new BBTest;
 	test->setWindowFlags(Qt::Widget);
-	layout->addWidget(test);
 
-	QWidget* window = new QWidget;
-	window->setLayout(layout);
-	setCentralWidget(window);
-	
-
+	QWidget* wrapper = new QWidget(this);
+	QBoxLayout* vLayout = new QBoxLayout(QBoxLayout::LeftToRight, wrapper);
+	vLayout->addWidget(treeView, 1, Qt::AlignLeft);
+	vLayout->addWidget(test, 0, Qt::AlignRight);
+	wrapper->setLayout(vLayout);
+	setCentralWidget(wrapper);
 
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }

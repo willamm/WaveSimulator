@@ -8,7 +8,7 @@
 
 #include "ui_WaveSim.h"
 #include "ObjectTreeModel.h"
-#include "BBTest/BBTest.h"
+#include "BBTest.h"
 
 class WaveSim : public QMainWindow
 {
