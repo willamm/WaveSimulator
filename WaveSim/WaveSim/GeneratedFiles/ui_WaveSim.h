@@ -17,10 +17,8 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
-#include <QtWidgets/QTreeView>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -33,8 +31,6 @@ public:
     QAction *actionSave;
     QAction *actionExit;
     QWidget *centralWidget;
-    QPushButton *pushButton;
-    QTreeView *treeView;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuAbout;
@@ -56,12 +52,6 @@ public:
         actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(WaveSimClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(400, 290, 75, 23));
-        treeView = new QTreeView(centralWidget);
-        treeView->setObjectName(QStringLiteral("treeView"));
-        treeView->setGeometry(QRect(10, 80, 256, 551));
         WaveSimClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WaveSimClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -98,7 +88,6 @@ public:
         actionOpen->setText(QApplication::translate("WaveSimClass", "Open", 0));
         actionSave->setText(QApplication::translate("WaveSimClass", "Save", 0));
         actionExit->setText(QApplication::translate("WaveSimClass", "Exit", 0));
-        pushButton->setText(QApplication::translate("WaveSimClass", "Close", 0));
         menuFile->setTitle(QApplication::translate("WaveSimClass", "File", 0));
         menuAbout->setTitle(QApplication::translate("WaveSimClass", "About", 0));
     } // retranslateUi

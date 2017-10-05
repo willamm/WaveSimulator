@@ -3,6 +3,7 @@
 #include "TreeItem.h"
 
 #include <QAbstractItemModel>
+#include <QStringList>
 
 class ObjectTreeModel : public QAbstractItemModel // TODO: extend QStandardItemModel instead?
 {

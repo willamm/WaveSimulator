@@ -1,8 +1,7 @@
 #include "ObjectTreeModel.h"
+#include "WaveSim.h"
 
-#include <QApplication>
-#include <QFile>
-#include <QTreeView>
+
 
 int main(int argc, char *argv[])
 {
@@ -10,14 +9,9 @@ int main(int argc, char *argv[])
 
 	QApplication app(argc, argv);
 
-	QFile file(":/default.txt");
-	file.open(QIODevice::ReadOnly);
-	ObjectTreeModel model(file.readAll());
-	file.close();
+	
 
-	QTreeView view;
-	view.setModel(&model);
-	view.setWindowTitle(QObject::tr("Simple Tree Model"));
-	view.show();
+	WaveSim w;
+	w.show();
 	return app.exec();
 }

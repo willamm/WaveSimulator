@@ -8,5 +8,26 @@ WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)
 {
 	ui.setupUi(this);
-	connect(ui.pushButton, &QPushButton::pressed, this, &WaveSim::close);
+
+	QFile file(":/default.txt");
+	file.open(QIODevice::ReadOnly);
+	treeModel = new ObjectTreeModel(file.readAll());
+	file.close();
+
+	treeView = new QTreeView;
+	treeView->setModel(treeModel);
+	QVBoxLayout* layout = new QVBoxLayout;
+	layout->addWidget(treeView);
+	QWidget* window = new QWidget;
+	window->setLayout(layout);
+	setCentralWidget(window);
+	
+
+	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
+}
+
+WaveSim::~WaveSim()
+{
+	delete treeModel;
+	delete treeView;
 }
