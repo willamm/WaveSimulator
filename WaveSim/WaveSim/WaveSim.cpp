@@ -15,13 +15,17 @@ WaveSim::WaveSim(QWidget *parent)
 
 	treeView = new QTreeView;
 	treeView->setModel(treeModel);
-	QVBoxLayout* layout = new QVBoxLayout;
-	layout->addWidget(treeView);
-	QWidget* window = new QWidget;
-	window->setLayout(layout);
-	setCentralWidget(window);
+	rc = new RenderController(this);
 
-	//RenderController* rc = new RenderController(this);
+	QHBoxLayout* layout = new QHBoxLayout(this);
+	QWidget* window = new QWidget(this);
+
+	layout->addWidget(treeView);
+	layout->addWidget(rc);
+
+	window->setLayout(layout);
+
+	setCentralWidget(window);
 	
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }

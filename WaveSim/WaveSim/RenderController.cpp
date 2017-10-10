@@ -9,6 +9,7 @@ RenderController::RenderController(QWidget *parent)
 	, mPixItem(mScene->addPixmap(*mPix))
 	, mView(new QGraphicsView(mScene, this))
 {
+	setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	mView->resize(WINDOW_WIDTH + 2, WINDOW_HEIGHT + 2);
 	initThreads();
 }

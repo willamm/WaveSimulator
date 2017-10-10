@@ -22,4 +22,5 @@ private:
 	Ui::WaveSimClass ui;
 	ObjectTreeModel* treeModel;
 	QTreeView* treeView;
+	RenderController* rc;
 };
