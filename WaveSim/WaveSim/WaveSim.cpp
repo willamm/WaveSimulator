@@ -1,5 +1,4 @@
 #include "WaveSim.h"
-#include "ObjectTreeModel.h"
 
 #include <QObject>
 #include <QPushButton>
@@ -21,8 +20,9 @@ WaveSim::WaveSim(QWidget *parent)
 	QWidget* window = new QWidget;
 	window->setLayout(layout);
 	setCentralWidget(window);
-	
 
+	//RenderController* rc = new RenderController(this);
+	
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }
 

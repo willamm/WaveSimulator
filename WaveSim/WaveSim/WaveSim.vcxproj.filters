@@ -28,6 +28,24 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{e265eefa-2e99-4089-96da-1edebd3e3ae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Model">
+      <UniqueIdentifier>{dc3055dc-549f-44ce-b53b-0e39b37f5e62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\View">
+      <UniqueIdentifier>{a867bfbe-5a46-4bbc-99e0-1d3345aa4598}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Controller">
+      <UniqueIdentifier>{ee09ee42-2bcc-4b12-8010-ce78bc50fe28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Model\Shapes">
+      <UniqueIdentifier>{c51d0ff2-02f5-491c-bd96-52fc704243a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Renderer\Model\Field">
+      <UniqueIdentifier>{9e925428-7f78-40f7-83f9-d5408a5b3bc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -57,6 +75,42 @@
     <ClCompile Include="TreeItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_CalcThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_CalcThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_PaintThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_PaintThread.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_RenderController.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_RenderController.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PaintThread.cpp">
+      <Filter>Renderer\View</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderController.cpp">
+      <Filter>Renderer\Controller</Filter>
+    </ClCompile>
+    <ClCompile Include="LCircle.cpp">
+      <Filter>Renderer\Model\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="LRect.cpp">
+      <Filter>Renderer\Model\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="LShape.cpp">
+      <Filter>Renderer\Model\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="CalcThread.cpp">
+      <Filter>Renderer\Model\Field</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -71,6 +125,15 @@
     <CustomBuild Include="ObjectTreeModel.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="PaintThread.h">
+      <Filter>Renderer\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="RenderController.h">
+      <Filter>Renderer\Controller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="CalcThread.h">
+      <Filter>Renderer\Model\Field</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_WaveSim.h">
@@ -78,6 +141,24 @@
     </ClInclude>
     <ClInclude Include="TreeItem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="values.h">
+      <Filter>Renderer\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="LCircle.h">
+      <Filter>Renderer\Model\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="LRect.h">
+      <Filter>Renderer\Model\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="LShape.h">
+      <Filter>Renderer\Model\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="FieldArray.h">
+      <Filter>Renderer\Model\Field</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveSolver.h">
+      <Filter>Renderer\Model\Field</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

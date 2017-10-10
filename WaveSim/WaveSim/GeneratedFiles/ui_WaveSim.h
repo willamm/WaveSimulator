@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WaveSim.ui'
 **
-** Created by: Qt User Interface Compiler version 5.6.2
+** Created by: Qt User Interface Compiler version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -83,13 +83,13 @@ public:
 
     void retranslateUi(QMainWindow *WaveSimClass)
     {
-        WaveSimClass->setWindowTitle(QApplication::translate("WaveSimClass", "WaveSim", 0));
-        actionNew->setText(QApplication::translate("WaveSimClass", "New", 0));
-        actionOpen->setText(QApplication::translate("WaveSimClass", "Open", 0));
-        actionSave->setText(QApplication::translate("WaveSimClass", "Save", 0));
-        actionExit->setText(QApplication::translate("WaveSimClass", "Exit", 0));
-        menuFile->setTitle(QApplication::translate("WaveSimClass", "File", 0));
-        menuAbout->setTitle(QApplication::translate("WaveSimClass", "About", 0));
+        WaveSimClass->setWindowTitle(QApplication::translate("WaveSimClass", "WaveSim", Q_NULLPTR));
+        actionNew->setText(QApplication::translate("WaveSimClass", "New", Q_NULLPTR));
+        actionOpen->setText(QApplication::translate("WaveSimClass", "Open", Q_NULLPTR));
+        actionSave->setText(QApplication::translate("WaveSimClass", "Save", Q_NULLPTR));
+        actionExit->setText(QApplication::translate("WaveSimClass", "Exit", Q_NULLPTR));
+        menuFile->setTitle(QApplication::translate("WaveSimClass", "File", Q_NULLPTR));
+        menuAbout->setTitle(QApplication::translate("WaveSimClass", "About", Q_NULLPTR));
     } // retranslateUi
 
 };

@@ -1,13 +1,13 @@
 /****************************************************************************
 ** Resource object code
 **
-** Created by: The Resource Compiler for Qt version 5.6.2
+** Created by: The Resource Compiler for Qt version 5.9.1
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
 static const unsigned char qt_resource_data[] = {
-  // C:/Users/Will/Documents/WaveSimulator/WaveSim/WaveSim/default.txt
+  // C:/Users/benny/Google Drive/BCIT/201720/Lumerical/WaveSimulator/WaveSim/WaveSim/default.txt
   0x0,0x0,0x0,0x65,
   0x52,
   0x6f,0x6f,0x74,0x9,0x52,0x6f,0x6f,0x74,0xd,0xa,0x20,0x47,0x65,0x6f,0x6d,0x65,
@@ -32,8 +32,10 @@ static const unsigned char qt_resource_name[] = {
 static const unsigned char qt_resource_struct[] = {
   // :
   0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x1,
+0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,
   // :/default.txt
   0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x0,0x0,0x0,
+0x0,0x0,0x1,0x5f,0x7,0x70,0x2f,0x69,
 
 };
 
@@ -65,7 +67,7 @@ int QT_RCC_MANGLE_NAMESPACE(qInitResources_WaveSim)();
 int QT_RCC_MANGLE_NAMESPACE(qInitResources_WaveSim)()
 {
     QT_RCC_PREPEND_NAMESPACE(qRegisterResourceData)
-        (0x01, qt_resource_struct, qt_resource_name, qt_resource_data);
+        (0x2, qt_resource_struct, qt_resource_name, qt_resource_data);
     return 1;
 }
 
@@ -73,7 +75,7 @@ int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_WaveSim)();
 int QT_RCC_MANGLE_NAMESPACE(qCleanupResources_WaveSim)()
 {
     QT_RCC_PREPEND_NAMESPACE(qUnregisterResourceData)
-       (0x01, qt_resource_struct, qt_resource_name, qt_resource_data);
+       (0x2, qt_resource_struct, qt_resource_name, qt_resource_data);
     return 1;
 }
 
