@@ -1,10 +1,17 @@
+#include "ObjectTreeModel.h"
 #include "WaveSim.h"
-#include <QtWidgets/QApplication>
+
+
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
+	//Q_INIT_RESOURCE(simpletreemodel);
+
+	QApplication app(argc, argv);
+
+	
+
 	WaveSim w;
 	w.show();
-	return a.exec();
+	return app.exec();
 }

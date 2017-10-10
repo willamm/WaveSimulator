@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'WaveSim.ui'
 **
-** Created by: Qt User Interface Compiler version 5.9.1
+** Created by: Qt User Interface Compiler version 5.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -17,7 +17,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -32,7 +31,6 @@ public:
     QAction *actionSave;
     QAction *actionExit;
     QWidget *centralWidget;
-    QPushButton *pushButton;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuAbout;
@@ -43,7 +41,7 @@ public:
     {
         if (WaveSimClass->objectName().isEmpty())
             WaveSimClass->setObjectName(QStringLiteral("WaveSimClass"));
-        WaveSimClass->resize(483, 370);
+        WaveSimClass->resize(894, 716);
         actionNew = new QAction(WaveSimClass);
         actionNew->setObjectName(QStringLiteral("actionNew"));
         actionOpen = new QAction(WaveSimClass);
@@ -54,13 +52,10 @@ public:
         actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(WaveSimClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(400, 290, 75, 23));
         WaveSimClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WaveSimClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 483, 21));
+        menuBar->setGeometry(QRect(0, 0, 894, 31));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuAbout = new QMenu(menuBar);
@@ -88,14 +83,13 @@ public:
 
     void retranslateUi(QMainWindow *WaveSimClass)
     {
-        WaveSimClass->setWindowTitle(QApplication::translate("WaveSimClass", "WaveSim", Q_NULLPTR));
-        actionNew->setText(QApplication::translate("WaveSimClass", "New", Q_NULLPTR));
-        actionOpen->setText(QApplication::translate("WaveSimClass", "Open", Q_NULLPTR));
-        actionSave->setText(QApplication::translate("WaveSimClass", "Save", Q_NULLPTR));
-        actionExit->setText(QApplication::translate("WaveSimClass", "Exit", Q_NULLPTR));
-        pushButton->setText(QApplication::translate("WaveSimClass", "Close", Q_NULLPTR));
-        menuFile->setTitle(QApplication::translate("WaveSimClass", "File", Q_NULLPTR));
-        menuAbout->setTitle(QApplication::translate("WaveSimClass", "About", Q_NULLPTR));
+        WaveSimClass->setWindowTitle(QApplication::translate("WaveSimClass", "WaveSim", 0));
+        actionNew->setText(QApplication::translate("WaveSimClass", "New", 0));
+        actionOpen->setText(QApplication::translate("WaveSimClass", "Open", 0));
+        actionSave->setText(QApplication::translate("WaveSimClass", "Save", 0));
+        actionExit->setText(QApplication::translate("WaveSimClass", "Exit", 0));
+        menuFile->setTitle(QApplication::translate("WaveSimClass", "File", 0));
+        menuAbout->setTitle(QApplication::translate("WaveSimClass", "About", 0));
     } // retranslateUi
 
 };
