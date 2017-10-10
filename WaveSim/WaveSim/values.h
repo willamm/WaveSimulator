@@ -8,7 +8,7 @@ const int FPS = 60;
 const int X = 200;
 const int Y = 200;
 
-const int PIXEL_SIZE = 2;
+const int PIXEL_SIZE = 3;
 
 const int MIDDLE_COLOR = 126;
 const int COLOR_CONSTRAST = 3;
