@@ -14,7 +14,7 @@
 #include "WaveSolver.h"
 #include "values.h"
 
-// Make this class generic
+// TODO: Make this class generic
 class RenderController : public QWidget
 {
 	Q_OBJECT
@@ -23,8 +23,8 @@ public:
 	RenderController(QWidget *parent);
 	~RenderController();
 
-	void AddRect(int x, int y, int width, int height, double vel);
-	void AddCircle(int x, int y, int radius, double vel);
+	void AddRect(const int x, const int y, const int width, const int height, const double vel);
+	void AddCircle(const int x, const int y, const int radius, const double vel);
 	void ClearShapes();
 	void ResetField();
 

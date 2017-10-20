@@ -9,16 +9,16 @@ template<typename T>
 class LShape
 {
 public:
-	LShape(int x, int y, T vel);
+	LShape(const int x, const int y, const T vel);
 
-	int GetX();
-	int GetY();
-	T GetVel();
+	int GetX() const;
+	int GetY() const;
+	T GetVel() const;
 
-	virtual void Draw(QPainter* painter) = 0;
+	virtual void Draw(QPainter* painter) = 0 const;
 private:
-	int mX;
-	int mY;
-	T mVel;
+	const int mX;
+	const int mY;
+	const T mVel;
 };
 

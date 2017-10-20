@@ -1,7 +1,7 @@
 #include "PaintThread.h"
 #include <QDebug> 
 
-PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent)
+PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, const float fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)

@@ -1,14 +1,14 @@
 #include "LCircle.h"
 
 template<typename T>
-LCircle<T>::LCircle(int x, int y, int radius, T vel)
+LCircle<T>::LCircle(const int x, const int y, const int radius, const T vel)
 	: LShape(x, y, vel)
 	, mRadius(radius)
 {
 }
 
 template<typename T>
-void LCircle<T>::Draw(QPainter* painter) 
+void LCircle<T>::Draw(QPainter* painter) const 
 {
 	int startingX = LShape::GetX() - mRadius;
 	int startingY = LShape::GetY() - mRadius;
