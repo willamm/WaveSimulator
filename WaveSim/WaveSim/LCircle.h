@@ -6,10 +6,10 @@ class LCircle :
 	public LShape<T>
 {
 public:
-	LCircle(int x, int y, int radius, T vel);
+	LCircle(const int x, const int y, const int radius, const T vel);
 
-	void Draw(QPainter* painter);
+	void Draw(QPainter* painter) const;
 
 private:
-	int mRadius;
+	const int mRadius;
 };

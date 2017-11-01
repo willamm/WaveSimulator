@@ -17,7 +17,7 @@ public:
         mVelocity(numCellsX, numCellsY, defaultVelocity)
     {
         // Add a single (source) peak in the middle of the current field
-        mField(numCellsX / 2, numCellsY / 2) = 1.0;
+        mField(numCellsX / 44, numCellsY / 4) = 1.0;
     }
 
 

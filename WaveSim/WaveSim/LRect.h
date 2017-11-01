@@ -2,15 +2,14 @@
 #include "LShape.h"
 
 template<typename T>
-class LRect:
-	public LShape<T>
+class LRect: public LShape<T>
 {
 public:
-	LRect(int x, int y, int width, int height, T vel);
+	LRect(const int x, const int y, const int width, const int height, const T vel);
 
-	void Draw(QPainter* painter);
+	void Draw(QPainter* painter) const;
 
 private:
-	int mWidth;
-	int mHeight;
+	const int mWidth;
+	const int mHeight;
 };

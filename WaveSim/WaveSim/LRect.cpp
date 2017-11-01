@@ -1,7 +1,7 @@
 #include "LRect.h"
 
 template<typename T>
-LRect<T>::LRect(int x, int y, int width, int height, T vel)
+LRect<T>::LRect(const int x, const int y, const int width, const int height, const T vel)
 	: LShape(x, y, vel)
 	, mWidth(width)
 	, mHeight(height)
@@ -9,7 +9,7 @@ LRect<T>::LRect(int x, int y, int width, int height, T vel)
 }
 
 template<typename T>
-void LRect<T>::Draw(QPainter* painter)
+void LRect<T>::Draw(QPainter* painter) const
 {
 	painter->fillRect(LShape::GetX() * PIXEL_SIZE, LShape::GetY() * PIXEL_SIZE, mWidth * PIXEL_SIZE, mHeight * PIXEL_SIZE, QColor(255, 0, 0, 125));
 }

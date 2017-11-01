@@ -20,6 +20,7 @@ RenderController::~RenderController()
 	delete mPThread;
 
 	delete mSolver;
+	delete mShapes;
 	
 	delete mView;
 	delete mPixItem;
@@ -27,13 +28,13 @@ RenderController::~RenderController()
 	delete mPix;
 }
 
-void RenderController::AddRect(int x, int y, int width, int height, double vel)
+void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
 {
 	mSolver->addRectangle(x, y, x + width, y + height, vel);
 	mShapes->append(new LRect<double>(x, y, width, height, vel));
 }
 
-void RenderController::AddCircle(int x, int y, int radius, double vel)
+void RenderController::AddCircle(const int x, const int y, const int radius, const double vel)
 {
 	mSolver->addCircle(x, y, radius, vel);
 	mShapes->append(new LCircle<double>(x, y, radius, vel));
