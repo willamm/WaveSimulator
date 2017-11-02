@@ -16,7 +16,7 @@ RenderController::RenderController(QWidget *parent)
 
 RenderController::~RenderController()
 {
-	for (auto i : *mShapes)
+	for (auto& i : *mShapes)
 	{
 		delete i;
 	}

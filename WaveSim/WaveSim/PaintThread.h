@@ -22,6 +22,8 @@ public:
 	PaintThread(const PaintThread& pt);
 	~PaintThread();
 
+	class ThreadBuilder;
+
 protected:
 	void run();
 
@@ -33,10 +35,17 @@ private:
 	QVector<LShape<double>*>* mShapes;
 
 	QPixmap* mPix;
-	QPainter* mPainter;
+	std::unique_ptr<QPainter> mPainter;
 
 	void paint();
 
 signals:
 	void paintDone();
+};
+
+class PaintThread::ThreadBuilder 
+{
+public:
+private:
+
 };

@@ -8,7 +8,7 @@ PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* s
 	, mSolver(solver)
 	, mShapes(shapes)
 	, mPix(pix)
-	, mPainter(new QPainter(pix))
+	, mPainter(std::make_unique<QPainter>(pix))
 {
 }
 
@@ -19,7 +19,7 @@ PaintThread::PaintThread(const PaintThread& pt)
 PaintThread::~PaintThread()
 {
 	mRunning = false;
-	wait();
+	wait(1000);
 }
 
 void PaintThread::run()
@@ -28,7 +28,7 @@ void PaintThread::run()
 	while (mRunning)
 	{
 		mutex.lock();
-			paint();
+		paint();
 		mutex.unlock();
 
 		emit paintDone();
@@ -65,6 +65,6 @@ void PaintThread::paint()
 
 	for (const auto& shapes : *mShapes)
 	{
-		shapes->Draw(mPainter);
+		shapes->Draw(mPainter.get());
 	}
 }

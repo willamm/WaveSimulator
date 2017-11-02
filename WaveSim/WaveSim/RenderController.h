@@ -29,6 +29,7 @@ public:
 	void ResetField();
 
 private:
+
 	std::unique_ptr<WaveSolver<double>> mSolver;
 
 	std::unique_ptr<CalcThread> mCThread;
