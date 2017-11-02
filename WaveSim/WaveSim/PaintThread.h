@@ -12,11 +12,14 @@
 #include "WaveSolver.h"
 #include "values.h"
 
-class PaintThread : public QThread
+class PaintThread
+	: public QThread
 {
 	Q_OBJECT
 public:
-	PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, const float fps, QObject* parent = nullptr);
+	
+	PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent = nullptr);
+	PaintThread(const PaintThread& pt);
 	~PaintThread();
 
 protected:
@@ -24,7 +27,7 @@ protected:
 
 private:
 	bool mRunning;
-	const int mFPS;
+	int mFPS;
 
 	WaveSolver<double>* mSolver;
 	QVector<LShape<double>*>* mShapes;

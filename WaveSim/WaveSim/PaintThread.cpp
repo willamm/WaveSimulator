@@ -1,7 +1,7 @@
 #include "PaintThread.h"
 #include <QDebug> 
 
-PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, const float fps, QObject* parent)
+PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)
@@ -9,6 +9,10 @@ PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* s
 	, mShapes(shapes)
 	, mPix(pix)
 	, mPainter(new QPainter(pix))
+{
+}
+
+PaintThread::PaintThread(const PaintThread& pt)
 {
 }
 
@@ -59,8 +63,8 @@ void PaintThread::paint()
 		}
 	}
 
-	for (int k = 0; k < mShapes->size(); k++)
+	for (const auto& shapes : *mShapes)
 	{
-		mShapes->at(k)->Draw(mPainter);
+		shapes->Draw(mPainter);
 	}
 }
