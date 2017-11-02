@@ -1,6 +1,5 @@
 #include "ObjectTreeModel.h"
 
-
 ObjectTreeModel::ObjectTreeModel(const QString& data, QObject* parent)
 	: QAbstractItemModel(parent)
 {
