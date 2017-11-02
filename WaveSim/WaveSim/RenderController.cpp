@@ -16,6 +16,10 @@ RenderController::RenderController(QWidget *parent)
 
 RenderController::~RenderController()
 {
+	for (auto i : *mShapes)
+	{
+		delete i;
+	}
 }
 
 void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
