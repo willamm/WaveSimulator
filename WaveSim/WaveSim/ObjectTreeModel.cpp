@@ -6,13 +6,12 @@ ObjectTreeModel::ObjectTreeModel(const QString& data, QObject* parent)
 {
 	QList<QVariant> rootData;
 	rootData << "Name" << "Type";
-	rootItem = new TreeItem(rootData);
-	setupModelData(data.split(QString("\n")), rootItem);
+	rootItem = std::make_unique<TreeItem>(rootData);
+	setupModelData(data.split(QString("\n")), rootItem.get());
 }
 
 ObjectTreeModel::~ObjectTreeModel()
 {
-	delete rootItem;
 }
 
 Qt::ItemFlags ObjectTreeModel::flags(const QModelIndex & index) const
@@ -45,7 +44,7 @@ QModelIndex ObjectTreeModel::index(int row, int column, const QModelIndex& paren
 
 	if (!parent.isValid())
 	{
-		parentItem = rootItem;
+		parentItem = rootItem.get();
 	}
 	else
 	{
@@ -73,7 +72,7 @@ QModelIndex ObjectTreeModel::parent(const QModelIndex& index) const
 	TreeItem* child = static_cast<TreeItem*>(index.internalPointer());
 	TreeItem* parentItem = child->parentItem();
 
-	if (parentItem == rootItem)
+	if (parentItem == rootItem.get())
 	{
 		return QModelIndex();
 	}
@@ -91,7 +90,7 @@ int ObjectTreeModel::rowCount(const QModelIndex& parent) const
 
 	if (!parent.isValid())
 	{
-		parentItem = rootItem;
+		parentItem = rootItem.get();
 	}
 	else
 	{

@@ -22,7 +22,7 @@ WaveSim::WaveSim(QWidget *parent)
 
 	layout->addWidget(treeView);
 	layout->addWidget(rc);
-
+	
 	window->setLayout(layout);
 
 	setCentralWidget(window);
@@ -34,4 +34,5 @@ WaveSim::~WaveSim()
 {
 	delete treeModel;
 	delete treeView;
+	delete rc;
 }

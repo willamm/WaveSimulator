@@ -1,21 +1,25 @@
 #include "PaintThread.h"
 #include <QDebug> 
 
-PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, const float fps, QObject* parent)
+PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)
 	, mSolver(solver)
 	, mShapes(shapes)
 	, mPix(pix)
-	, mPainter(new QPainter(pix))
+	, mPainter(std::make_unique<QPainter>(pix))
+{
+}
+
+PaintThread::PaintThread(const PaintThread& pt)
 {
 }
 
 PaintThread::~PaintThread()
 {
 	mRunning = false;
-	wait();
+	wait(1000);
 }
 
 void PaintThread::run()
@@ -24,7 +28,7 @@ void PaintThread::run()
 	while (mRunning)
 	{
 		mutex.lock();
-			paint();
+		paint();
 		mutex.unlock();
 
 		emit paintDone();
@@ -59,8 +63,8 @@ void PaintThread::paint()
 		}
 	}
 
-	for (int k = 0; k < mShapes->size(); k++)
+	for (const auto& shapes : *mShapes)
 	{
-		mShapes->at(k)->Draw(mPainter);
+		shapes->Draw(mPainter.get());
 	}
 }

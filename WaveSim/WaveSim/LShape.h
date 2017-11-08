@@ -15,7 +15,7 @@ public:
 	int GetY() const;
 	T GetVel() const;
 
-	virtual void Draw(QPainter* painter) = 0 const;
+	virtual void Draw(QPainter* painter) const = 0;
 private:
 	const int mX;
 	const int mY;

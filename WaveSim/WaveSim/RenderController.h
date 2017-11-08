@@ -29,17 +29,18 @@ public:
 	void ResetField();
 
 private:
-	WaveSolver<double>* mSolver;
 
-	CalcThread* mCThread;
-	PaintThread* mPThread;
+	std::unique_ptr<WaveSolver<double>> mSolver;
 
-	QVector<LShape<double>*>* mShapes;
+	std::unique_ptr<CalcThread> mCThread;
+	std::unique_ptr<PaintThread> mPThread;
 
-	QPixmap* mPix;
-	QGraphicsScene* mScene;
-	QGraphicsPixmapItem* mPixItem;
-	QGraphicsView* mView;
+	std::unique_ptr<QVector<LShape<double>*>> mShapes;
+
+	std::unique_ptr<QPixmap> mPix;
+	std::unique_ptr<QGraphicsScene> mScene;
+	std::unique_ptr<QGraphicsPixmapItem> mPixItem;
+	std::unique_ptr<QGraphicsView> mView;
 
 	void initThreads();
 
