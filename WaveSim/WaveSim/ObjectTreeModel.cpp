@@ -1,6 +1,5 @@
 #include "ObjectTreeModel.h"
 
-
 ObjectTreeModel::ObjectTreeModel(const QString& data, QObject* parent)
 	: QAbstractItemModel(parent)
 {
@@ -174,11 +173,9 @@ void ObjectTreeModel::setupModelData(const QStringList& lines, TreeItem* parent)
 					indentations.pop_back();
 				}
 			}
-
 			// Append a new item to the current parent's list of children.
 			parents.last()->appendChild(new TreeItem(columnData, parents.last()));
 		}
-
 		++number;
 	}
 }
