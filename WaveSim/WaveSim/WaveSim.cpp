@@ -20,6 +20,9 @@ WaveSim::WaveSim(QWidget *parent)
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
 
+	treeView->setMaximumHeight(rc->height());
+	setMaximumHeight(rc->height());
+
 	layout->addWidget(treeView);
 	layout->addWidget(rc);
 
