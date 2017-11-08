@@ -2,6 +2,7 @@
 
 #include <QList>
 #include <QVariant>
+#include <memory>
 
 class TreeItem // TODO: make this class extend QStandardItem? Not sure yet
 {

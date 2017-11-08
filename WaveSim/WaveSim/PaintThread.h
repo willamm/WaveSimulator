@@ -12,28 +12,40 @@
 #include "WaveSolver.h"
 #include "values.h"
 
-class PaintThread : public QThread
+class PaintThread
+	: public QThread
 {
 	Q_OBJECT
 public:
-	PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, const float fps, QObject* parent = nullptr);
+	
+	PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent = nullptr);
+	PaintThread(const PaintThread& pt);
 	~PaintThread();
+
+	class ThreadBuilder;
 
 protected:
 	void run();
 
 private:
 	bool mRunning;
-	const int mFPS;
+	int mFPS;
 
 	WaveSolver<double>* mSolver;
 	QVector<LShape<double>*>* mShapes;
 
 	QPixmap* mPix;
-	QPainter* mPainter;
+	std::unique_ptr<QPainter> mPainter;
 
 	void paint();
 
 signals:
 	void paintDone();
+};
+
+class PaintThread::ThreadBuilder 
+{
+public:
+private:
+
 };

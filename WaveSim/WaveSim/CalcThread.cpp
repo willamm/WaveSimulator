@@ -10,7 +10,7 @@ CalcThread::CalcThread(WaveSolver<double>* solver, const int fps, QObject* paren
 CalcThread::~CalcThread()
 {
 	mRunning = false;
-	wait();
+	wait(1000);
 }
 
 void CalcThread::run()
