@@ -2,7 +2,9 @@
 #include <memory>
 #include <unordered_map>
 
-#include <Module.h>
+#include "Module.h"
+
+using ModuleMap = std::unordered_map<int, std::shared_ptr<Module>>;
 
 class DatabaseRef final
 {
