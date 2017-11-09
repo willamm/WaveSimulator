@@ -22,7 +22,7 @@ class PaintThread
 	Q_OBJECT
 public:
 	
-	PaintThread(std::shared_ptr<WaveSolver<double>> solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, float fps, QObject* parent = nullptr);
+	PaintThread(std::shared_ptr<WaveSolver<double>> solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent = nullptr);
 	PaintThread(const PaintThread& pt);
 	~PaintThread();
 
