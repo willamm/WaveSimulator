@@ -7,6 +7,9 @@
 *.userosscache
 *.sln.docstates
 
+#Qt generated files
+WaveSim/WaveSim/GeneratedFiles/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
