@@ -5,6 +5,7 @@
 
 WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)
+	, databaseRef(std::make_shared<DatabaseRef>())
 {
 	ui.setupUi(this);
 
@@ -15,7 +16,7 @@ WaveSim::WaveSim(QWidget *parent)
 
 	treeView = new QTreeView;
 	treeView->setModel(treeModel);
-	rc = new RenderController(this);
+	rc = std::make_unique<RenderController>(this, databaseRef);
 
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
@@ -24,18 +25,19 @@ WaveSim::WaveSim(QWidget *parent)
 	setMaximumHeight(rc->height());
 
 	layout->addWidget(treeView);
-	layout->addWidget(rc);
+	layout->addWidget(rc.get());
 	
 	window->setLayout(layout);
 
 	setCentralWidget(window);
 	
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
+
+	rc->AddRect(50, 50, 10, 10, 0);
 }
 
 WaveSim::~WaveSim()
 {
 	delete treeModel;
 	delete treeView;
-	delete rc;
 }

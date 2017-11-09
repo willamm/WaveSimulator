@@ -1,14 +1,18 @@
 #pragma once
+#include <memory>
+
 #include <QMutex>
 #include <QThread>
 #include <QPainter>
 #include <QPixmap>
 #include <QVector>
 
+#include "DatabaseRef.h"
 #include "FieldArray.h"
 #include "LCircle.h"
 #include "LRect.h"
 #include "LShape.h"
+#include "ShapesModule.h"
 #include "WaveSolver.h"
 #include "values.h"
 
@@ -18,7 +22,7 @@ class PaintThread
 	Q_OBJECT
 public:
 	
-	PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent = nullptr);
+	PaintThread(std::shared_ptr<WaveSolver<double>> solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent = nullptr);
 	PaintThread(const PaintThread& pt);
 	~PaintThread();
 
@@ -31,8 +35,8 @@ private:
 	bool mRunning;
 	int mFPS;
 
-	WaveSolver<double>* mSolver;
-	QVector<LShape<double>*>* mShapes;
+	std::shared_ptr<WaveSolver<double>> mSolver;
+	std::shared_ptr<ShapesModule> mShapes;
 
 	QPixmap* mPix;
 	std::unique_ptr<QPainter> mPainter;
