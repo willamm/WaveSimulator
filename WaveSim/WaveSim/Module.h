@@ -3,11 +3,8 @@
 class Module
 {
 public:
-	Module() = delete;
-	virtual ~Module();
+	virtual ~Module() = 0;
 
-	inline int GetKey() { return KEY; }
-	inline bool CheckKey(int key) { return key == KEY; }
-protected:
-	const static int KEY = 0;
+	virtual inline int GetKey() const = 0;
+	virtual inline bool CheckKey(const int key) const = 0;
 };
