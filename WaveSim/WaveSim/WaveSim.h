@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QtWidgets/QMainWindow>
 #include <QApplication>
 #include <QFile>
@@ -7,6 +9,7 @@
 #include <QVBoxLayout>
 
 #include "ui_WaveSim.h"
+#include "DatabaseRef.h"
 #include "ObjectTreeModel.h"
 #include "RenderController.h"
 
@@ -22,5 +25,6 @@ private:
 	Ui::WaveSimClass ui;
 	ObjectTreeModel* treeModel;
 	QTreeView* treeView;
-	RenderController* rc;
+	std::unique_ptr<RenderController> rc;
+	std::shared_ptr<DatabaseRef> databaseRef;
 };
