@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
@@ -7,6 +9,7 @@
 #include <QWidget>
 
 #include "CalcThread.h"
+#include "DatabaseRef.h"
 #include "PaintThread.h"
 #include "LCircle.h"
 #include "LShape.h"
@@ -20,7 +23,7 @@ class RenderController : public QWidget
 	Q_OBJECT
 
 public:
-	RenderController(QWidget *parent);
+	RenderController(QWidget *parent, std::shared_ptr<DatabaseRef> dbr);
 	~RenderController();
 
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
@@ -30,12 +33,11 @@ public:
 
 private:
 
-	std::unique_ptr<WaveSolver<double>> mSolver;
+	std::shared_ptr<ShapesModule> mShapes;
+	std::shared_ptr<WaveSolver<double>> mSolver;
 
 	std::unique_ptr<CalcThread> mCThread;
 	std::unique_ptr<PaintThread> mPThread;
-
-	std::unique_ptr<QVector<LShape<double>*>> mShapes;
 
 	std::unique_ptr<QPixmap> mPix;
 	std::unique_ptr<QGraphicsScene> mScene;

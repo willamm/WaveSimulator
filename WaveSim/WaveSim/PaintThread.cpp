@@ -1,12 +1,12 @@
 #include "PaintThread.h"
 #include <QDebug> 
 
-PaintThread::PaintThread(WaveSolver<double>* solver, QVector<LShape<double>*>* shapes, QPixmap* pix, float fps, QObject* parent)
+PaintThread::PaintThread(std::shared_ptr<WaveSolver<double>> solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, float fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)
+	, mShapes(std::dynamic_pointer_cast<ShapesModule>(dbr->GetModule(DatabaseRef::SHAPES_KEY)))
 	, mSolver(solver)
-	, mShapes(shapes)
 	, mPix(pix)
 	, mPainter(std::make_unique<QPainter>(pix))
 {
@@ -60,11 +60,13 @@ void PaintThread::paint()
 				, PIXEL_SIZE, PIXEL_SIZE
 				, QColor(rgb, rgb, rgb)
 			);
+			// Exception Thrown here when closing program? Access violation executing location 0x0000000200000000
 		}
 	}
 
-	for (const auto& shapes : *mShapes)
+	std::vector<std::unique_ptr<LShape<double>>>* vec = mShapes->GetShapes();
+	for (int k = 0; k < vec->size(); k++)
 	{
-		shapes->Draw(mPainter.get());
+		vec->at(k)->Draw(mPainter.get());
 	}
 }

@@ -7,7 +7,7 @@
 #include "LRect.h"
 #include "Module.h"
 
-class ShapesModule final : Module
+class ShapesModule final : public Module
 {
 public:
 	ShapesModule();
@@ -26,12 +26,12 @@ public:
 	bool AddRect(const int x, const int y, const int w, const int h, const double vel);
 	bool AddCircle(const int x, const int y, const int r, const int vel);
 
-	std::unique_ptr<std::vector<std::vector<LShape<double>>>> GetShapes() const;
+	std::vector<std::unique_ptr<LShape<double>>>* GetShapes() const;
 
 	bool ClearAllShapes();
 
 private:
 	const static int KEY = 0xf9507d36d9f7d655;
 
-	std::unique_ptr<std::vector<std::unique_ptr<LShape<double>>>> mShapes;
+	std::shared_ptr<std::vector<std::unique_ptr<LShape<double>>>> mShapes;
 };
