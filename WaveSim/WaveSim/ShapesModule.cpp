@@ -1,11 +1,11 @@
-#include "ObjectModule.h"
+#include "ShapesModule.h"
 
-ObjectModule::ObjectModule()
+ShapesModule::ShapesModule()
 	: mShapes(std::make_unique<std::vector<std::unique_ptr<LShape<double>>>>(new std::vector<std::unique_ptr<LShape<double>>>))
 {
 }
 
-bool ObjectModule::AddRect(const int x, const int y, const int w, const int h, const double vel)
+bool ShapesModule::AddRect(const int x, const int y, const int w, const int h, const double vel)
 {
 	int initSize = mShapes->size();
 
@@ -16,7 +16,7 @@ bool ObjectModule::AddRect(const int x, const int y, const int w, const int h, c
 	return postSize > initSize;
 }
 
-bool ObjectModule::AddCircle(const int x, const int y, const int r, const int vel)
+bool ShapesModule::AddCircle(const int x, const int y, const int r, const int vel)
 {
 	int initSize = mShapes->size();
 
@@ -27,12 +27,12 @@ bool ObjectModule::AddCircle(const int x, const int y, const int r, const int ve
 	return false;
 }
 
-std::unique_ptr<std::vector<std::vector<LShape<double>>>> ObjectModule::GetShapes() const
+std::unique_ptr<std::vector<std::vector<LShape<double>>>> ShapesModule::GetShapes() const
 {
 	return std::unique_ptr<std::vector<std::vector<LShape<double>>>>();
 }
 
-bool ObjectModule::ClearAllObjects()
+bool ShapesModule::ClearAllObjects()
 {
 	mShapes->clear();
 	return mShapes->empty();

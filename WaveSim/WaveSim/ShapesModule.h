@@ -7,11 +7,11 @@
 #include "LRect.h"
 #include "Module.h"
 
-class ObjectModule final : Module
+class ShapesModule final : Module
 {
 public:
-	ObjectModule();
-	~ObjectModule() = default;
+	ShapesModule();
+	~ShapesModule() = default;
 	
 	inline int GetKey() const
 	{
