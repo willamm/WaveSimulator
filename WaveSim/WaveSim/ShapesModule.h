@@ -26,7 +26,7 @@ public:
 	bool AddRect(const int x, const int y, const int w, const int h, const double vel);
 	bool AddCircle(const int x, const int y, const int r, const int vel);
 
-	std::vector<std::unique_ptr<LShape<double>>> GetShapes() const;
+	std::vector<std::unique_ptr<LShape<double>>>* GetShapes() const;
 
 	bool ClearAllShapes();
 

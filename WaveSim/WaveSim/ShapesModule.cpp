@@ -26,9 +26,9 @@ bool ShapesModule::AddCircle(const int x, const int y, const int r, const int ve
 	return false;
 }
 
-std::vector<std::unique_ptr<LShape<double>>> ShapesModule::GetShapes() const
+std::vector<std::unique_ptr<LShape<double>>>* ShapesModule::GetShapes() const
 {
-	return std::vector<std::unique_ptr<LShape<double>>>();
+	return mShapes.get();
 }
 
 bool ShapesModule::ClearAllShapes()
