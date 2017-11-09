@@ -32,7 +32,7 @@ std::unique_ptr<std::vector<std::vector<LShape<double>>>> ShapesModule::GetShape
 	return std::unique_ptr<std::vector<std::vector<LShape<double>>>>();
 }
 
-bool ShapesModule::ClearAllObjects()
+bool ShapesModule::ClearAllShapes()
 {
 	mShapes->clear();
 	return mShapes->empty();

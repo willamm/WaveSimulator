@@ -18,7 +18,7 @@ public:
 		return KEY;
 	}
 
-	inline bool matchKey(const int key) const
+	inline bool MatchKey(const int key) const
 	{
 		return key == KEY;
 	}
@@ -28,7 +28,7 @@ public:
 
 	std::unique_ptr<std::vector<std::vector<LShape<double>>>> GetShapes() const;
 
-	bool ClearAllObjects();
+	bool ClearAllShapes();
 
 private:
 	const static int KEY = 0xf9507d36d9f7d655;

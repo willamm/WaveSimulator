@@ -75,6 +75,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="CalcThread.cpp" />
+    <ClCompile Include="DatabaseRef.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_CalcThread.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </ClCompile>
@@ -115,6 +116,7 @@
     <ClCompile Include="LRect.cpp" />
     <ClCompile Include="LShape.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ShapesModule.cpp" />
     <ClCompile Include="ObjectTreeModel.cpp" />
     <ClCompile Include="PaintThread.cpp" />
     <ClCompile Include="RenderController.cpp" />
@@ -146,6 +148,9 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="DatabaseRef.h" />
+    <ClInclude Include="Module.h" />
+    <ClInclude Include="ShapesModule.h" />
     <ClInclude Include="values.h" />
     <ClInclude Include="WaveSolver.h" />
     <CustomBuild Include="CalcThread.h">
