@@ -7,31 +7,20 @@
 #include "LRect.h"
 #include "Module.h"
 
+using namespace std;
+
 class ShapesModule final : public Module
 {
 public:
 	ShapesModule();
 	~ShapesModule() = default;
-	
-	inline int GetKey() const
-	{
-		return KEY;
-	}
 
-	inline bool MatchKey(const int key) const
-	{
-		return key == KEY;
-	}
+	const bool AddRect(const int x, const int y, const int w, const int h, const double vel);
+	const bool AddCircle(const int x, const int y, const int r, const int vel);
 
-	bool AddRect(const int x, const int y, const int w, const int h, const double vel);
-	bool AddCircle(const int x, const int y, const int r, const int vel);
-
-	std::vector<std::unique_ptr<LShape<double>>>* GetShapes() const;
-
-	bool ClearAllShapes();
+	const vector<unique_ptr<LShape<double>>>& GetShapes() const;
+	const bool ClearAllShapes();
 
 private:
-	const static int KEY = 0xf9507d36d9f7d655;
-
-	std::shared_ptr<std::vector<std::unique_ptr<LShape<double>>>> mShapes;
+	vector<unique_ptr<LShape<double>>> mShapes;
 };
