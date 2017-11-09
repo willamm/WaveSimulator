@@ -64,10 +64,12 @@ void PaintThread::paint()
 		}
 	}
 
-	// This is not running even though the loop about is
+	// vec is empty
 	std::vector<std::unique_ptr<LShape<double>>> vec = mShapes->GetShapes();
+	qDebug() << vec.size();
 	for (int k = 0; k < vec.size(); k++)
 	{
+		qDebug() << "Hello";
 		vec.at(k)->Draw(mPainter.get());
 	}
 }
