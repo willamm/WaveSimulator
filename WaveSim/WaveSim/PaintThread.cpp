@@ -64,9 +64,8 @@ void PaintThread::paint()
 		}
 	}
 
-	std::vector<std::unique_ptr<LShape<double>>>* vec = mShapes->GetShapes();
-	for (int k = 0; k < vec->size(); k++)
+	for (auto& s : mShapes->GetShapes())
 	{
-		vec->at(k)->Draw(mPainter.get());
+		s->Draw(mPainter.get());
 	}
 }
