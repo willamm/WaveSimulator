@@ -123,6 +123,9 @@
     <ClCompile Include="CalcThread.cpp">
       <Filter>Renderer\Controller</Filter>
     </ClCompile>
+    <ClCompile Include="SolverModule.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -180,6 +183,9 @@
     </ClInclude>
     <ClInclude Include="DatabaseRef.h">
       <Filter>Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SolverModule.h">
+      <Filter>Model\Module</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

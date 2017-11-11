@@ -120,6 +120,7 @@
     <ClCompile Include="ObjectTreeModel.cpp" />
     <ClCompile Include="PaintThread.cpp" />
     <ClCompile Include="RenderController.cpp" />
+    <ClCompile Include="SolverModule.cpp" />
     <ClCompile Include="TreeItem.cpp" />
     <ClCompile Include="WaveSim.cpp" />
   </ItemGroup>
@@ -151,6 +152,7 @@
     <ClInclude Include="DatabaseRef.h" />
     <ClInclude Include="Module.h" />
     <ClInclude Include="ShapesModule.h" />
+    <ClInclude Include="SolverModule.h" />
     <ClInclude Include="values.h" />
     <ClInclude Include="WaveSolver.h" />
     <CustomBuild Include="CalcThread.h">

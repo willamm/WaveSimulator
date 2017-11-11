@@ -14,8 +14,9 @@
 #include "LCircle.h"
 #include "LShape.h"
 #include "LRect.h"
-#include "WaveSolver.h"
 #include "values.h"
+
+using namespace std;
 
 // TODO: Make this class generic
 class RenderController : public QWidget
@@ -24,7 +25,7 @@ class RenderController : public QWidget
 
 public:
 	RenderController(QWidget *parent, std::shared_ptr<DatabaseRef> dbr);
-	~RenderController();
+	~RenderController() = default;
 
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
 	void AddCircle(const int x, const int y, const int radius, const double vel);
@@ -33,16 +34,16 @@ public:
 
 private:
 
-	std::shared_ptr<ShapesModule> mShapes;
-	std::shared_ptr<WaveSolver<double>> mSolver;
+	shared_ptr<ShapesModule> mShapesModule;
+	shared_ptr<SolverModule> mSolverModule;
 
-	std::unique_ptr<CalcThread> mCThread;
-	std::unique_ptr<PaintThread> mPThread;
+	unique_ptr<CalcThread> mCThread;
+	unique_ptr<PaintThread> mPThread;
 
-	std::unique_ptr<QPixmap> mPix;
-	std::unique_ptr<QGraphicsScene> mScene;
-	std::unique_ptr<QGraphicsPixmapItem> mPixItem;
-	std::unique_ptr<QGraphicsView> mView;
+	unique_ptr<QPixmap> mPix;
+	unique_ptr<QGraphicsScene> mScene;
+	unique_ptr<QGraphicsPixmapItem> mPixItem;
+	unique_ptr<QGraphicsView> mView;
 
 	void initThreads();
 

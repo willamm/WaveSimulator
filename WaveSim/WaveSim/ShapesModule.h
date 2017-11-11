@@ -22,5 +22,5 @@ public:
 	const bool ClearAllShapes();
 
 private:
-	vector<unique_ptr<LShape<double>>> mShapes;
+	vector<unique_ptr<LShape<double>>> mShapesModule;
 };

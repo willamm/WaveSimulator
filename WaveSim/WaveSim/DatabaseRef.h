@@ -4,6 +4,7 @@
 
 #include <Module.h>
 #include <ShapesModule.h>
+#include <SolverModule.h>
 
 using namespace std;
 
@@ -13,9 +14,10 @@ public:
 	DatabaseRef();
 	~DatabaseRef() = default;
 
-	shared_ptr<Module> GetModule(const int key) const;
+	const shared_ptr<Module> GetModule(const int key) const;
 
-	const static int SHAPES_KEY = 0xf9507d36d9f7d655;
+	const static int SHAPES_KEY = 0;
+	const static int SOLVER_KEY = 1;
 private:
 	unordered_map<int ,shared_ptr<Module>> mModules;
 };

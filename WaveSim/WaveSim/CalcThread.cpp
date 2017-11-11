@@ -1,6 +1,6 @@
 #include "CalcThread.h"
 
-CalcThread::CalcThread(WaveSolver<double>* solver, const int fps, QObject* parent)
+CalcThread::CalcThread(WaveSolver<double>& solver, const int fps, QObject* parent)
 	: mSolver(solver)
 	, mFPS(fps)
 {
@@ -19,7 +19,7 @@ void CalcThread::run()
 	while (mRunning)
 	{
 		mutex.lock();
-		mSolver->doTimestep();
+		mSolver.doTimestep();
 		mutex.unlock();
 		emit calculated();
 		msleep(mFPS);

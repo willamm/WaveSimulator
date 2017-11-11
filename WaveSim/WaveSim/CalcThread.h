@@ -10,13 +10,13 @@ class CalcThread
 {
 	Q_OBJECT
 public:
-	CalcThread(WaveSolver<double>* solver, const int mFPS, QObject* parent = nullptr);
+	CalcThread(WaveSolver<double>& solver, const int mFPS, QObject* parent = nullptr);
 	~CalcThread();
 
 private:
 	bool mRunning;
 	const int mFPS;
-	WaveSolver<double>* mSolver;
+	WaveSolver<double>& mSolver;
 
 protected:
 	void run();
