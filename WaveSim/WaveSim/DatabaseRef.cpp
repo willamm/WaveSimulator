@@ -9,7 +9,7 @@ DatabaseRef::DatabaseRef()
 	mModules[DatabaseRef::SOLVER_KEY] = dynamic_pointer_cast<Module>(make_shared<SolverModule>());
 }
 
-const shared_ptr<Module> DatabaseRef::GetModule(const int key) const
+shared_ptr<Module> DatabaseRef::GetModule(const int key) const
 {
 	return mModules.at(key);
 }

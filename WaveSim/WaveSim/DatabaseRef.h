@@ -14,7 +14,7 @@ public:
 	DatabaseRef();
 	~DatabaseRef() = default;
 
-	const shared_ptr<Module> GetModule(const int key) const;
+	shared_ptr<Module> GetModule(const int key) const;
 
 	const static int SHAPES_KEY = 0;
 	const static int SOLVER_KEY = 1;

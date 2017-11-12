@@ -19,7 +19,7 @@ public:
 	const void ResetMaterials();
 	const void ResetField();
 
-	WaveSolver<double>& GetField();
+	WaveSolver<double>* GetField();
 	
 private:
 	WaveSolver<double> mSolver;

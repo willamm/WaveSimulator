@@ -27,16 +27,7 @@ public:
 	RenderController(QWidget *parent, std::shared_ptr<DatabaseRef> dbr);
 	~RenderController() = default;
 
-	void AddRect(const int x, const int y, const int width, const int height, const double vel);
-	void AddCircle(const int x, const int y, const int radius, const double vel);
-	void ClearShapes();
-	void ResetField();
-
 private:
-
-	shared_ptr<ShapesModule> mShapesModule;
-	shared_ptr<SolverModule> mSolverModule;
-
 	unique_ptr<CalcThread> mCThread;
 	unique_ptr<PaintThread> mPThread;
 

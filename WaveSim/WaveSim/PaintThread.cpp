@@ -1,14 +1,16 @@
 #include "PaintThread.h"
 #include <QDebug> 
 
-PaintThread::PaintThread(WaveSolver<double>& solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent)
+using namespace std;
+
+PaintThread::PaintThread(std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)
-	, mShapes(std::dynamic_pointer_cast<ShapesModule>(dbr->GetModule(DatabaseRef::SHAPES_KEY)))
-	, mSolver(solver)
+	, mShapes(dynamic_pointer_cast<ShapesModule>(dbr->GetModule(DatabaseRef::SHAPES_KEY)))
+	, mSolver(((SolverModule*)dbr->GetModule(DatabaseRef::SOLVER_KEY).get())->GetField())
 	, mPix(pix)
-	, mPainter(std::make_unique<QPainter>(pix))
+	, mPainter(make_unique<QPainter>(pix))
 {
 }
 
@@ -35,14 +37,14 @@ void PaintThread::run()
 void PaintThread::paint()
 {
 	double rgb;
-	int numOfX = mSolver.getField().numCellsX();
-	int numOfY = mSolver.getField().numCellsY();
+	int numOfX = mSolver->getField().numCellsX();
+	int numOfY = mSolver->getField().numCellsY();
 
 	for (int i = 0; i < numOfX; i++)
 	{
 		for (int j = 0; j < numOfY; j++)
 		{
-			rgb = (mSolver.getField()(i, j) * 255 * COLOR_CONSTRAST) + MIDDLE_COLOR;
+			rgb = (mSolver->getField()(i, j) * 255 * COLOR_CONSTRAST) + MIDDLE_COLOR;
 			if (rgb > 255)
 			{
 				rgb = 255;
@@ -56,7 +58,6 @@ void PaintThread::paint()
 				, PIXEL_SIZE, PIXEL_SIZE
 				, QColor(rgb, rgb, rgb)
 			);
-			// Exception Thrown here when closing program? Access violation executing location 0x0000000200000000
 		}
 	}
 

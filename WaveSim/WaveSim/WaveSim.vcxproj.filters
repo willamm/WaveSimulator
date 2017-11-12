@@ -124,7 +124,7 @@
       <Filter>Renderer\Controller</Filter>
     </ClCompile>
     <ClCompile Include="SolverModule.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Model\Module</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -32,7 +32,7 @@ const void SolverModule::ResetField()
 	mSolver.resetField();
 }
 
-WaveSolver<double>& SolverModule::GetField()
+WaveSolver<double>* SolverModule::GetField()
 {
-	return mSolver;
+	return &mSolver;
 }
