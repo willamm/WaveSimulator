@@ -21,6 +21,11 @@ public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
 	~WaveSim();
 
+	void AddRect(const int x, const int y, const int width, const int height, const double vel);
+	void AddCircle(const int x, const int y, const int radius, const double vel);
+	void ClearShapes();
+	void ResetField();
+
 private:
 	Ui::WaveSimClass ui;
 	ObjectTreeModel* treeModel;

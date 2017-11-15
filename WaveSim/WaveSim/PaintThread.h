@@ -16,13 +16,15 @@
 #include "WaveSolver.h"
 #include "values.h"
 
+using namespace std;
+
 class PaintThread
 	: public QThread
 {
 	Q_OBJECT
 public:
 	
-	PaintThread(std::shared_ptr<WaveSolver<double>> solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent = nullptr);
+	PaintThread(std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent = nullptr);
 	PaintThread(const PaintThread& pt);
 	~PaintThread();
 
@@ -35,11 +37,11 @@ private:
 	bool mRunning;
 	int mFPS;
 
-	std::shared_ptr<WaveSolver<double>> mSolver;
-	std::shared_ptr<ShapesModule> mShapes;
+	WaveSolver<double>* mSolver;
+	shared_ptr<ShapesModule> mShapes;
 
 	QPixmap* mPix;
-	std::unique_ptr<QPainter> mPainter;
+	unique_ptr<QPainter> mPainter;
 
 	void paint();
 

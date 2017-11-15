@@ -1,18 +1,16 @@
 #include "PaintThread.h"
 #include <QDebug> 
 
-PaintThread::PaintThread(std::shared_ptr<WaveSolver<double>> solver, std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent)
+using namespace std;
+
+PaintThread::PaintThread(std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)
-	, mShapes(std::dynamic_pointer_cast<ShapesModule>(dbr->GetModule(DatabaseRef::SHAPES_KEY)))
-	, mSolver(solver)
+	, mShapes(dynamic_pointer_cast<ShapesModule>(dbr->GetModule(DatabaseRef::SHAPES_KEY)))
+	, mSolver(((SolverModule*)dbr->GetModule(DatabaseRef::SOLVER_KEY).get())->GetField())
 	, mPix(pix)
-	, mPainter(std::make_unique<QPainter>(pix))
-{
-}
-
-PaintThread::PaintThread(const PaintThread& pt)
+	, mPainter(make_unique<QPainter>(pix))
 {
 }
 
@@ -60,13 +58,11 @@ void PaintThread::paint()
 				, PIXEL_SIZE, PIXEL_SIZE
 				, QColor(rgb, rgb, rgb)
 			);
-			// Exception Thrown here when closing program? Access violation executing location 0x0000000200000000
 		}
 	}
 
-	std::vector<std::unique_ptr<LShape<double>>>* vec = mShapes->GetShapes();
-	for (int k = 0; k < vec->size(); k++)
+	for (auto& s : mShapes->GetShapes())
 	{
-		vec->at(k)->Draw(mPainter.get());
+		s->Draw(mPainter.get());
 	}
 }
