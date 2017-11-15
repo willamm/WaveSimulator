@@ -14,6 +14,10 @@ moc_*.cpp
 moc_*.h
 ui_*.h
 
+#Doxygen files
+Doxyfile
+Documentation/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "TreeItem.h"
+#include "DatabaseRef.h"
 
 #include <QAbstractItemModel>
 #include <QStringList>
@@ -11,6 +12,7 @@ class ObjectTreeModel : public QAbstractItemModel // TODO: extend QStandardItemM
 
 public:
 	explicit ObjectTreeModel(const QString& data, QObject* parent = 0);
+	explicit ObjectTreeModel(const DatabaseRef& dbRef, QObject* parent = 0);
 	~ObjectTreeModel();
 
 	Qt::ItemFlags flags(const QModelIndex& index) const override;
@@ -21,8 +23,13 @@ public:
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
+public slots:
+	
+	
 private:
 	void setupModelData(const QStringList& lines, TreeItem* parent);
+
+	void setupModelDataFromDB(const DatabaseRef& db, TreeItem* root);
 
 	std::unique_ptr<TreeItem> rootItem;
 };

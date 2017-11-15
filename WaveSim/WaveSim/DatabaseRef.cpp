@@ -3,7 +3,7 @@
 using namespace std;
 
 DatabaseRef::DatabaseRef()
-	: mModules(unordered_map<int ,shared_ptr<Module>>())
+	: mModules(unordered_map<int, shared_ptr<Module>>())
 {
 	mModules[DatabaseRef::SHAPES_KEY] = dynamic_pointer_cast<Module>(make_shared<ShapesModule>());
 	mModules[DatabaseRef::SOLVER_KEY] = dynamic_pointer_cast<Module>(make_shared<SolverModule>());

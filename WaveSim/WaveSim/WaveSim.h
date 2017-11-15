@@ -9,7 +9,6 @@
 #include <QVBoxLayout>
 
 #include "ui_WaveSim.h"
-#include "DatabaseRef.h"
 #include "ObjectTreeModel.h"
 #include "RenderController.h"
 
@@ -17,6 +16,10 @@ class WaveSim : public QMainWindow
 {
 	Q_OBJECT
 
+signals:
+	void rectAdded(const int x, const int y, const int width, const int height);
+	void circleAdded(const int x, const int y, const int radius);
+	void shapesCleared();
 public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
 	~WaveSim();
@@ -28,8 +31,8 @@ public:
 
 private:
 	Ui::WaveSimClass ui;
-	ObjectTreeModel* treeModel;
-	QTreeView* treeView;
+	std::unique_ptr<ObjectTreeModel> treeModel;
+	QTreeView treeView;
 	std::unique_ptr<RenderController> rc;
 	std::shared_ptr<DatabaseRef> databaseRef;
 };

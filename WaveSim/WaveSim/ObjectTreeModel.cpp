@@ -9,6 +9,15 @@ ObjectTreeModel::ObjectTreeModel(const QString& data, QObject* parent)
 	setupModelData(data.split(QString("\n")), rootItem.get());
 }
 
+ObjectTreeModel::ObjectTreeModel(const DatabaseRef& dbRef, QObject* parent)
+	: QAbstractItemModel(parent)
+{
+	QList<QVariant> rootData;
+	rootData << "Name" << "Type";
+	rootItem = std::make_unique<TreeItem>(rootData);
+	setupModelDataFromDB(dbRef, rootItem.get());
+}
+
 ObjectTreeModel::~ObjectTreeModel()
 {
 }
@@ -19,7 +28,6 @@ Qt::ItemFlags ObjectTreeModel::flags(const QModelIndex & index) const
 	{
 		return 0;
 	}
-
 	return QAbstractItemModel::flags(index);
 }
 
@@ -178,4 +186,11 @@ void ObjectTreeModel::setupModelData(const QStringList& lines, TreeItem* parent)
 		}
 		++number;
 	}
+}
+
+void ObjectTreeModel::setupModelDataFromDB(const DatabaseRef& db, TreeItem* root)
+{
+	Module shapeData = *db.GetModule(DatabaseRef::SHAPES_KEY);
+	QList<TreeItem*> parents;
+	parents << root;
 }
