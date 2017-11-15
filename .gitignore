@@ -8,7 +8,11 @@
 *.sln.docstates
 
 #Qt generated files
-WaveSim/WaveSim/GeneratedFiles/
+/WaveSim/WaveSim/GeneratedFiles/
+qrc_*.cpp
+moc_*.cpp
+moc_*.h
+ui_*.h
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
