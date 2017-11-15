@@ -29,7 +29,7 @@ public slots:
 private:
 	void setupModelData(const QStringList& lines, TreeItem* parent);
 
-	void setupModelDataFromDB(const DatabaseRef& db, TreeItem* root);
+	void setupModelDataFromDB(const DatabaseRef& db);
 
 	std::unique_ptr<TreeItem> rootItem;
 };

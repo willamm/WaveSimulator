@@ -52,6 +52,9 @@
     <Filter Include="Model\Module">
       <UniqueIdentifier>{54d1ed61-aa1e-433f-ac3d-c239f07d7e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File IO">
+      <UniqueIdentifier>{3b49bcbd-821e-4c6c-aac6-2f408375b4f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

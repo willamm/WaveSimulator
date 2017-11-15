@@ -11,7 +11,7 @@ WaveSim::WaveSim(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	treeModel = std::make_unique<ObjectTreeModel>(*databaseRef);
+	treeModel = std::make_unique<ObjectTreeModel>(*databaseRef, this);
 
 	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
 	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();

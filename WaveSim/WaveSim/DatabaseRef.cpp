@@ -13,3 +13,8 @@ shared_ptr<Module> DatabaseRef::GetModule(const int key) const
 {
 	return mModules.at(key);
 }
+
+const unordered_map<int, shared_ptr<Module>>& DatabaseRef::GetMap() const
+{
+	return mModules;
+}
