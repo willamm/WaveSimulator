@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/**
+ *	Constructor for the singleton class that holds multplie data modules.
+*/
 DatabaseRef::DatabaseRef()
 	: mModules(unordered_map<int ,shared_ptr<Module>>())
 {
@@ -9,6 +12,14 @@ DatabaseRef::DatabaseRef()
 	mModules[DatabaseRef::SOLVER_KEY] = dynamic_pointer_cast<Module>(make_shared<SolverModule>());
 }
 
+/**
+ *	GetModule(const int key)
+ *		key: The integer key of a module
+ *
+ *	Retrieves a module based from the hash map using the key.
+ *
+ *	Returns a shared pointer to the module.
+*/
 shared_ptr<Module> DatabaseRef::GetModule(const int key) const
 {
 	return mModules.at(key);
