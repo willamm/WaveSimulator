@@ -29,10 +29,11 @@ public:
 	void ClearShapes();
 	void ResetField();
 
+public slots:
+	void clicked(const QModelIndex& index);
 private:
 	Ui::WaveSimClass ui;
 	std::unique_ptr<ObjectTreeModel> treeModel;
-	QTreeView treeView;
 	std::unique_ptr<RenderController> rc;
 	std::shared_ptr<DatabaseRef> databaseRef;
 };

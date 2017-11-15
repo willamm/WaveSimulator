@@ -2,6 +2,7 @@
 
 #include <QObject>
 #include <QPushButton>
+#include <QStandardItemModel>
 
 using namespace std;
 
@@ -11,28 +12,49 @@ WaveSim::WaveSim(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	treeModel = std::make_unique<ObjectTreeModel>(*databaseRef, this);
-
 	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
 	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
 
-	treeView.setModel(treeModel.get());
+	// Shapes added here so that they show in the object model
+	AddRect(50, 50, 10, 10, 0);
+	AddCircle(100, 75, 30, 0);
+
+	int numRows = shapes->GetShapes().size();
+	QStandardItemModel* standardTreeModel = new QStandardItemModel(this);
+	QList<QStandardItem*> columns;
+	QStandardItem* rootItem = standardTreeModel->invisibleRootItem();
+	standardTreeModel->setHorizontalHeaderLabels(QStringList() << "Name" << "Type");
+	columns << new QStandardItem(QString("Root")) << new QStandardItem(QString("Root"));
+	standardTreeModel->appendRow(columns);
+	for (int row = 0; row < numRows; row++)
+	{
+		QList<QStandardItem*> shapeRows;
+		QStandardItem* item = new QStandardItem(QString(shapes->GetShapes()[row]->GetClassName().c_str()));
+		shapeRows << item << new QStandardItem(QString("Structure"));
+		standardTreeModel->appendRow(shapeRows);
+		rootItem = item;
+	}
+
+	QTreeView* treeView = new QTreeView(this);
+	treeView->setModel(standardTreeModel);
+	
+	// Emit event when an item in the view is clicked
+	connect(treeView, &QTreeView::clicked, this, &WaveSim::clicked);
 
 	rc = std::make_unique<RenderController>(this, databaseRef);
 
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
-	treeView.setMaximumHeight(rc->height());
+	treeView->setMaximumHeight(rc->height());
 	setMaximumHeight(rc->height());
-	layout->addWidget(&treeView);
+	layout->addWidget(treeView);
 	layout->addWidget(rc.get());
 	window->setLayout(layout);
 	setCentralWidget(window);
 
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 
-	AddRect(50, 50, 10, 10, 0);
-
+	
 	// Add connection for AddRect, AddCircle, ClearShapes
 
 }
@@ -45,7 +67,7 @@ void WaveSim::AddRect(const int x, const int y, const int width, const int heigh
 	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
 	shapes->AddRect(x, y, width, height, vel);
 
-	emit rectAdded(x, y, width, height); // Add shape data?
+	emit rectAdded(x, y, width, height);
 }
 
 void WaveSim::AddCircle(const int x, const int y, const int radius, const double vel)
@@ -76,6 +98,11 @@ void WaveSim::ResetField()
 	solver->ResetField();
 
 	// Might have to emit something here
+}
+
+void WaveSim::clicked(const QModelIndex& index)
+{
+
 }
 
 WaveSim::~WaveSim()
