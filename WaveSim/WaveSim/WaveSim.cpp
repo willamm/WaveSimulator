@@ -24,16 +24,22 @@ WaveSim::WaveSim(QWidget *parent)
 	QList<QStandardItem*> columns;
 	QStandardItem* rootItem = standardTreeModel->invisibleRootItem();
 	standardTreeModel->setHorizontalHeaderLabels(QStringList() << "Name" << "Type");
-	columns << new QStandardItem(QString("Root")) << new QStandardItem(QString("Root"));
+	QStandardItem* root = new QStandardItem("Root");
+	QStandardItem* geometryItem = new QStandardItem("Geometry");
+	QList<QStandardItem*> geoRow;
+	geoRow << geometryItem << new QStandardItem("Group");
+	columns << root << new QStandardItem("Root");
+	rootItem->appendRow(columns);
+	root->appendRow(geoRow);
 	standardTreeModel->appendRow(columns);
 	for (int row = 0; row < numRows; row++)
 	{
-		QList<QStandardItem*> shapeRows;
+		QList<QStandardItem*> shapesRow;
 		QStandardItem* item = new QStandardItem(QString(shapes->GetShapes()[row]->GetClassName().c_str()));
-		shapeRows << item << new QStandardItem(QString("Structure"));
-		standardTreeModel->appendRow(shapeRows);
-		rootItem = item;
+		shapesRow << item << new QStandardItem(QString("Structure"));
+		geometryItem->appendRow(shapesRow);
 	}
+	root->appendRow(new QStandardItem("Solver"));
 
 	QTreeView* treeView = new QTreeView(this);
 	treeView->setModel(standardTreeModel);
