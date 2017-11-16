@@ -41,13 +41,13 @@ WaveSim::WaveSim(QWidget *parent)
 	}
 	root->appendRow(new QStandardItem("Solver"));
 
+	rc = std::make_unique<RenderController>(this, databaseRef);
+
 	QTreeView* treeView = new QTreeView(this);
 	treeView->setModel(standardTreeModel);
 	
 	// Emit event when an item in the view is clicked
 	connect(treeView, &QTreeView::clicked, this, &WaveSim::clicked);
-
-	rc = std::make_unique<RenderController>(this, databaseRef);
 
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
@@ -58,11 +58,10 @@ WaveSim::WaveSim(QWidget *parent)
 	window->setLayout(layout);
 	setCentralWidget(window);
 
+	createToolBarButtons();
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
-
 	
 	// Add connection for AddRect, AddCircle, ClearShapes
-
 }
 
 void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
@@ -104,6 +103,31 @@ void WaveSim::ResetField()
 	solver->ResetField();
 
 	// Might have to emit something here
+}
+
+void WaveSim::createToolBarButtons()
+{
+	QToolBar* toolbar = ui.mainToolBar;
+
+	QPushButton* startButton = new QPushButton("Start", this);
+	QPushButton* stopButton = new QPushButton("Stop", this);
+	QPushButton* addRectButton = new QPushButton("Add Rect", this);
+	QPushButton* addCircleButton = new QPushButton("Add Circle", this);
+	QPushButton* resetFieldButton = new QPushButton("Reset Field", this);
+	QPushButton* clearShapesButton = new QPushButton("Clear Shapes", this);
+
+	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
+	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
+
+	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
+	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
+
+	toolbar->addWidget(startButton);
+	toolbar->addWidget(stopButton);
+	toolbar->addWidget(addRectButton);
+	toolbar->addWidget(addCircleButton);
+	toolbar->addWidget(resetFieldButton);
+	toolbar->addWidget(clearShapesButton);
 }
 
 void WaveSim::clicked(const QModelIndex& index)

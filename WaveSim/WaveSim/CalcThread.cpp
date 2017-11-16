@@ -5,6 +5,7 @@ CalcThread::CalcThread(WaveSolver<double>* solver, const int fps, QObject* paren
 	, mFPS(fps)
 {
 	mRunning = true;
+	mDoCalculation = true;
 }
 
 CalcThread::~CalcThread()
@@ -16,12 +17,27 @@ CalcThread::~CalcThread()
 void CalcThread::run()
 {
 	QMutex mutex;
-	while (mRunning)
+	while (mRunning) 
 	{
-		mutex.lock();
-		mSolver->doTimestep();
-		mutex.unlock();
-		emit calculated();
+		while (mDoCalculation)
+		{
+			mutex.lock();
+			mSolver->doTimestep();
+			mutex.unlock();
+			emit calculated();
+			msleep(mFPS);
+		}
 		msleep(mFPS);
 	}
+	
+}
+
+void CalcThread::setDoCalculation(bool state)
+{
+	mDoCalculation = state;
+}
+
+void CalcThread::setRunning(bool state)
+{
+	mRunning = state;
 }
