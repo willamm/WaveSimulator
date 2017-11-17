@@ -12,11 +12,24 @@ WaveSim::WaveSim(QWidget *parent)
 {
 	ui.setupUi(this);
 
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
-	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
+	createRenderer();
+	createObjectTree();
+	setLayout();
+	createToolBarButtons();
 
+	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
+	
+	// Add connection for AddRect, AddCircle, ClearShapes
+}
+
+void WaveSim::createRenderer()
+{
 	rc = std::make_unique<RenderController>(this, databaseRef);
+}
 
+void WaveSim::createObjectTree()
+{
+	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
 	int numRows = shapes->GetShapes().size();
 	QStandardItemModel* standardTreeModel = new QStandardItemModel(this);
 	QList<QStandardItem*> columns;
@@ -39,25 +52,57 @@ WaveSim::WaveSim(QWidget *parent)
 	}
 	root->appendRow(new QStandardItem("Solver"));
 
-	QTreeView* treeView = new QTreeView(this);
-	treeView->setModel(standardTreeModel);
+	mTreeView = make_unique<QTreeView>(this);
+	mTreeView->setModel(standardTreeModel);
 	
 	// Emit event when an item in the view is clicked
-	connect(treeView, &QTreeView::clicked, this, &WaveSim::clicked);
+	connect(mTreeView.get(), &QTreeView::clicked, this, &WaveSim::clicked);
+}
 
+void WaveSim::setLayout()
+{
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
-	treeView->setMaximumHeight(rc->height());
+	mTreeView->setMaximumHeight(rc->height());
 	setMaximumHeight(rc->height());
-	layout->addWidget(treeView);
+	layout->addWidget(mTreeView.get());
 	layout->addWidget(rc.get());
 	window->setLayout(layout);
 	setCentralWidget(window);
+}
 
-	createToolBarButtons();
-	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
-	
-	// Add connection for AddRect, AddCircle, ClearShapes
+void WaveSim::createToolBarButtons()
+{
+	mAddRectDialog = make_unique<AddRectDialog>(this);
+	mAddCircleDialog = make_unique<AddCircleDialog>(this);
+
+	QToolBar* toolbar = ui.mainToolBar;
+
+	QPushButton* startButton = new QPushButton("Start", this);
+	QPushButton* stopButton = new QPushButton("Stop", this);
+	QPushButton* addRectButton = new QPushButton("Add Rect", this);
+	QPushButton* addCircleButton = new QPushButton("Add Circle", this);
+	QPushButton* resetFieldButton = new QPushButton("Reset Field", this);
+	QPushButton* clearShapesButton = new QPushButton("Clear Shapes", this);
+
+	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
+	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
+
+	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
+	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
+
+	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
+	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
+
+	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
+	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
+
+	toolbar->addWidget(startButton);
+	toolbar->addWidget(stopButton);
+	toolbar->addWidget(addRectButton);
+	toolbar->addWidget(addCircleButton);
+	toolbar->addWidget(resetFieldButton);
+	toolbar->addWidget(clearShapesButton);
 }
 
 void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
@@ -99,40 +144,6 @@ void WaveSim::ResetField()
 	solver->ResetField();
 
 	// Might have to emit something here
-}
-
-void WaveSim::createToolBarButtons()
-{
-	mAddRectDialog = make_unique<AddRectDialog>();
-	mAddCircleDialog = make_unique<AddCircleDialog>();
-
-	QToolBar* toolbar = ui.mainToolBar;
-
-	QPushButton* startButton = new QPushButton("Start", this);
-	QPushButton* stopButton = new QPushButton("Stop", this);
-	QPushButton* addRectButton = new QPushButton("Add Rect", this);
-	QPushButton* addCircleButton = new QPushButton("Add Circle", this);
-	QPushButton* resetFieldButton = new QPushButton("Reset Field", this);
-	QPushButton* clearShapesButton = new QPushButton("Clear Shapes", this);
-
-	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
-	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
-
-	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
-	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
-
-	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
-	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
-
-	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
-	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
-
-	toolbar->addWidget(startButton);
-	toolbar->addWidget(stopButton);
-	toolbar->addWidget(addRectButton);
-	toolbar->addWidget(addCircleButton);
-	toolbar->addWidget(resetFieldButton);
-	toolbar->addWidget(clearShapesButton);
 }
 
 void WaveSim::clicked(const QModelIndex& index)

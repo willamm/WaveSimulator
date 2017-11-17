@@ -42,9 +42,12 @@ private:
 	unique_ptr<AddRectDialog> mAddRectDialog;
 	unique_ptr<AddCircleDialog> mAddCircleDialog;
 
-	unique_ptr<ObjectTreeModel> treeModel;
+	unique_ptr<QTreeView> mTreeView;
 	unique_ptr<RenderController> rc;
 	shared_ptr<DatabaseRef> databaseRef;
 
 	void createToolBarButtons();
+	void createRenderer();
+	void createObjectTree();
+	void setLayout();
 };
