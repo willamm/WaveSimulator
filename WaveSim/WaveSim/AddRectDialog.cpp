@@ -15,7 +15,7 @@ void AddRectDialog::sendRectangle()
 	int y = ui.lineEditY->text().toInt();
 	int w = ui.lineEditW->text().toInt();
 	int h = ui.lineEditH->text().toInt();
-	double vel = ui.lineEditVel->text().toDouble();
+	int vel = ui.lineEditVel->text().toDouble();
 	
 	emit RectSpecifiedSignal(x, y, w, h, vel * 0.01);
 }

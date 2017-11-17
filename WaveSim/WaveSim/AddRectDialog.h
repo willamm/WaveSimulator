@@ -8,7 +8,6 @@ class AddRectDialog : public QDialog
 	Q_OBJECT
 
 public:
-
 	AddRectDialog(QWidget *parent = Q_NULLPTR);
 	~AddRectDialog() = default;
 

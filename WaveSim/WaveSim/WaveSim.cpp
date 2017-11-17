@@ -15,9 +15,7 @@ WaveSim::WaveSim(QWidget *parent)
 	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
 	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
 
-	// Shapes added here so that they show in the object model
-	//AddRect(50, 50, 10, 10, 0);
-	AddCircle(100, 75, 30, 0);
+	rc = std::make_unique<RenderController>(this, databaseRef);
 
 	int numRows = shapes->GetShapes().size();
 	QStandardItemModel* standardTreeModel = new QStandardItemModel(this);
@@ -40,8 +38,6 @@ WaveSim::WaveSim(QWidget *parent)
 		geometryItem->appendRow(shapesRow);
 	}
 	root->appendRow(new QStandardItem("Solver"));
-
-	rc = std::make_unique<RenderController>(this, databaseRef);
 
 	QTreeView* treeView = new QTreeView(this);
 	treeView->setModel(standardTreeModel);
@@ -108,6 +104,8 @@ void WaveSim::ResetField()
 void WaveSim::createToolBarButtons()
 {
 	mAddRectDialog = make_unique<AddRectDialog>();
+	mAddCircleDialog = make_unique<AddCircleDialog>();
+
 	QToolBar* toolbar = ui.mainToolBar;
 
 	QPushButton* startButton = new QPushButton("Start", this);
@@ -123,6 +121,9 @@ void WaveSim::createToolBarButtons()
 	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
 	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
 
+	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
+	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
+
 	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
 	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
 
@@ -137,8 +138,4 @@ void WaveSim::createToolBarButtons()
 void WaveSim::clicked(const QModelIndex& index)
 {
 
-}
-
-WaveSim::~WaveSim()
-{
 }
