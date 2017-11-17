@@ -55,6 +55,12 @@
     <Filter Include="File IO">
       <UniqueIdentifier>{3b49bcbd-821e-4c6c-aac6-2f408375b4f8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dialog">
+      <UniqueIdentifier>{7b664122-03fe-4910-8e75-6cf626ed7d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog\AddRectDialog">
+      <UniqueIdentifier>{edf69069-be9e-4427-97de-51792ebcbc07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -129,6 +135,15 @@
     <ClCompile Include="SolverModule.cpp">
       <Filter>Model\Module</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddRectDialog.cpp">
+      <Filter>Dialog\AddRectDialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -151,6 +166,12 @@
     </CustomBuild>
     <CustomBuild Include="CalcThread.h">
       <Filter>Renderer\Controller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddRectDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddRectDialog.h">
+      <Filter>Dialog\AddRectDialog</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -189,6 +210,9 @@
     </ClInclude>
     <ClInclude Include="SolverModule.h">
       <Filter>Model\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AddRectDialog.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

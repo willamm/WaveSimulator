@@ -8,9 +8,12 @@
 #include <QTreeView>
 #include <QVBoxLayout>
 
+#include "AddRectDialog.h"
 #include "ui_WaveSim.h"
 #include "ObjectTreeModel.h"
 #include "RenderController.h"
+
+using namespace std;
 
 class WaveSim : public QMainWindow
 {
@@ -25,19 +28,22 @@ public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
 	~WaveSim();
 
-	void AddRect(const int x, const int y, const int width, const int height, const double vel);
+	//void AddRect(const int x, const int y, const int width, const int height, const double vel);
 	void AddCircle(const int x, const int y, const int radius, const double vel);
 
 public slots:
+	void AddRect(const int x, const int y, const int width, const int height, const double vel);
 	void clicked(const QModelIndex& index);
 	void ClearShapes();
 	void ResetField();
 
 private:
 	Ui::WaveSimClass ui;
-	std::unique_ptr<ObjectTreeModel> treeModel;
-	std::unique_ptr<RenderController> rc;
-	std::shared_ptr<DatabaseRef> databaseRef;
+	unique_ptr<AddRectDialog> mAddRectDialog;
+
+	unique_ptr<ObjectTreeModel> treeModel;
+	unique_ptr<RenderController> rc;
+	shared_ptr<DatabaseRef> databaseRef;
 
 	void createToolBarButtons();
 };

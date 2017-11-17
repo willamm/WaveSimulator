@@ -16,7 +16,7 @@ WaveSim::WaveSim(QWidget *parent)
 	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
 
 	// Shapes added here so that they show in the object model
-	AddRect(50, 50, 10, 10, 0);
+	//AddRect(50, 50, 10, 10, 0);
 	AddCircle(100, 75, 30, 0);
 
 	int numRows = shapes->GetShapes().size();
@@ -107,6 +107,7 @@ void WaveSim::ResetField()
 
 void WaveSim::createToolBarButtons()
 {
+	mAddRectDialog = make_unique<AddRectDialog>();
 	QToolBar* toolbar = ui.mainToolBar;
 
 	QPushButton* startButton = new QPushButton("Start", this);
@@ -118,6 +119,9 @@ void WaveSim::createToolBarButtons()
 
 	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
 	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
+
+	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
+	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
 
 	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
 	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
