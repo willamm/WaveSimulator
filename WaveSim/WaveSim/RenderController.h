@@ -36,8 +36,11 @@ private:
 	unique_ptr<QGraphicsPixmapItem> mPixItem;
 	unique_ptr<QGraphicsView> mView;
 
-	void initThreads();
-
 private slots:
 	void afterPainting();
+
+public slots:
+	void startCalculation();
+	void pauseCalculation();
+	void stopCalculation();
 };

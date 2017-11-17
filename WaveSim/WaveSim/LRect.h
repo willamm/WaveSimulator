@@ -9,6 +9,8 @@ public:
 
 	void Draw(QPainter* painter) const;
 
+	const std::string GetClassName() const override;
+
 private:
 	const int mWidth;
 	const int mHeight;
