@@ -11,23 +11,34 @@ class WaveSolver {
 public:
 
     WaveSolver(int numCellsX, int numCellsY) :
+		mCenterX(numCellsX / 44),
+		mCenterY(numCellsY / 4),
         mFieldPrev(numCellsX, numCellsY, 0),
         mField(numCellsX, numCellsY, 0),
         mFieldNext(numCellsX, numCellsY, 0),
         mVelocity(numCellsX, numCellsY, defaultVelocity)
     {
         // Add a single (source) peak in the middle of the current field
-        mField(numCellsX / 44, numCellsY / 4) = 1.0;
+        mField(mCenterX, mCenterY) = 1.0;
     }
 
+	WaveSolver(int numCellsX, int numCellsY, int centerX, int centerY) :
+		mCenterX(centerX),
+		mCenterY(centerY),
+        mFieldPrev(numCellsX, numCellsY, 0),
+        mField(numCellsX, numCellsY, 0),
+        mFieldNext(numCellsX, numCellsY, 0),
+        mVelocity(numCellsX, numCellsY, defaultVelocity)
+    {
+        // Add a single (source) peak in the middle of the current field
+        mField(mCenterX, mCenterY) = 1.0;
+    }
 
     FieldArray<T>& getField() { return mField; }
     FieldArray<T> const& getField() const { return mField; }
 
     FieldArray<T>& getVelocity() { return mVelocity; }
     FieldArray<T> const& getVelocity() const { return mVelocity; }
-
-
 
     void addRectangle(int minX, int minY, int maxX, int maxY, T value = 0.5) {
         assert(minX <= maxX);
@@ -60,9 +71,18 @@ public:
         }
     }
 
-    void resetMaterials() { getVelocity().setToValue(defaultVelocity); }
+    void resetMaterials() 
+	{
+		getVelocity().setToValue(defaultVelocity); 
+	}
 
-    void resetField() { getField().setToValue(0); }
+    void resetField() 
+	{
+		mFieldPrev.setToValue(0);
+		mField.setToValue(0); 
+		mFieldNext.setToValue(0);
+        mField(mCenterX, mCenterY) = 1.0;
+	}
 
     void doTimestep() {
         const T dx2 = 1;
@@ -71,8 +91,8 @@ public:
 
         const int minX = 1;
         const int minY = 1;
-        const int maxX = getField().numCellsX() - 1;
-        const int maxY = getField().numCellsY() - 1;
+        const int maxX = mField.numCellsX() - 1;
+        const int maxY = mField.numCellsY() - 1;
 
         for (int curX = minX; curX < maxX; ++curX) {
             for (int curY = minY; curY < maxY; ++curY) {
@@ -89,6 +109,9 @@ public:
     }
 
 private:
+	int mCenterX;
+	int mCenterY;
+
     const T defaultVelocity = 1.0;
 
     FieldArray<T> mFieldPrev;       ///< Field at previous time-step

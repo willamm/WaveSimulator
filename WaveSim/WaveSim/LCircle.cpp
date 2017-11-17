@@ -16,4 +16,10 @@ void LCircle<T>::Draw(QPainter* painter) const
 	painter->drawEllipse(startingX * PIXEL_SIZE, startingY * PIXEL_SIZE, 2 * mRadius * PIXEL_SIZE, 2 * mRadius * PIXEL_SIZE);
 }
 
+template<typename T>
+const std::string LCircle<T>::GetClassName() const
+{
+	return std::string("Circle");
+}
+
 template class LCircle<double>;

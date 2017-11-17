@@ -52,6 +52,18 @@
     <Filter Include="Model\Module">
       <UniqueIdentifier>{54d1ed61-aa1e-433f-ac3d-c239f07d7e0d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="File IO">
+      <UniqueIdentifier>{3b49bcbd-821e-4c6c-aac6-2f408375b4f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog">
+      <UniqueIdentifier>{7b664122-03fe-4910-8e75-6cf626ed7d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog\AddRectDialog">
+      <UniqueIdentifier>{edf69069-be9e-4427-97de-51792ebcbc07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog\AddCircleDialog">
+      <UniqueIdentifier>{3d8ad384-2c93-4c9f-b1bd-e6869f177fb8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -126,6 +138,24 @@
     <ClCompile Include="SolverModule.cpp">
       <Filter>Model\Module</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddRectDialog.cpp">
+      <Filter>Dialog\AddRectDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_AddCircleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_AddCircleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="AddCircleDialog.cpp">
+      <Filter>Dialog\AddCircleDialog</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -148,6 +178,18 @@
     </CustomBuild>
     <CustomBuild Include="CalcThread.h">
       <Filter>Renderer\Controller</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddRectDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddRectDialog.h">
+      <Filter>Dialog\AddRectDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddCircleDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AddCircleDialog.h">
+      <Filter>Dialog\AddCircleDialog</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +228,12 @@
     </ClInclude>
     <ClInclude Include="SolverModule.h">
       <Filter>Model\Module</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AddRectDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
