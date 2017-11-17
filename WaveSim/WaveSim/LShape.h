@@ -16,6 +16,8 @@ public:
 	T GetVel() const;
 
 	virtual void Draw(QPainter* painter) const = 0;
+
+	virtual const std::string GetClassName() const = 0;
 private:
 	const int mX;
 	const int mY;

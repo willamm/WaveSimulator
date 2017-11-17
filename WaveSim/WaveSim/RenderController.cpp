@@ -17,13 +17,26 @@ RenderController::RenderController(QWidget *parent, std::shared_ptr<DatabaseRef>
 	setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 	mView->resize(WINDOW_WIDTH + 2, WINDOW_HEIGHT + 2);
 
-	initThreads();
+	mPThread->start(QThread::HighPriority);
 }
 
-void RenderController::initThreads()
+void RenderController::startCalculation()
 {
+	mCThread->setDoCalculation(true);
+	mCThread->setRunning(true);
 	mCThread->start(QThread::HighPriority);
-	mPThread->start(QThread::HighPriority);
+}
+
+void RenderController::pauseCalculation()
+{
+	mCThread->setDoCalculation(false);
+}
+
+void RenderController::stopCalculation()
+{
+	mCThread->setDoCalculation(false);
+	mCThread->setRunning(false);
+	mCThread->exit();
 }
 
 void RenderController::afterPainting()
