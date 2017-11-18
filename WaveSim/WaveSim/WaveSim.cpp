@@ -18,8 +18,6 @@ WaveSim::WaveSim(QWidget *parent)
 	createToolBarButtons();
 
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
-	
-	// Add connection for AddRect, AddCircle, ClearShapes
 }
 
 void WaveSim::createRenderer()
@@ -142,11 +140,9 @@ void WaveSim::ResetField()
 {
 	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
 	solver->ResetField();
-
-	// Might have to emit something here
 }
 
 void WaveSim::clicked(const QModelIndex& index)
 {
-
+	
 }
