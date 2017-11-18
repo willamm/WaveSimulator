@@ -17,11 +17,12 @@ ShapesModule::ShapesModule()
 
 /**
  *	AddRect(const int x, const int y, const int w, const int h, const double vel)
- *		x:		The x location of the top left corner of the LRect to be added
- *		y:		The y location of the top left corner of the LRect to be added
- *		w:		The width of the LRect to be added
- *		h:		The height of the LRect to be added
- *		vel:	The velocity of squares covered by the LRect to be added, 1 is full velocity and 0 is no movement
+ *	
+ *	@param x The x location of the top left corner of the LRect to be added
+ *	@param y The y location of the top left corner of the LRect to be added
+ *	@param w The width of the LRect to be added
+ *	@param h The height of the LRect to be added
+ *	@param vel The velocity of squares covered by the LRect to be added, 1 is full velocity and 0 is no movement
  *
  *	Adds a LRect to the vector of LShapes. 
  *
@@ -37,10 +38,10 @@ const bool ShapesModule::AddRect(const int x, const int y, const int w, const in
 
 /**
  *	AddCircle(const int x, const int y, const int r, const double vel)
- *		x:		The x location of the center of the LCircle	
- *		y:		The y location of the center of the LCircle	
- *		r:		The radius of the LCircle to be added
- *		vel:	The velocity of squares covered by the LCircle to be added, 1 is full velocity and 0 is no movement
+ *  @param x The x location of the center of the LCircle	
+ *	@param y The y location of the center of the LCircle	
+ *	@param r The radius of the LCircle to be added
+ *	@param vel	The velocity of squares covered by the LCircle to be added, 1 is full velocity and 0 is no movement
  *
  *	Adds a LCircle to the vector of LShapes. 
  *

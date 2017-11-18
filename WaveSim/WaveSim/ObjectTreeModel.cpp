@@ -1,15 +1,6 @@
 #include "ObjectTreeModel.h"
 
-ObjectTreeModel::ObjectTreeModel(const QString& data, QObject* parent)
-	: QAbstractItemModel(parent)
-{
-	QList<QVariant> rootData;
-	rootData << "Name" << "Type";
-	rootItem = std::make_unique<TreeItem>(rootData);
-	setupModelData(data.split(QString("\n")), rootItem.get());
-}
-
-ObjectTreeModel::ObjectTreeModel(const DatabaseRef& dbRef, QObject* parent)
+ObjectTreeModel::ObjectTreeModel(const std::shared_ptr<DatabaseRef>& dbRef, QObject* parent)
 	: QAbstractItemModel(parent)
 {
 	setupModelDataFromDB(dbRef);
@@ -130,69 +121,15 @@ QVariant ObjectTreeModel::data(const QModelIndex& index, int role) const
 	return item->data(index.column());
 }
 
-void ObjectTreeModel::setupModelData(const QStringList& lines, TreeItem* parent)
+bool ObjectTreeModel::insertRows(int row, int column, const QModelIndex & parent)
 {
-	QList<TreeItem*> parents;
-	QList<int> indentations;
-	parents << parent;
-	indentations << 0;
-
-	int number = 0;
-
-	while (number < lines.count()) 
-	{
-		int position = 0;
-		while (position < lines[number].length()) 
-		{
-			if (lines[number].at(position) != ' ')
-				break;
-			position++;
-		}
-
-		QString lineData = lines[number].mid(position).trimmed();
-
-		if (!lineData.isEmpty()) 
-		{
-			// Read the column data from the rest of the line.
-			QStringList columnStrings = lineData.split("\t", QString::SkipEmptyParts);
-			QList<QVariant> columnData;
-			for (int column = 0; column < columnStrings.count(); ++column)
-				columnData << columnStrings[column];
-
-			if (position > indentations.last()) 
-			{
-				// The last child of the current parent is now the new parent
-				// unless the current parent has no children.
-
-				if (parents.last()->childCount() > 0) 
-				{
-					parents << parents.last()->child(parents.last()->childCount() - 1);
-					indentations << position;
-				}
-			}
-			else 
-			{
-				while (position < indentations.last() && parents.count() > 0) 
-				{
-					parents.pop_back();
-					indentations.pop_back();
-				}
-			}
-			// Append a new item to the current parent's list of children.
-			parents.last()->appendChild(new TreeItem(columnData, parents.last()));
-		}
-		++number;
-	}
+	return false;
 }
 
-void ObjectTreeModel::setupModelDataFromDB(const DatabaseRef& db)
+void ObjectTreeModel::setupModelDataFromDB(const std::shared_ptr<DatabaseRef>& db)
 {
-	std::unordered_map<int, std::shared_ptr<Module>> map = db.GetMap();
+	std::unordered_map<int, std::shared_ptr<Module>> map = db->GetMap();
 	QList<QVariant> rootData;
-	QList<TreeItem*> parents;
 	rootData << "Name" << "Type";
 	rootItem = std::make_unique<TreeItem>(rootData);
-	parents << rootItem.get();
-
-
 }

@@ -7,6 +7,10 @@
 #include <QFile>
 #include <QTreeView>
 #include <QVBoxLayout>
+#include <QContextMenuEvent>
+#include <QStandardItemModel>
+#include <QObject>
+#include <QPushButton>
 
 #include "AddRectDialog.h"
 #include "AddCircleDialog.h"
@@ -29,19 +33,22 @@ public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
 	~WaveSim() = default;
 
-
 public slots:
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
 	void AddCircle(const int x, const int y, const int radius, const double vel);
-	void clicked(const QModelIndex& index);
 	void ClearShapes();
 	void ResetField();
+
+	void ShowContextMenu(const QPoint& event);
+
+	void UpdateObjectTree();
 
 private:
 	Ui::WaveSimClass ui;
 	unique_ptr<AddRectDialog> mAddRectDialog;
 	unique_ptr<AddCircleDialog> mAddCircleDialog;
 
+	unique_ptr<ObjectTreeModel> standardTreeModel;
 	unique_ptr<QTreeView> mTreeView;
 	unique_ptr<RenderController> rc;
 	shared_ptr<DatabaseRef> databaseRef;

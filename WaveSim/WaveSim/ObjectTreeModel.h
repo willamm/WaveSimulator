@@ -11,8 +11,7 @@ class ObjectTreeModel : public QAbstractItemModel // TODO: extend QStandardItemM
 	Q_OBJECT
 
 public:
-	explicit ObjectTreeModel(const QString& data, QObject* parent = 0);
-	explicit ObjectTreeModel(const DatabaseRef& dbRef, QObject* parent = 0);
+	explicit ObjectTreeModel(const std::shared_ptr<DatabaseRef>& dbRef, QObject* parent = 0);
 	~ObjectTreeModel();
 
 	Qt::ItemFlags flags(const QModelIndex& index) const override;
@@ -23,13 +22,13 @@ public:
 	int columnCount(const QModelIndex& parent = QModelIndex()) const override;
 	QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
 
+	bool insertRows(int row, int column, const QModelIndex& parent = QModelIndex()) override;
+
 public slots:
 	
 	
 private:
-	void setupModelData(const QStringList& lines, TreeItem* parent);
-
-	void setupModelDataFromDB(const DatabaseRef& db);
+	void setupModelDataFromDB(const std::shared_ptr<DatabaseRef>& dbRef);
 
 	std::unique_ptr<TreeItem> rootItem;
 };

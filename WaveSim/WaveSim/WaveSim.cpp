@@ -1,9 +1,5 @@
 #include "WaveSim.h"
 
-#include <QObject>
-#include <QPushButton>
-#include <QStandardItemModel>
-
 using namespace std;
 
 WaveSim::WaveSim(QWidget *parent)
@@ -27,34 +23,14 @@ void WaveSim::createRenderer()
 
 void WaveSim::createObjectTree()
 {
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
-	int numRows = shapes->GetShapes().size();
-	QStandardItemModel* standardTreeModel = new QStandardItemModel(this);
-	QList<QStandardItem*> columns;
-	QStandardItem* rootItem = standardTreeModel->invisibleRootItem();
-	standardTreeModel->setHorizontalHeaderLabels(QStringList() << "Name" << "Type");
-	QStandardItem* root = new QStandardItem("Root");
-	QStandardItem* geometryItem = new QStandardItem("Geometry");
-	QList<QStandardItem*> geoRow;
-	geoRow << geometryItem << new QStandardItem("Group");
-	columns << root << new QStandardItem("Root");
-	rootItem->appendRow(columns);
-	root->appendRow(geoRow);
-	standardTreeModel->appendRow(columns);
-	for (int row = 0; row < numRows; row++)
-	{
-		QList<QStandardItem*> shapesRow;
-		QStandardItem* item = new QStandardItem(QString(shapes->GetShapes()[row]->GetClassName().c_str()));
-		shapesRow << item << new QStandardItem(QString("Structure"));
-		geometryItem->appendRow(shapesRow);
-	}
-	root->appendRow(new QStandardItem("Solver"));
+	standardTreeModel = make_unique<ObjectTreeModel>(databaseRef, this);
 
 	mTreeView = make_unique<QTreeView>(this);
-	mTreeView->setModel(standardTreeModel);
+	mTreeView->setModel(standardTreeModel.get());
+	mTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
 	
 	// Emit event when an item in the view is clicked
-	connect(mTreeView.get(), &QTreeView::clicked, this, &WaveSim::clicked);
+	connect(mTreeView.get(), &QTreeView::customContextMenuRequested, this, &WaveSim::ShowContextMenu);
 }
 
 void WaveSim::setLayout()
@@ -142,7 +118,16 @@ void WaveSim::ResetField()
 	solver->ResetField();
 }
 
-void WaveSim::clicked(const QModelIndex& index)
+void WaveSim::ShowContextMenu(const QPoint& point)
+{
+	QMenu contextMenu(this);
+	QModelIndex index = mTreeView->indexAt(point);
+	QVariant itemName = index.data();
+	contextMenu.addAction(itemName.toString());
+	contextMenu.exec(mTreeView->mapToGlobal(point));
+}
+
+void WaveSim::UpdateObjectTree()
 {
 	
 }
