@@ -25,10 +25,12 @@ public:
 	bool insertRows(int row, int column, const QModelIndex& parent = QModelIndex()) override;
 
 public slots:
-	
+	void addShapeToTree();
 	
 private:
 	void setupModelDataFromDB(const std::shared_ptr<DatabaseRef>& dbRef);
 
-	std::unique_ptr<TreeItem> rootItem;
+	TreeItem* rootItem;
+	TreeItem* geometryRootItem;
+	TreeItem* solverRootItem;
 };

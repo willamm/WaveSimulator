@@ -41,8 +41,6 @@ public slots:
 
 	void ShowContextMenu(const QPoint& event);
 
-	void UpdateObjectTree();
-
 private:
 	Ui::WaveSimClass ui;
 	unique_ptr<AddRectDialog> mAddRectDialog;

@@ -126,8 +126,3 @@ void WaveSim::ShowContextMenu(const QPoint& point)
 	contextMenu.addAction(itemName.toString());
 	contextMenu.exec(mTreeView->mapToGlobal(point));
 }
-
-void WaveSim::UpdateObjectTree()
-{
-	
-}

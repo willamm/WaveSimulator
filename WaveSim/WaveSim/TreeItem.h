@@ -1,28 +1,27 @@
 #pragma once
 
-#include <QList>
-#include <QVariant>
-
 #include <memory>
+#include <vector>
 
 class TreeItem 
 {
 public:
-	explicit TreeItem(const QList<QVariant>& data, TreeItem* parentItem = 0);
-	virtual ~TreeItem();
+	explicit TreeItem(const std::string& itemName, const std::vector<int>& shapeData, std::weak_ptr<TreeItem>& parent);
+	virtual ~TreeItem() = default;
 
-	void appendChild(TreeItem* child);
+	void appendChild(std::unique_ptr<TreeItem> child);
 
 	TreeItem* child(int row);
 	int childCount() const;
 	int columnCount() const;
-	QVariant data(int column) const;
+	std::pair<std::string, std::vector<int>> itemData(int column) const;
 	int row() const;
-	TreeItem* parentItem();
+	std::weak_ptr<TreeItem> parentItem();
 	
 private:
-	QList<TreeItem*> m_childItems;
-	QList<QVariant> m_itemData;
-	TreeItem* m_parentItem;
+	std::vector<std::unique_ptr<TreeItem>> m_childItems;
+	std::string m_itemName;
+	std::vector<int> m_itemData;
+	std::weak_ptr<TreeItem> m_parentItem;
 };
 
