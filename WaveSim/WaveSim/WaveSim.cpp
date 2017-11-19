@@ -69,12 +69,22 @@ void WaveSim::setLayout()
 	setCentralWidget(window);
 }
 
-void WaveSim::createToolBarButtons()
+void WaveSim::createDialogs()
 {
 	mAddRectDialog = make_unique<AddRectDialog>(this);
 	mAddCircleDialog = make_unique<AddCircleDialog>(this);
 
+	mAddRectDialog->setWindowTitle("Add Rectangle");
+	mAddCircleDialog->setWindowTitle("Add Circle");
+
+	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
+	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
+}
+
+void WaveSim::createToolBarButtons()
+{
 	QToolBar* toolbar = ui.mainToolBar;
+	createDialogs();
 
 	QPushButton* startButton = new QPushButton("Start", this);
 	QPushButton* stopButton = new QPushButton("Stop", this);
@@ -85,13 +95,8 @@ void WaveSim::createToolBarButtons()
 
 	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
 	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
-
 	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
-	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
-
 	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
-	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
-
 	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
 	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
 
