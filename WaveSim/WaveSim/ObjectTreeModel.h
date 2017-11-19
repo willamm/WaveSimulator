@@ -12,7 +12,7 @@ class ObjectTreeModel : public QAbstractItemModel // TODO: extend QStandardItemM
 
 public:
 	explicit ObjectTreeModel(const std::shared_ptr<DatabaseRef>& dbRef, QObject* parent = 0);
-	~ObjectTreeModel();
+	~ObjectTreeModel() = default;
 
 	Qt::ItemFlags flags(const QModelIndex& index) const override;
 	QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
@@ -30,7 +30,7 @@ public slots:
 private:
 	void setupModelDataFromDB(const std::shared_ptr<DatabaseRef>& dbRef);
 
-	TreeItem* rootItem;
-	TreeItem* geometryRootItem;
-	TreeItem* solverRootItem;
+	std::unique_ptr<TreeRow> rootItem;
+	std::unique_ptr<TreeRow> geometryRootItem;
+	std::unique_ptr<TreeRow> solverRootItem;
 };

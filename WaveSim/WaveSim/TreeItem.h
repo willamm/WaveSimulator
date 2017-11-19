@@ -3,25 +3,25 @@
 #include <memory>
 #include <vector>
 
-class TreeItem 
+class TreeRow 
 {
 public:
-	explicit TreeItem(const std::string& itemName, const std::vector<int>& shapeData, std::weak_ptr<TreeItem>& parent);
-	virtual ~TreeItem() = default;
+	explicit TreeRow(const std::vector<std::string>& rowStrings, const std::vector<int>& shapeData);
+	virtual ~TreeRow() = default;
 
-	void appendChild(std::unique_ptr<TreeItem> child);
+	void appendChild(std::unique_ptr<TreeRow> child);
 
-	TreeItem* child(int row);
+	TreeRow* child(int row);
 	int childCount() const;
 	int columnCount() const;
 	std::pair<std::string, std::vector<int>> itemData(int column) const;
 	int row() const;
-	std::weak_ptr<TreeItem> parentItem();
+	std::weak_ptr<TreeRow> parentItem();
 	
 private:
-	std::vector<std::unique_ptr<TreeItem>> m_childItems;
-	std::string m_itemName;
-	std::vector<int> m_itemData;
-	std::weak_ptr<TreeItem> m_parentItem;
+	std::vector<std::unique_ptr<TreeRow>> m_childItems;
+	std::vector<std::string> m_rowStrings;
+	std::vector<int> m_shapeData;
+	std::weak_ptr<TreeRow> m_parentItem;
 };
 
