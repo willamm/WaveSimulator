@@ -1,9 +1,5 @@
 #include "WaveSim.h"
 
-#include <QObject>
-#include <QPushButton>
-#include <QStandardItemModel>
-
 using namespace std;
 
 WaveSim::WaveSim(QWidget *parent)
@@ -50,7 +46,7 @@ void WaveSim::createObjectTree()
 	}
 	root->appendRow(new QStandardItem("Solver"));
 
-	mTreeView = make_unique<QTreeView>(this);
+	mTreeView = make_unique<LTreeView>(this);
 	mTreeView->setModel(standardTreeModel);
 	
 	// Emit event when an item in the view is clicked

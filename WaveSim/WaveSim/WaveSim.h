@@ -5,13 +5,14 @@
 #include <QtWidgets/QMainWindow>
 #include <QApplication>
 #include <QFile>
-#include <QTreeView>
+#include <QStandardItemModel>
 #include <QVBoxLayout>
 
 #include "AddRectDialog.h"
 #include "AddCircleDialog.h"
 #include "ui_WaveSim.h"
 #include "ObjectTreeModel.h"
+#include "LTreeView.h"
 #include "RenderController.h"
 
 using namespace std;

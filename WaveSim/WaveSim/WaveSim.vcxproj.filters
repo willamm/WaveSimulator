@@ -156,6 +156,15 @@
     <ClCompile Include="AddCircleDialog.cpp">
       <Filter>Dialog\AddCircleDialog</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_LTreeView.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_LTreeView.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LTreeView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -190,6 +199,9 @@
     </CustomBuild>
     <CustomBuild Include="AddCircleDialog.h">
       <Filter>Dialog\AddCircleDialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="LTreeView.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
