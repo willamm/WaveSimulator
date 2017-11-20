@@ -23,7 +23,7 @@ void WaveSim::createRenderer()
 
 void WaveSim::createObjectTree()
 {
-	standardTreeModel = make_unique<ObjectTreeModel>(databaseRef, this);
+	standardTreeModel = make_unique<ObjectTreeModel>(this);
 
 	mTreeView = make_unique<QTreeView>(this);
 	mTreeView->setModel(standardTreeModel.get());
