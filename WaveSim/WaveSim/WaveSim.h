@@ -57,5 +57,6 @@ private:
 	void createToolBarButtons();
 	void createRenderer();
 	void createObjectTree();
+	void createDialogs();
 	void setLayout();
 };
