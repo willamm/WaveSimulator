@@ -1,27 +1,24 @@
 #pragma once
 
-#include <QList>
-#include <QVariant>
 #include <memory>
+#include <vector>
 
-class TreeItem // TODO: make this class extend QStandardItem? Not sure yet
+#include <QStandardItem>
+
+class TreeItem : public QStandardItem
 {
 public:
-	explicit TreeItem(const QList<QVariant>& data, TreeItem* parentItem = 0);
-	virtual ~TreeItem();
+	TreeItem();
+	TreeItem(const std::string& text);
+	virtual ~TreeItem() = default;
 
-	void appendChild(TreeItem* child);
+	int type() const override;
+	QVariant data(int role) const override;
+	void setData(const QVariant& value, int role) override;
+	QStandardItem* clone() const override;
 
-	TreeItem* child(int row);
-	int childCount() const;
-	int columnCount() const;
-	QVariant data(int column) const;
-	int row() const;
-	TreeItem* parentItem();
-	
 private:
-	QList<TreeItem*> m_childItems;
-	QList<QVariant> m_itemData;
-	TreeItem* m_parentItem;
+	std::vector<std::string> mColumnTitles;
+	std::vector<int> mShapeData;
 };
 

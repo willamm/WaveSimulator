@@ -64,6 +64,9 @@
     <Filter Include="Dialog\AddCircleDialog">
       <UniqueIdentifier>{3d8ad384-2c93-4c9f-b1bd-e6869f177fb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object Tree">
+      <UniqueIdentifier>{30289438-99ee-4b9c-9532-957a80744327}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -80,18 +83,6 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\qrc_WaveSim.cpp">
       <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ObjectTreeModel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ObjectTreeModel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectTreeModel.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TreeItem.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CalcThread.cpp">
       <Filter>Generated Files</Filter>
@@ -156,6 +147,12 @@
     <ClCompile Include="AddCircleDialog.cpp">
       <Filter>Dialog\AddCircleDialog</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectTreeModel.cpp">
+      <Filter>Object Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeItem.cpp">
+      <Filter>Object Tree</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -166,9 +163,6 @@
     </CustomBuild>
     <CustomBuild Include="WaveSim.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="ObjectTreeModel.h">
-      <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="PaintThread.h">
       <Filter>Renderer\View</Filter>
@@ -191,13 +185,13 @@
     <CustomBuild Include="AddCircleDialog.h">
       <Filter>Dialog\AddCircleDialog</Filter>
     </CustomBuild>
+    <CustomBuild Include="ObjectTreeModel.h">
+      <Filter>Object Tree</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_WaveSim.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TreeItem.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="values.h">
       <Filter>Model\Renderer</Filter>
@@ -234,6 +228,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TreeItem.h">
+      <Filter>Object Tree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,51 +1,40 @@
 #include "TreeItem.h"
 
-TreeItem::TreeItem(const QList<QVariant>& data, TreeItem* parentItem)
+TreeItem::TreeItem()
+	: QStandardItem()
 {
-	m_parentItem = parentItem;
-	m_itemData = data;
 }
 
-TreeItem::~TreeItem()
+TreeItem::TreeItem(const std::string& text)
+	: QStandardItem(QString::fromStdString(text))
 {
-	qDeleteAll(m_childItems);
+	mColumnTitles.push_back(text);
 }
 
-void TreeItem::appendChild(TreeItem* child)
+int TreeItem::type() const
 {
-	m_childItems.append(child);
+	return QStandardItem::UserType + 1;
 }
 
-TreeItem* TreeItem::child(int row)
+QVariant TreeItem::data(int role) const
 {
-	return m_childItems.value(row);
-}
-
-int TreeItem::childCount() const
-{
-	return m_childItems.count();
-}
-
-int TreeItem::columnCount() const
-{
-	return m_itemData.count();
-}
-
-QVariant TreeItem::data(int column) const
-{
-	return m_itemData.value(column);
-}
-
-int TreeItem::row() const
-{
-	if (m_parentItem)
+	if (role == Qt::DisplayRole)
 	{
-		return m_parentItem->m_childItems.indexOf(const_cast<TreeItem*>(this));
+		return QString::fromStdString(mColumnTitles.at(0));
 	}
-	return 0;
+	if (role == Qt::ToolTipRole)
+	{
+		return QString();
+	}
+	return QVariant();
 }
 
-TreeItem* TreeItem::parentItem()
+void TreeItem::setData(const QVariant& value, int role)
 {
-	return m_parentItem;
+	QStandardItem::setData(value, role);
+}
+
+QStandardItem* TreeItem::clone() const
+{
+	return new TreeItem();
 }

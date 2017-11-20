@@ -19,7 +19,52 @@
   <property name="windowTitle">
    <string>WaveSim</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <widget class="QTreeWidget" name="treeWidget">
+    <property name="geometry">
+     <rect>
+      <x>5</x>
+      <y>20</y>
+      <width>361</width>
+      <height>711</height>
+     </rect>
+    </property>
+    <column>
+     <property name="text">
+      <string>Name</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
+      <string>Type</string>
+     </property>
+    </column>
+    <item>
+     <property name="text">
+      <string>Root</string>
+     </property>
+     <property name="text">
+      <string>Root</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Geometry</string>
+      </property>
+      <property name="text">
+       <string>Group</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Solvers</string>
+      </property>
+      <property name="text">
+       <string>Group</string>
+      </property>
+     </item>
+    </item>
+   </widget>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
