@@ -84,12 +84,6 @@
     <ClCompile Include="GeneratedFiles\qrc_WaveSim.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_ObjectTreeModel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_ObjectTreeModel.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_CalcThread.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
@@ -153,10 +147,10 @@
     <ClCompile Include="AddCircleDialog.cpp">
       <Filter>Dialog\AddCircleDialog</Filter>
     </ClCompile>
-    <ClCompile Include="TreeRow.cpp">
+    <ClCompile Include="ObjectTreeModel.cpp">
       <Filter>Object Tree</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectTreeModel.cpp">
+    <ClCompile Include="TreeItem.cpp">
       <Filter>Object Tree</Filter>
     </ClCompile>
   </ItemGroup>
@@ -235,7 +229,7 @@
     <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="TreeRow.h">
+    <ClInclude Include="TreeItem.h">
       <Filter>Object Tree</Filter>
     </ClInclude>
   </ItemGroup>

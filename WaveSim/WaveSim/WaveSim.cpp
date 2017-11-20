@@ -23,23 +23,21 @@ void WaveSim::createRenderer()
 
 void WaveSim::createObjectTree()
 {
-	standardTreeModel = make_unique<ObjectTreeModel>(this);
+	QTreeWidgetItem* dummyRoot = ui.treeWidget->topLevelItem(0);
+	dummyRoot->setText(0, "Root");
+	dummyRoot->setText(1, "Root");
 
-	mTreeView = make_unique<QTreeView>(this);
-	mTreeView->setModel(standardTreeModel.get());
-	mTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
-	
-	// Emit event when an item in the view is clicked
-	connect(mTreeView.get(), &QTreeView::customContextMenuRequested, this, &WaveSim::ShowContextMenu);
+	QTreeWidgetItem* geometryRoot = dummyRoot->child(0);
+	geometryRoot->setText(0, "Geometry");
+	geometryRoot->setText(1, "Group");
 }
 
 void WaveSim::setLayout()
 {
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
-	mTreeView->setMaximumHeight(rc->height());
 	setMaximumHeight(rc->height());
-	layout->addWidget(mTreeView.get());
+	layout->addWidget(ui.treeWidget);
 	layout->addWidget(rc.get());
 	window->setLayout(layout);
 	setCentralWidget(window);
@@ -120,9 +118,4 @@ void WaveSim::ResetField()
 
 void WaveSim::ShowContextMenu(const QPoint& point)
 {
-	QMenu contextMenu(this);
-	QModelIndex index = mTreeView->indexAt(point);
-	QVariant itemName = index.data();
-	contextMenu.addAction(itemName.toString());
-	contextMenu.exec(mTreeView->mapToGlobal(point));
 }

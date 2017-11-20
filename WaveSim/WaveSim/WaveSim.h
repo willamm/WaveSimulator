@@ -11,11 +11,12 @@
 #include <QStandardItemModel>
 #include <QObject>
 #include <QPushButton>
+#include <QTreeWidget>
 
 #include "AddRectDialog.h"
 #include "AddCircleDialog.h"
 #include "ui_WaveSim.h"
-#include "ObjectTreeModel.h"
+#include "TreeItem.h"
 #include "RenderController.h"
 
 using namespace std;
@@ -46,8 +47,6 @@ private:
 	unique_ptr<AddRectDialog> mAddRectDialog;
 	unique_ptr<AddCircleDialog> mAddCircleDialog;
 
-	unique_ptr<ObjectTreeModel> standardTreeModel;
-	unique_ptr<QTreeView> mTreeView;
 	unique_ptr<RenderController> rc;
 	shared_ptr<DatabaseRef> databaseRef;
 
