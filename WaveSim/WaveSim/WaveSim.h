@@ -32,7 +32,7 @@ signals:
 
 public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
-	~WaveSim() = default;
+	~WaveSim();
 
 public slots:
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
@@ -41,6 +41,8 @@ public slots:
 	void ResetField();
 
 	void ShowContextMenu(const QPoint& event);
+	
+	void AddItemToObjectTree();
 
 private:
 	Ui::WaveSimClass ui;
@@ -49,6 +51,8 @@ private:
 
 	unique_ptr<RenderController> rc;
 	shared_ptr<DatabaseRef> databaseRef;
+
+	QTreeWidgetItem* geometryRoot;
 
 	void createToolBarButtons();
 	void createRenderer();

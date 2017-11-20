@@ -16,6 +16,11 @@ WaveSim::WaveSim(QWidget *parent)
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }
 
+WaveSim::~WaveSim()
+{
+	delete geometryRoot;
+}
+
 void WaveSim::createRenderer()
 {
 	rc = std::make_unique<RenderController>(this, databaseRef);
@@ -27,9 +32,12 @@ void WaveSim::createObjectTree()
 	dummyRoot->setText(0, "Root");
 	dummyRoot->setText(1, "Root");
 
-	QTreeWidgetItem* geometryRoot = dummyRoot->child(0);
+	geometryRoot = dummyRoot->child(0);
 	geometryRoot->setText(0, "Geometry");
 	geometryRoot->setText(1, "Group");
+
+	connect(this, &WaveSim::rectAdded, &WaveSim::AddItemToObjectTree);
+	connect(this, &WaveSim::circleAdded, &WaveSim::AddItemToObjectTree);
 }
 
 void WaveSim::setLayout()
@@ -37,6 +45,8 @@ void WaveSim::setLayout()
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
 	setMaximumHeight(rc->height());
+	ui.treeWidget->setMaximumHeight(rc->height());
+	window->setMinimumHeight(rc->height());
 	layout->addWidget(ui.treeWidget);
 	layout->addWidget(rc.get());
 	window->setLayout(layout);
@@ -118,4 +128,17 @@ void WaveSim::ResetField()
 
 void WaveSim::ShowContextMenu(const QPoint& point)
 {
+}
+
+void WaveSim::AddItemToObjectTree()
+{
+	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
+	QTreeWidgetItem* shapeNode = new QTreeWidgetItem;
+	const auto& end = shapes->GetShapes().back().get();
+	QString shapeName = QString::fromStdString(end->GetClassName());
+	shapeNode->setText(0, shapeName);
+	shapeNode->setText(1, "Structure");
+	geometryRoot->addChild(shapeNode);
+	geometryRoot->setExpanded(true);
+	geometryRoot->treeWidget()->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
