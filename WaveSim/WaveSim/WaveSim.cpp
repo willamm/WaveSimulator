@@ -4,7 +4,7 @@ using namespace std;
 
 WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)
-	, databaseRef(std::make_shared<DatabaseRef>())
+	, databaseRef(DatabaseRef::GetInstance())
 {
 	ui.setupUi(this);
 
@@ -18,7 +18,6 @@ WaveSim::WaveSim(QWidget *parent)
 
 WaveSim::~WaveSim()
 {
-	delete geometryRoot;
 }
 
 void WaveSim::createRenderer()
@@ -28,16 +27,10 @@ void WaveSim::createRenderer()
 
 void WaveSim::createObjectTree()
 {
-	QTreeWidgetItem* dummyRoot = ui.treeWidget->topLevelItem(0);
-	dummyRoot->setText(0, "Root");
-	dummyRoot->setText(1, "Root");
-
-	geometryRoot = dummyRoot->child(0);
-	geometryRoot->setText(0, "Geometry");
-	geometryRoot->setText(1, "Group");
-
-	connect(this, &WaveSim::rectAdded, &WaveSim::AddItemToObjectTree);
-	connect(this, &WaveSim::circleAdded, &WaveSim::AddItemToObjectTree);
+	objectTree = std::make_unique<ObjectTree>();
+	connect(this, &WaveSim::rectAdded, objectTree.get(), &ObjectTree::addItem);
+	connect(this, &WaveSim::circleAdded, objectTree.get(), &ObjectTree::addItem);
+	connect(this, &WaveSim::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
 }
 
 void WaveSim::setLayout()
@@ -45,9 +38,8 @@ void WaveSim::setLayout()
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
 	setMaximumHeight(rc->height());
-	ui.treeWidget->setMaximumHeight(rc->height());
 	window->setMinimumHeight(rc->height());
-	layout->addWidget(ui.treeWidget);
+	layout->addWidget(objectTree.get());
 	layout->addWidget(rc.get());
 	window->setLayout(layout);
 	setCentralWidget(window);
@@ -94,10 +86,10 @@ void WaveSim::createToolBarButtons()
 
 void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
 {
-	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
+	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
 	solver->AddRectangle(x, y, width, height, vel);
 
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	shapes->AddRect(x, y, width, height, vel);
 
 	emit rectAdded(x, y, width, height);
@@ -105,10 +97,10 @@ void WaveSim::AddRect(const int x, const int y, const int width, const int heigh
 
 void WaveSim::AddCircle(const int x, const int y, const int radius, const double vel)
 {
-	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
+	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
 	solver->AddCircle(x, y, radius, vel);
 
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	shapes->AddCircle(x, y, radius, vel);
 
 	emit circleAdded(x, y, radius);
@@ -116,10 +108,10 @@ void WaveSim::AddCircle(const int x, const int y, const int radius, const double
 
 void WaveSim::ClearShapes()
 {
-	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
+	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
 	solver->ResetMaterials();
 
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	shapes->ClearAllShapes();
 
 	emit shapesCleared();
@@ -127,23 +119,6 @@ void WaveSim::ClearShapes()
 
 void WaveSim::ResetField()
 {
-	SolverModule* solver = (SolverModule*)databaseRef->GetModule(DatabaseRef::SOLVER_KEY).get();
+	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
 	solver->ResetField();
-}
-
-void WaveSim::ShowContextMenu(const QPoint& point)
-{
-}
-
-void WaveSim::AddItemToObjectTree()
-{
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
-	QTreeWidgetItem* shapeNode = new QTreeWidgetItem;
-	const auto& end = shapes->GetShapes().back().get();
-	QString shapeName = QString::fromStdString(end->GetClassName());
-	shapeNode->setText(0, shapeName);
-	shapeNode->setText(1, "Structure");
-	geometryRoot->addChild(shapeNode);
-	geometryRoot->setExpanded(true);
-	geometryRoot->treeWidget()->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
