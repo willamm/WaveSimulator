@@ -11,8 +11,8 @@ ObjectTree::ObjectTree(QWidget *parent)
 	headerLabels << "Name" << "Type";
 	setHeaderLabels(headerLabels);
 	setColumnCount(2);
-	setContextMenuPolicy(Qt::CustomContextMenu);
 	header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+	setContextMenuPolicy(Qt::CustomContextMenu);
 
 	addTopLevelItem(dummyRoot);
 	dummyRoot->setText(0, "Root");
@@ -36,7 +36,7 @@ ObjectTree::~ObjectTree()
 void ObjectTree::onContextMenuRequested(const QPoint& pos)
 {
 	QTreeWidgetItem* item = itemAt(pos);
-	if (item)
+	if (item && item->type() == ShapeType)
 	{
 		showContextMenu(item, viewport()->mapToGlobal(pos));
 	}
@@ -45,7 +45,7 @@ void ObjectTree::onContextMenuRequested(const QPoint& pos)
 void ObjectTree::addItem()
 {
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	QTreeWidgetItem* shapeNode = new QTreeWidgetItem(geometryRoot);
+	QTreeWidgetItem* shapeNode = new QTreeWidgetItem(geometryRoot, ShapeType);
 	const auto& end = shapes->GetShapes().back().get();
 	QString shapeName = QString::fromStdString(end->GetClassName());
 	shapeNode->setText(0, shapeName);
@@ -62,10 +62,5 @@ void ObjectTree::showContextMenu(const QTreeWidgetItem* item, const QPoint& pos)
 {
 	QMenu menu;
 	menu.addAction("Edit");
-	
-	switch (item->type())
-	{
-	case ShapeType:
-		menu.exec(pos);
-	}
+	menu.exec(pos);
 }

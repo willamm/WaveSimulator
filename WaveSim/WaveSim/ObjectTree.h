@@ -22,9 +22,11 @@ public slots:
 private:
 	void showContextMenu(const QTreeWidgetItem* item, const QPoint& pos) const;
 
+	// Initialization
+
 	QTreeWidgetItem* dummyRoot;
 	QTreeWidgetItem* geometryRoot;
 	QTreeWidgetItem* solverRoot;
 
-	DatabaseRef databaseRef;
+	const DatabaseRef databaseRef;
 };
