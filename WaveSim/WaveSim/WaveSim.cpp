@@ -1,9 +1,5 @@
 #include "WaveSim.h"
 
-#include <QObject>
-#include <QPushButton>
-#include <QStandardItemModel>
-
 using namespace std;
 
 WaveSim::WaveSim(QWidget *parent)
@@ -20,6 +16,11 @@ WaveSim::WaveSim(QWidget *parent)
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }
 
+WaveSim::~WaveSim()
+{
+	delete geometryRoot;
+}
+
 void WaveSim::createRenderer()
 {
 	rc = std::make_unique<RenderController>(this, databaseRef);
@@ -27,43 +28,26 @@ void WaveSim::createRenderer()
 
 void WaveSim::createObjectTree()
 {
-	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
-	int numRows = shapes->GetShapes().size();
-	QStandardItemModel* standardTreeModel = new QStandardItemModel(this);
-	QList<QStandardItem*> columns;
-	QStandardItem* rootItem = standardTreeModel->invisibleRootItem();
-	standardTreeModel->setHorizontalHeaderLabels(QStringList() << "Name" << "Type");
-	QStandardItem* root = new QStandardItem("Root");
-	QStandardItem* geometryItem = new QStandardItem("Geometry");
-	QList<QStandardItem*> geoRow;
-	geoRow << geometryItem << new QStandardItem("Group");
-	columns << root << new QStandardItem("Root");
-	rootItem->appendRow(columns);
-	root->appendRow(geoRow);
-	standardTreeModel->appendRow(columns);
-	for (int row = 0; row < numRows; row++)
-	{
-		QList<QStandardItem*> shapesRow;
-		QStandardItem* item = new QStandardItem(QString(shapes->GetShapes()[row]->GetClassName().c_str()));
-		shapesRow << item << new QStandardItem(QString("Structure"));
-		geometryItem->appendRow(shapesRow);
-	}
-	root->appendRow(new QStandardItem("Solver"));
+	QTreeWidgetItem* dummyRoot = ui.treeWidget->topLevelItem(0);
+	dummyRoot->setText(0, "Root");
+	dummyRoot->setText(1, "Root");
 
-	mTreeView = make_unique<QTreeView>(this);
-	mTreeView->setModel(standardTreeModel);
-	
-	// Emit event when an item in the view is clicked
-	connect(mTreeView.get(), &QTreeView::clicked, this, &WaveSim::clicked);
+	geometryRoot = dummyRoot->child(0);
+	geometryRoot->setText(0, "Geometry");
+	geometryRoot->setText(1, "Group");
+
+	connect(this, &WaveSim::rectAdded, &WaveSim::AddItemToObjectTree);
+	connect(this, &WaveSim::circleAdded, &WaveSim::AddItemToObjectTree);
 }
 
 void WaveSim::setLayout()
 {
 	QHBoxLayout* layout = new QHBoxLayout(this);
 	QWidget* window = new QWidget(this);
-	mTreeView->setMaximumHeight(rc->height());
 	setMaximumHeight(rc->height());
-	layout->addWidget(mTreeView.get());
+	ui.treeWidget->setMaximumHeight(rc->height());
+	window->setMinimumHeight(rc->height());
+	layout->addWidget(ui.treeWidget);
 	layout->addWidget(rc.get());
 	window->setLayout(layout);
 	setCentralWidget(window);
@@ -147,7 +131,19 @@ void WaveSim::ResetField()
 	solver->ResetField();
 }
 
-void WaveSim::clicked(const QModelIndex& index)
+void WaveSim::ShowContextMenu(const QPoint& point)
 {
-	
+}
+
+void WaveSim::AddItemToObjectTree()
+{
+	ShapesModule* shapes = (ShapesModule*)databaseRef->GetModule(DatabaseRef::SHAPES_KEY).get();
+	QTreeWidgetItem* shapeNode = new QTreeWidgetItem;
+	const auto& end = shapes->GetShapes().back().get();
+	QString shapeName = QString::fromStdString(end->GetClassName());
+	shapeNode->setText(0, shapeName);
+	shapeNode->setText(1, "Structure");
+	geometryRoot->addChild(shapeNode);
+	geometryRoot->setExpanded(true);
+	geometryRoot->treeWidget()->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 }
