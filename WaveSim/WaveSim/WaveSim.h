@@ -11,12 +11,11 @@
 #include <QStandardItemModel>
 #include <QObject>
 #include <QPushButton>
-#include <QTreeWidget>
 
 #include "AddRectDialog.h"
+#include "ObjectTree.h"
 #include "AddCircleDialog.h"
 #include "ui_WaveSim.h"
-#include "TreeItem.h"
 #include "RenderController.h"
 
 using namespace std;
@@ -40,19 +39,15 @@ public slots:
 	void ClearShapes();
 	void ResetField();
 
-	void ShowContextMenu(const QPoint& event);
-	
-	void AddItemToObjectTree();
-
 private:
 	Ui::WaveSimClass ui;
 	unique_ptr<AddRectDialog> mAddRectDialog;
 	unique_ptr<AddCircleDialog> mAddCircleDialog;
 
 	unique_ptr<RenderController> rc;
-	shared_ptr<DatabaseRef> databaseRef;
+	DatabaseRef databaseRef;
 
-	QTreeWidgetItem* geometryRoot;
+	unique_ptr<ObjectTree> objectTree;
 
 	void createToolBarButtons();
 	void createRenderer();
