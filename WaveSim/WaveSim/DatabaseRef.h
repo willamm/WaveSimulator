@@ -11,9 +11,8 @@ using namespace std;
 class DatabaseRef final
 {
 public:
+	DatabaseRef();
 	~DatabaseRef() = default;
-
-	static DatabaseRef& GetInstance();
 
 	shared_ptr<Module> GetModule(const int key) const;
 
@@ -22,6 +21,5 @@ public:
 	const static int SHAPES_KEY = 0;
 	const static int SOLVER_KEY = 1;
 private:
-	DatabaseRef();
 	unordered_map<int ,shared_ptr<Module>> mModules;
 };

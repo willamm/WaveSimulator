@@ -19,6 +19,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -31,6 +32,7 @@ public:
     QAction *actionSave;
     QAction *actionExit;
     QWidget *centralWidget;
+    QTreeWidget *treeWidget;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuAbout;
@@ -53,10 +55,16 @@ public:
         actionExit->setObjectName(QStringLiteral("actionExit"));
         centralWidget = new QWidget(WaveSimClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        treeWidget = new QTreeWidget(centralWidget);
+        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem(treeWidget);
+        new QTreeWidgetItem(__qtreewidgetitem);
+        new QTreeWidgetItem(__qtreewidgetitem);
+        treeWidget->setObjectName(QStringLiteral("treeWidget"));
+        treeWidget->setGeometry(QRect(5, 20, 361, 711));
         WaveSimClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(WaveSimClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1100, 31));
+        menuBar->setGeometry(QRect(0, 0, 1100, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuAbout = new QMenu(menuBar);
@@ -84,11 +92,28 @@ public:
 
     void retranslateUi(QMainWindow *WaveSimClass)
     {
-        WaveSimClass->setWindowTitle(QApplication::translate("WaveSimClass", "Wave Simulator", Q_NULLPTR));
+        WaveSimClass->setWindowTitle(QApplication::translate("WaveSimClass", "WaveSim", Q_NULLPTR));
         actionNew->setText(QApplication::translate("WaveSimClass", "New", Q_NULLPTR));
         actionOpen->setText(QApplication::translate("WaveSimClass", "Open", Q_NULLPTR));
         actionSave->setText(QApplication::translate("WaveSimClass", "Save", Q_NULLPTR));
         actionExit->setText(QApplication::translate("WaveSimClass", "Exit", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem = treeWidget->headerItem();
+        ___qtreewidgetitem->setText(1, QApplication::translate("WaveSimClass", "Type", Q_NULLPTR));
+        ___qtreewidgetitem->setText(0, QApplication::translate("WaveSimClass", "Name", Q_NULLPTR));
+
+        const bool __sortingEnabled = treeWidget->isSortingEnabled();
+        treeWidget->setSortingEnabled(false);
+        QTreeWidgetItem *___qtreewidgetitem1 = treeWidget->topLevelItem(0);
+        ___qtreewidgetitem1->setText(1, QApplication::translate("WaveSimClass", "Root", Q_NULLPTR));
+        ___qtreewidgetitem1->setText(0, QApplication::translate("WaveSimClass", "Root", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem2 = ___qtreewidgetitem1->child(0);
+        ___qtreewidgetitem2->setText(1, QApplication::translate("WaveSimClass", "Group", Q_NULLPTR));
+        ___qtreewidgetitem2->setText(0, QApplication::translate("WaveSimClass", "Geometry", Q_NULLPTR));
+        QTreeWidgetItem *___qtreewidgetitem3 = ___qtreewidgetitem1->child(1);
+        ___qtreewidgetitem3->setText(1, QApplication::translate("WaveSimClass", "Group", Q_NULLPTR));
+        ___qtreewidgetitem3->setText(0, QApplication::translate("WaveSimClass", "Solvers", Q_NULLPTR));
+        treeWidget->setSortingEnabled(__sortingEnabled);
+
         menuFile->setTitle(QApplication::translate("WaveSimClass", "File", Q_NULLPTR));
         menuAbout->setTitle(QApplication::translate("WaveSimClass", "About", Q_NULLPTR));
     } // retranslateUi

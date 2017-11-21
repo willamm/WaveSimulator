@@ -12,12 +12,6 @@ DatabaseRef::DatabaseRef()
 	mModules[DatabaseRef::SOLVER_KEY] = dynamic_pointer_cast<Module>(make_shared<SolverModule>());
 }
 
-DatabaseRef& DatabaseRef::GetInstance()
-{
-	static DatabaseRef instance;
-	return instance;
-}
-
 /**
  *	GetModule(const int key)
  *		key: The integer key of a module

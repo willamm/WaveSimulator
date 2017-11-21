@@ -3,12 +3,12 @@
 
 using namespace std;
 
-PaintThread::PaintThread(const DatabaseRef& dbr, QPixmap* pix, const int fps, QObject* parent)
+PaintThread::PaintThread(std::shared_ptr<DatabaseRef> dbr, QPixmap* pix, const int fps, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
 	, mFPS(fps)
-	, mShapes(dynamic_pointer_cast<ShapesModule>(dbr.GetModule(DatabaseRef::SHAPES_KEY)))
-	, mSolver(((SolverModule*)dbr.GetModule(DatabaseRef::SOLVER_KEY).get())->GetField())
+	, mShapes(dynamic_pointer_cast<ShapesModule>(dbr->GetModule(DatabaseRef::SHAPES_KEY)))
+	, mSolver(((SolverModule*)dbr->GetModule(DatabaseRef::SOLVER_KEY).get())->GetField())
 	, mPix(pix)
 	, mPainter(make_unique<QPainter>(pix))
 {
