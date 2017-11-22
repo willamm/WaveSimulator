@@ -41,6 +41,7 @@ private slots:
 
 public slots:
 	void startCalculation();
+	void doOneTimestep();
 	void pauseCalculation();
 	void stopCalculation();
 };

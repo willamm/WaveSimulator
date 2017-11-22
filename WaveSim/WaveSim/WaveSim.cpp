@@ -16,10 +16,6 @@ WaveSim::WaveSim(QWidget *parent)
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
 }
 
-WaveSim::~WaveSim()
-{
-}
-
 void WaveSim::createRenderer()
 {
 	rc = std::make_unique<RenderController>(this, databaseRef);
@@ -64,6 +60,7 @@ void WaveSim::createToolBarButtons()
 
 	QPushButton* startButton = new QPushButton("Start", this);
 	QPushButton* stopButton = new QPushButton("Stop", this);
+	QPushButton* singleStepButton = new QPushButton("Step Once", this);
 	QPushButton* addRectButton = new QPushButton("Add Rect", this);
 	QPushButton* addCircleButton = new QPushButton("Add Circle", this);
 	QPushButton* resetFieldButton = new QPushButton("Reset Field", this);
@@ -71,6 +68,7 @@ void WaveSim::createToolBarButtons()
 
 	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
 	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
+	connect(singleStepButton, &QPushButton::pressed, rc.get(), &RenderController::doOneTimestep);
 	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
 	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
 	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
@@ -78,6 +76,7 @@ void WaveSim::createToolBarButtons()
 
 	toolbar->addWidget(startButton);
 	toolbar->addWidget(stopButton);
+	toolbar->addWidget(singleStepButton);
 	toolbar->addWidget(addRectButton);
 	toolbar->addWidget(addCircleButton);
 	toolbar->addWidget(resetFieldButton);
