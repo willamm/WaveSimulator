@@ -23,15 +23,9 @@ using namespace std;
 class WaveSim : public QMainWindow
 {
 	Q_OBJECT
-
-signals:
-	void rectAdded(const int x, const int y, const int width, const int height);
-	void circleAdded(const int x, const int y, const int radius);
-	void shapesCleared();
-
 public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
-	~WaveSim();
+	~WaveSim() = default;
 
 public slots:
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
@@ -54,4 +48,10 @@ private:
 	void createObjectTree();
 	void createDialogs();
 	void setLayout();
+
+signals:
+	void rectAdded(const int x, const int y, const int width, const int height);
+	void circleAdded(const int x, const int y, const int radius);
+	void shapesCleared();
+
 };
