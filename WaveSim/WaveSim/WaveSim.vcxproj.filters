@@ -64,8 +64,8 @@
     <Filter Include="Dialog\AddCircleDialog">
       <UniqueIdentifier>{3d8ad384-2c93-4c9f-b1bd-e6869f177fb8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object Tree">
-      <UniqueIdentifier>{30289438-99ee-4b9c-9532-957a80744327}</UniqueIdentifier>
+    <Filter Include="Object tree">
+      <UniqueIdentifier>{2a9050ca-7101-424a-892d-c52d593899c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -147,11 +147,14 @@
     <ClCompile Include="AddCircleDialog.cpp">
       <Filter>Dialog\AddCircleDialog</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectTreeModel.cpp">
-      <Filter>Object Tree</Filter>
+    <ClCompile Include="GeneratedFiles\Debug\moc_ObjectTree.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="TreeItem.cpp">
-      <Filter>Object Tree</Filter>
+    <ClCompile Include="GeneratedFiles\Release\moc_ObjectTree.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectTree.cpp">
+      <Filter>Object tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -185,8 +188,8 @@
     <CustomBuild Include="AddCircleDialog.h">
       <Filter>Dialog\AddCircleDialog</Filter>
     </CustomBuild>
-    <CustomBuild Include="ObjectTreeModel.h">
-      <Filter>Object Tree</Filter>
+    <CustomBuild Include="ObjectTree.h">
+      <Filter>Object tree</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -228,9 +231,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TreeItem.h">
-      <Filter>Object Tree</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

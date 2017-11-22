@@ -24,7 +24,7 @@ class RenderController : public QWidget
 	Q_OBJECT
 
 public:
-	RenderController(QWidget *parent, std::shared_ptr<DatabaseRef> dbr);
+	RenderController(QWidget *parent, const DatabaseRef& dbr);
 	~RenderController() = default;
 
 private:
