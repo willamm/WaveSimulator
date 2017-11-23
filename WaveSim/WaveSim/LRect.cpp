@@ -9,9 +9,9 @@ LRect<T>::LRect(const int x, const int y, const int width, const int height, con
 }
 
 template<typename T>
-void LRect<T>::Draw(QPainter* painter) const
+void LRect<T>::Draw(QPainter* painter, int pixelSize) const
 {
-	painter->fillRect(LShape::GetX() * PIXEL_SIZE, LShape::GetY() * PIXEL_SIZE, mWidth * PIXEL_SIZE, mHeight * PIXEL_SIZE, QColor(255, 0, 0, 125));
+	painter->fillRect(LShape::GetX() * pixelSize, LShape::GetY() * pixelSize, mWidth * pixelSize, mHeight * pixelSize, QColor(255, 0, 0, 125));
 }
 
 template<typename T>

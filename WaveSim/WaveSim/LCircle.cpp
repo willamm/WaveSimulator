@@ -8,12 +8,12 @@ LCircle<T>::LCircle(const int x, const int y, const int radius, const T vel)
 }
 
 template<typename T>
-void LCircle<T>::Draw(QPainter* painter) const 
+void LCircle<T>::Draw(QPainter* painter, int pixelSize) const 
 {
 	int startingX = LShape::GetX() - mRadius;
 	int startingY = LShape::GetY() - mRadius;
 
-	painter->drawEllipse(startingX * PIXEL_SIZE, startingY * PIXEL_SIZE, 2 * mRadius * PIXEL_SIZE, 2 * mRadius * PIXEL_SIZE);
+	painter->drawEllipse(startingX * pixelSize, startingY * pixelSize, 2 * mRadius * pixelSize, 2 * mRadius * pixelSize);
 }
 
 template<typename T>

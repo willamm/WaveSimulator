@@ -15,7 +15,6 @@
 #include "SettingsManager.h"
 #include "ShapesModule.h"
 #include "WaveSolver.h"
-#include "values.h"
 
 using namespace std;
 

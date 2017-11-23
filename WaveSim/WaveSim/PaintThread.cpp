@@ -66,6 +66,6 @@ void PaintThread::paint()
 
 	for (auto& s : mShapes->GetShapes())
 	{
-		s->Draw(mPainter.get());
+		s->Draw(mPainter.get(), pixelSize);
 	}
 }
