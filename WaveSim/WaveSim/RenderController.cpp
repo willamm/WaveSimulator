@@ -36,6 +36,7 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 
 void RenderController::startCalculation()
 {
+	qApp->setStyleSheet("QToolBar { background-color: #5fc3fc }");
 	mCThread->SetDoCalculation(true);
 	mCThread->SetRunning(true);
 	mCThread->start(QThread::HighPriority);
@@ -53,6 +54,7 @@ void RenderController::pauseCalculation()
 
 void RenderController::stopCalculation()
 {
+	qApp->setStyleSheet("");
 	mCThread->SetDoCalculation(false);
 	mCThread->SetRunning(false);
 	mCThread->exit();
