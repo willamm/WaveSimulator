@@ -12,8 +12,9 @@ WaveSim::WaveSim(QWidget *parent)
 	createObjectTree();
 	setLayout();
 	createToolBarButtons();
+	connectMenuActions();
 
-	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
+	
 }
 
 WaveSim::~WaveSim()
@@ -84,6 +85,14 @@ void WaveSim::createToolBarButtons()
 	toolbar->addWidget(clearShapesButton);
 }
 
+void WaveSim::connectMenuActions()
+{
+	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
+	//connect(ui.actionNew, &QAction::triggered, this, DO SOMETHING);
+	//connect(ui.actionOpen, &QAction::triggered, this, DO SOMETHING);
+	//connect(ui.actionSave, &QAction::triggered, this, DO SOMETHING);
+}
+
 void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
 {
 	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
@@ -122,3 +131,4 @@ void WaveSim::ResetField()
 	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
 	solver->ResetField();
 }
+

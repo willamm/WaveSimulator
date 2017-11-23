@@ -54,4 +54,5 @@ private:
 	void createObjectTree();
 	void createDialogs();
 	void setLayout();
+	void connectMenuActions();
 };
