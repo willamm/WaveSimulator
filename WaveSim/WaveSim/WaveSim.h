@@ -48,10 +48,11 @@ private:
 	void createObjectTree();
 	void createDialogs();
 	void setLayout();
+	void connectMenuActions();
+
 
 signals:
 	void rectAdded(const int x, const int y, const int width, const int height);
 	void circleAdded(const int x, const int y, const int radius);
 	void shapesCleared();
-
 };
