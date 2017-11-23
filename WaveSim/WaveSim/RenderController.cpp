@@ -6,6 +6,8 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	: QWidget(parent)
 {
 	mSettings.SetDefaultSettings();
+	mShapes = dbr.GetModule(DatabaseRef::SHAPES_KEY);
+	mSolver = dbr.GetModule(DatabaseRef::SOLVER_KEY);
 
 	const int x = mSettings.GetValue(SettingsManager::KEY_SIZE_X);
 	const int y = mSettings.GetValue(SettingsManager::KEY_SIZE_Y);
@@ -53,6 +55,32 @@ void RenderController::stopCalculation()
 	mCThread->SetDoCalculation(false);
 	mCThread->SetRunning(false);
 	mCThread->exit();
+}
+
+void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
+{
+	mShapes->AddRect(x, y, width, height, vel);
+	mSolver->AddRectangle(x, y, width, height, vel);
+	emit rectAdded(x, y, width, height);
+}
+
+void RenderController::AddCircle(const int x, const int y, const int radius, const double vel)
+{
+	mShapes->AddCircle(x, y, radius, vel);
+	mSolver->AddCircle(x, y, radius, vel);
+	emit circleAdded(x, y, radius);
+}
+
+void RenderController::ClearShapes()
+{
+	mShapes->ClearAllShapes();
+	mSolver->ResetMaterials();
+	emit shapesCleared();
+}
+
+void RenderController::ResetField()
+{
+	mSolver->ResetField();
 }
 
 void RenderController::afterPainting()

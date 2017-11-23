@@ -15,6 +15,8 @@
 #include "LShape.h"
 #include "LRect.h"
 #include "SettingsManager.h"
+#include "ShapesModule.h"
+#include "SolverModule.h"
 
 using namespace std;
 
@@ -28,6 +30,11 @@ public:
 	~RenderController() = default;
 
 private:
+	SettingsManager mSettings;
+
+	shared_ptr<ShapesModule> mShapes;
+	shared_ptr<SolverModule> mSolver;
+
 	unique_ptr<CalcThread> mCThread;
 	unique_ptr<PaintThread> mPThread;
 
@@ -36,7 +43,6 @@ private:
 	unique_ptr<QGraphicsPixmapItem> mPixItem;
 	unique_ptr<QGraphicsView> mView;
 
-	SettingsManager mSettings;
 
 private slots:
 	void afterPainting();
@@ -45,5 +51,14 @@ public slots:
 	void startCalculation();
 	void doOneTimestep();
 	void pauseCalculation();
-	void stopCalculation();
+	void stopCalculation();	
+	void AddRect(const int x, const int y, const int width, const int height, const double vel);
+	void AddCircle(const int x, const int y, const int radius, const double vel);
+	void ClearShapes();
+	void ResetField();
+
+signals:
+	void rectAdded(const int x, const int y, const int width, const int height);
+	void circleAdded(const int x, const int y, const int radius);
+	void shapesCleared();
 };

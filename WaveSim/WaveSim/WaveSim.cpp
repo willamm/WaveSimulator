@@ -19,15 +19,15 @@ WaveSim::WaveSim(QWidget *parent)
 
 void WaveSim::createRenderer()
 {
-	rc = std::make_unique<RenderController>(this, databaseRef);
+	rc = make_unique<RenderController>(this, databaseRef);
 }
 
 void WaveSim::createObjectTree()
 {
 	objectTree = std::make_unique<ObjectTree>();
-	connect(this, &WaveSim::rectAdded, objectTree.get(), &ObjectTree::addItem);
-	connect(this, &WaveSim::circleAdded, objectTree.get(), &ObjectTree::addItem);
-	connect(this, &WaveSim::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
+	connect(rc.get(), &RenderController::rectAdded, objectTree.get(), &ObjectTree::addItem);
+	connect(rc.get(), &RenderController::circleAdded, objectTree.get(), &ObjectTree::addItem);
+	connect(rc.get(), &RenderController::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
 }
 
 void WaveSim::setLayout()
@@ -50,8 +50,8 @@ void WaveSim::createDialogs()
 	mAddRectDialog->setWindowTitle("Add Rectangle");
 	mAddCircleDialog->setWindowTitle("Add Circle");
 
-	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
-	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
+	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, rc.get(), &RenderController::AddRect);
+	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, rc.get(), &RenderController::AddCircle);
 }
 
 void WaveSim::createToolBarButtons()
@@ -72,8 +72,8 @@ void WaveSim::createToolBarButtons()
 	connect(singleStepButton, &QPushButton::pressed, rc.get(), &RenderController::doOneTimestep);
 	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
 	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
-	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
-	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
+	connect(resetFieldButton, &QPushButton::pressed, rc.get(), &RenderController::ResetField);
+	connect(clearShapesButton, &QPushButton::pressed, rc.get(), &RenderController::ClearShapes);
 
 	toolbar->addWidget(startButton);
 	toolbar->addWidget(stopButton);
@@ -92,46 +92,6 @@ void WaveSim::connectMenuActions()
 	connect(ui.actionSave, &QAction::triggered, this, &WaveSim::Save);
 }
 
-void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
-{
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->AddRectangle(x, y, width, height, vel);
-
-	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	shapes->AddRect(x, y, width, height, vel);
-
-	emit rectAdded(x, y, width, height);
-}
-
-void WaveSim::AddCircle(const int x, const int y, const int radius, const double vel)
-{
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->AddCircle(x, y, radius, vel);
-
-	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	shapes->AddCircle(x, y, radius, vel);
-
-	emit circleAdded(x, y, radius);
-}
-
-void WaveSim::ClearShapes()
-{
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->ResetMaterials();
-
-	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	shapes->ClearAllShapes();
-
-	emit shapesCleared();
-}
-
-void WaveSim::ResetField()
-{
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->ResetField();
-}
-
-
 void WaveSim::Save()
 {
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
@@ -140,7 +100,7 @@ void WaveSim::Save()
 
 	json saveJson = shapes->GetJson();
 
-	std::ofstream outputFile;
+	ofstream outputFile;
 	outputFile.open(fileName.toStdString());
 
 	if (outputFile.is_open())
@@ -174,6 +134,6 @@ void WaveSim::Load()
 void WaveSim::New()
 {
 	rc->pauseCalculation();
-	WaveSim::ClearShapes();
-	WaveSim::ResetField();
+	rc->ClearShapes();
+	rc->ResetField();
 }
