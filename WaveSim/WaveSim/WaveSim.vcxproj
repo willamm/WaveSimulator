@@ -200,7 +200,6 @@
     <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="ShapesModule.h" />
     <ClInclude Include="SolverModule.h" />
-    <ClInclude Include="values.h" />
     <ClInclude Include="WaveSolver.h" />
     <CustomBuild Include="CalcThread.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>

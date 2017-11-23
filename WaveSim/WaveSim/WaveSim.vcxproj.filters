@@ -40,9 +40,6 @@
     <Filter Include="Model">
       <UniqueIdentifier>{834ec745-95f3-4a79-a3a1-9314e8963e6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Model\Renderer">
-      <UniqueIdentifier>{dc3055dc-549f-44ce-b53b-0e39b37f5e62}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Model\Field">
       <UniqueIdentifier>{9e925428-7f78-40f7-83f9-d5408a5b3bc6}</UniqueIdentifier>
     </Filter>
@@ -201,9 +198,6 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_WaveSim.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="values.h">
-      <Filter>Model\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="LCircle.h">
       <Filter>Model\Shapes</Filter>

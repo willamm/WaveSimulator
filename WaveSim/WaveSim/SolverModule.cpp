@@ -10,8 +10,9 @@ using namespace std;
  *	to other controller classes as needed.
 */
 SolverModule::SolverModule()
-	: mSolver(WaveSolver<double>(X, Y))
+	: mSolver(WaveSolver<double>(200, 200))
 {
+	// TODO: Get the size from SettingsManager
 }
 
 /**

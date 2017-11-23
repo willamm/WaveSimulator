@@ -2,7 +2,6 @@
 
 #include "Module.h"
 #include "WaveSolver.h"
-#include "values.h"
 
 using namespace std;
 
