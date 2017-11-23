@@ -133,6 +133,7 @@ void WaveSim::Load()
 
 void WaveSim::New()
 {
+	
 	rc->pauseCalculation();
 	rc->ClearShapes();
 	rc->ResetField();
