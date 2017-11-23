@@ -3,10 +3,10 @@
 
 using namespace std;
 
-PaintThread::PaintThread(const DatabaseRef& dbr, QPixmap* pix, const int fps, QObject* parent)
+PaintThread::PaintThread(const DatabaseRef& dbr, QPixmap* pix, SettingsManager& settings, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
-	, mFPS(fps)
+	, mSettings(settings)
 	, mShapes(dynamic_pointer_cast<ShapesModule>(dbr.GetModule(DatabaseRef::SHAPES_KEY)))
 	, mSolver(((SolverModule*)dbr.GetModule(DatabaseRef::SOLVER_KEY).get())->GetField())
 	, mPix(pix)
@@ -22,6 +22,7 @@ PaintThread::~PaintThread()
 
 void PaintThread::run()
 {
+	int frametime = 1000 / mSettings.GetValue(SettingsManager::KEY_FPS);
 	QMutex mutex;
 	while (mRunning)
 	{
@@ -30,21 +31,23 @@ void PaintThread::run()
 		mutex.unlock();
 
 		emit paintDone();
-		msleep(mFPS);
+		msleep(frametime);
 	}
 }
 
 void PaintThread::paint()
 {
-	double rgb;
 	int numOfX = mSolver->getField().numCellsX();
 	int numOfY = mSolver->getField().numCellsY();
+	int contrast = mSettings.GetValue(SettingsManager::KEY_COLOR_CONTRAST);
+	int neutralColor = mSettings.GetValue(SettingsManager::KEY_NEUTRAL_COLOR);
+	int pixelSize = mSettings.GetValue(SettingsManager::KEY_PIXEL_SIZE);
 
 	for (int i = 0; i < numOfX; i++)
 	{
 		for (int j = 0; j < numOfY; j++)
 		{
-				rgb = (mSolver->getField()(i, j) * 255 * COLOR_CONSTRAST) + MIDDLE_COLOR;
+				double rgb = (mSolver->getField()(i, j) * 255 * contrast) + neutralColor;
 				if (rgb > 255)
 				{
 					rgb = 255;
@@ -54,8 +57,8 @@ void PaintThread::paint()
 					rgb = 0;
 				}
 				mPainter->fillRect(
-					i * PIXEL_SIZE, j * PIXEL_SIZE
-					, PIXEL_SIZE, PIXEL_SIZE
+					i * pixelSize, j * pixelSize
+					, pixelSize, pixelSize
 					, QColor(rgb, rgb, rgb)
 				);
 		}

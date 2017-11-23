@@ -11,33 +11,31 @@
 #include <QStandardItemModel>
 #include <QObject>
 #include <QPushButton>
+#include <QFileDialog>
+#include <iostream>
+#include <fstream>
 
 #include "AddRectDialog.h"
 #include "ObjectTree.h"
 #include "AddCircleDialog.h"
 #include "ui_WaveSim.h"
 #include "RenderController.h"
+#include "json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 class WaveSim : public QMainWindow
 {
 	Q_OBJECT
-
-signals:
-	void rectAdded(const int x, const int y, const int width, const int height);
-	void circleAdded(const int x, const int y, const int radius);
-	void shapesCleared();
-
 public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
-	~WaveSim();
+	~WaveSim() = default;
 
 public slots:
-	void AddRect(const int x, const int y, const int width, const int height, const double vel);
-	void AddCircle(const int x, const int y, const int radius, const double vel);
-	void ClearShapes();
-	void ResetField();
+	void New();
+	void Save();
+	void Load();
 
 private:
 	Ui::WaveSimClass ui;
@@ -54,4 +52,5 @@ private:
 	void createObjectTree();
 	void createDialogs();
 	void setLayout();
+	void connectMenuActions();
 };

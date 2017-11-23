@@ -79,3 +79,43 @@ const bool ShapesModule::ClearAllShapes()
 	mShapes.clear();
 	return mShapes.empty();
 }
+
+
+/**
+ *	GetJson()
+ *
+ *  Parses shape data and adds to a json object
+ *
+ *	Returns the json object that the shapes were parsed to
+*/
+json ShapesModule::GetJson()
+{
+	json output;
+	int numShapes = 0;
+
+	for (auto it = mShapes.begin(); it != mShapes.end(); ++it)
+	{
+		//TODO: parse shapes to JSON
+		json tempShapeObject = (*it)->GetJson();
+
+		output[numShapes] = tempShapeObject;
+
+		numShapes++;
+	}
+
+	return output;
+}
+
+
+/**
+ *	LoadJson()
+ *
+ *  Parses a json object and loads that data to the shapes module
+ *
+ *	Returns true if succesful, otherwise returns false
+*/
+const bool ShapesModule::LoadJson(json inputFromFile)
+{
+	//TODO: READ DATA INTO SHAPES MODULE
+	return false;
+}

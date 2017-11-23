@@ -12,25 +12,22 @@ WaveSim::WaveSim(QWidget *parent)
 	createObjectTree();
 	setLayout();
 	createToolBarButtons();
+	connectMenuActions();
 
-	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
-}
-
-WaveSim::~WaveSim()
-{
+	
 }
 
 void WaveSim::createRenderer()
 {
-	rc = std::make_unique<RenderController>(this, databaseRef);
+	rc = make_unique<RenderController>(this, databaseRef);
 }
 
 void WaveSim::createObjectTree()
 {
 	objectTree = std::make_unique<ObjectTree>();
-	connect(this, &WaveSim::rectAdded, objectTree.get(), &ObjectTree::addItem);
-	connect(this, &WaveSim::circleAdded, objectTree.get(), &ObjectTree::addItem);
-	connect(this, &WaveSim::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
+	connect(rc.get(), &RenderController::rectAdded, objectTree.get(), &ObjectTree::addItem);
+	connect(rc.get(), &RenderController::circleAdded, objectTree.get(), &ObjectTree::addItem);
+	connect(rc.get(), &RenderController::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
 }
 
 void WaveSim::setLayout()
@@ -53,8 +50,8 @@ void WaveSim::createDialogs()
 	mAddRectDialog->setWindowTitle("Add Rectangle");
 	mAddCircleDialog->setWindowTitle("Add Circle");
 
-	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, this, &WaveSim::AddRect);
-	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, this, &WaveSim::AddCircle);
+	connect(mAddRectDialog.get(), &AddRectDialog::RectSpecifiedSignal, rc.get(), &RenderController::AddRect);
+	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, rc.get(), &RenderController::AddCircle);
 }
 
 void WaveSim::createToolBarButtons()
@@ -64,6 +61,7 @@ void WaveSim::createToolBarButtons()
 
 	QPushButton* startButton = new QPushButton("Start", this);
 	QPushButton* stopButton = new QPushButton("Stop", this);
+	QPushButton* singleStepButton = new QPushButton("Step Once", this);
 	QPushButton* addRectButton = new QPushButton("Add Rect", this);
 	QPushButton* addCircleButton = new QPushButton("Add Circle", this);
 	QPushButton* resetFieldButton = new QPushButton("Reset Field", this);
@@ -71,54 +69,71 @@ void WaveSim::createToolBarButtons()
 
 	connect(startButton, &QPushButton::pressed, rc.get(), &RenderController::startCalculation);
 	connect(stopButton, &QPushButton::pressed, rc.get(), &RenderController::stopCalculation);
+	connect(singleStepButton, &QPushButton::pressed, rc.get(), &RenderController::doOneTimestep);
 	connect(addRectButton, &QPushButton::pressed, mAddRectDialog.get(), &QDialog::show);
 	connect(addCircleButton, &QPushButton::pressed, mAddCircleDialog.get(), &QDialog::show);
-	connect(resetFieldButton, &QPushButton::pressed, this, &WaveSim::ResetField);
-	connect(clearShapesButton, &QPushButton::pressed, this, &WaveSim::ClearShapes);
+	connect(resetFieldButton, &QPushButton::pressed, rc.get(), &RenderController::ResetField);
+	connect(clearShapesButton, &QPushButton::pressed, rc.get(), &RenderController::ClearShapes);
 
 	toolbar->addWidget(startButton);
 	toolbar->addWidget(stopButton);
+	toolbar->addWidget(singleStepButton);
 	toolbar->addWidget(addRectButton);
 	toolbar->addWidget(addCircleButton);
 	toolbar->addWidget(resetFieldButton);
 	toolbar->addWidget(clearShapesButton);
 }
 
-void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
+void WaveSim::connectMenuActions()
 {
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->AddRectangle(x, y, width, height, vel);
-
-	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	shapes->AddRect(x, y, width, height, vel);
-
-	emit rectAdded(x, y, width, height);
+	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
+	connect(ui.actionNew, &QAction::triggered, this, &WaveSim::New);
+	connect(ui.actionOpen, &QAction::triggered, this, &WaveSim::Load);
+	connect(ui.actionSave, &QAction::triggered, this, &WaveSim::Save);
 }
 
-void WaveSim::AddCircle(const int x, const int y, const int radius, const double vel)
+void WaveSim::Save()
 {
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->AddCircle(x, y, radius, vel);
-
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	shapes->AddCircle(x, y, radius, vel);
+	QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Choose Location to Save"), "./Saves", tr("JSON File (*.json)"));
 
-	emit circleAdded(x, y, radius);
+	json saveJson = shapes->GetJson();
+
+	ofstream outputFile;
+	outputFile.open(fileName.toStdString());
+
+	if (outputFile.is_open())
+	{
+		outputFile << saveJson;
+	} //TODO: ADD FAILURE MESSAGE
+
+	outputFile.close();
+
 }
 
-void WaveSim::ClearShapes()
+void WaveSim::Load()
 {
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->ResetMaterials();
-
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	shapes->ClearAllShapes();
+	QString fileName = QFileDialog::getOpenFileName(this,
+		tr("Choose File to Open"), "./Saves", tr("JSON File (*.json)"));
 
-	emit shapesCleared();
+	json loadJson;
+
+	std::ifstream inputFile;
+	inputFile.open(fileName.toStdString());
+
+	if (inputFile.is_open())
+	{
+		inputFile >> loadJson;
+	} //TODO: ADD FAILURE MESSAGE
+
+	shapes->LoadJson(loadJson);
 }
 
-void WaveSim::ResetField()
+void WaveSim::New()
 {
-	SolverModule* solver = (SolverModule*)databaseRef.GetModule(DatabaseRef::SOLVER_KEY).get();
-	solver->ResetField();
+	rc->pauseCalculation();
+	rc->ClearShapes();
+	rc->ResetField();
 }

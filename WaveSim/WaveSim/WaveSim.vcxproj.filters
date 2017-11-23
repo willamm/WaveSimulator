@@ -67,6 +67,9 @@
     <Filter Include="Object tree">
       <UniqueIdentifier>{2a9050ca-7101-424a-892d-c52d593899c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="SettingsManager">
+      <UniqueIdentifier>{7c90eae3-2d55-4b9b-9505-32631657f5de}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -156,6 +159,9 @@
     <ClCompile Include="ObjectTree.cpp">
       <Filter>Object tree</Filter>
     </ClCompile>
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>SettingsManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -231,6 +237,9 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SettingsManager.h">
+      <Filter>SettingsManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

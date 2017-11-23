@@ -20,4 +20,18 @@ const std::string LRect<T>::GetClassName() const
 	return std::string("Rectangle");
 }
 
+template<typename T>
+json LRect<T>::GetJson() const
+{
+	json output;
+
+	output["Classname"] = "Rectangle";
+	output["X"] = LShape::GetX();
+	output["Y"] = LShape::GetY();
+	output["Velocity"] = LShape::GetVel();
+	output["Width"] = mWidth;
+	output["Height"] = mHeight;
+	return output;
+}
+
 template class LRect<double>;

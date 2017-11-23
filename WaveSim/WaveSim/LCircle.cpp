@@ -22,4 +22,17 @@ const std::string LCircle<T>::GetClassName() const
 	return std::string("Circle");
 }
 
+template<typename T>
+json LCircle<T>::GetJson() const
+{
+	json output;
+
+	output["Classname"] = "Circle";
+	output["X"] = LShape::GetX();
+	output["Y"] = LShape::GetY();
+	output["Velocity"] = LShape::GetVel();
+	output["Radius"] = mRadius;
+	return output;
+}
+
 template class LCircle<double>;
