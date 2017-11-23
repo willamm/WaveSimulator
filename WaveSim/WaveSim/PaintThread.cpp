@@ -22,7 +22,7 @@ PaintThread::~PaintThread()
 
 void PaintThread::run()
 {
-	int frametime = mSettings.GetValue(SettingsManager::KEY_FPS) / 1000;
+	int frametime = 1000 / mSettings.GetValue(SettingsManager::KEY_FPS);
 	QMutex mutex;
 	while (mRunning)
 	{

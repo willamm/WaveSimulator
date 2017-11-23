@@ -5,7 +5,10 @@ using namespace std;
 RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	: QWidget(parent)
 {
-	mSettings.SetDefaultSettings();
+	mSettings.LoadSettingsFromFile();
+
+	mShapes = dynamic_pointer_cast<ShapesModule>(dbr.GetModule(DatabaseRef::SHAPES_KEY));
+	mSolver = dynamic_pointer_cast<SolverModule>(dbr.GetModule(DatabaseRef::SOLVER_KEY));
 
 	const int x = mSettings.GetValue(SettingsManager::KEY_SIZE_X);
 	const int y = mSettings.GetValue(SettingsManager::KEY_SIZE_Y);
@@ -28,7 +31,7 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 
 	mPThread->start(QThread::HighPriority);
 
-	mSettings.saveSettingsToFile();
+	mSettings.SaveSettingsToFile();
 }
 
 void RenderController::startCalculation()
@@ -55,8 +58,65 @@ void RenderController::stopCalculation()
 	mCThread->exit();
 }
 
+void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
+{
+	if (validateRect(x, y, width, height))
+	{
+		mShapes->AddRect(x, y, width, height, vel);
+		mSolver->AddRectangle(x, y, width, height, vel);
+		emit rectAdded(x, y, width, height);
+	}
+	else
+	{
+		QMessageBox::warning(this, "Out of Bounds", "The rectangle you are trying to add exceeds the allowed boundaries");
+	}
+}
+
+void RenderController::AddCircle(const int x, const int y, const int radius, const double vel)
+{
+	if (validateCircle(x, y, radius))
+	{
+		mShapes->AddCircle(x, y, radius, vel);
+		mSolver->AddCircle(x, y, radius, vel);
+		emit circleAdded(x, y, radius);
+	}
+	else
+	{
+		QMessageBox::warning(this, "Out of Bounds", "The circle you are trying to add exceeds the allowed boundaries");
+	}
+}
+
+void RenderController::ClearShapes()
+{
+	mShapes->ClearAllShapes();
+	mSolver->ResetMaterials();
+	emit shapesCleared();
+}
+
+void RenderController::ResetField()
+{
+	mSolver->ResetField();
+}
+
+bool RenderController::validateRect(const int x, const int y, const int w, const int h)
+{
+	if (x + w > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
+	if (y + h > mSettings.GetValue(SettingsManager::KEY_SIZE_Y)) return false;
+	return true;
+}
+
+bool RenderController::validateCircle(const int x, const int y, const int r)
+{
+	if (x - r < 0) return false;
+	if (y - r < 0) return false;
+	if (x + r > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
+	if (y + r > mSettings.GetValue(SettingsManager::KEY_SIZE_Y)) return false;
+	return true;
+}
+
 void RenderController::afterPainting()
 {
 	mPixItem->setPixmap(*mPix);
 	mView->show();
 }
+
