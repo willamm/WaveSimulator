@@ -23,6 +23,7 @@ public:
 	const vector<unique_ptr<LShape<double>>>& GetShapes() const;
 	const bool ClearAllShapes();
 	json GetJson();
+	const bool LoadJson(json inputFromFile);
 
 private:
 	vector<unique_ptr<LShape<double>>> mShapes;

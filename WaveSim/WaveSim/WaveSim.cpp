@@ -168,8 +168,7 @@ void WaveSim::Load()
 		inputFile >> loadJson;
 	} //TODO: ADD FAILURE MESSAGE
 
-	//TODO: ADD FUNCTIONALITY TO READ JSON INTO SHAPES MODULE 
-	//shapes->LoadJson(importedJson)
+	shapes->LoadJson(loadJson);
 }
 
 void WaveSim::New()
