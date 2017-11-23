@@ -8,7 +8,7 @@ LCircle<T>::LCircle(const int x, const int y, const int radius, const T vel)
 }
 
 template<typename T>
-void LCircle<T>::Draw(QPainter* painter, int pixelSize) const 
+void LCircle<T>::Draw(QPainter* painter, const int pixelSize) const 
 {
 	int startingX = LShape::GetX() - mRadius;
 	int startingY = LShape::GetY() - mRadius;
