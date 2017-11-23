@@ -91,10 +91,31 @@ const bool ShapesModule::ClearAllShapes()
 json ShapesModule::GetJson()
 {
 	json output = {};
+	int numShapes = 0;
 
 	for (auto it = mShapes.begin(); it != mShapes.end(); ++it)
 	{
 		//TODO: parse shapes to JSON
+		json tempShapeObject;
+
+		if ((*it)->GetClassName == "Circle")
+		{
+			LCircle<double> tempCircle = static_cast<LCircle<double>>(*it);
+			tempShapeObject["Classname"] = (*it)->GetClassName;
+			tempShapeObject["X"] = ( *it)
+			tempShapeObject["Y"]
+			tempShapeObject["Velocity"]
+			tempShapeObject["Radius"]
+
+		}
+		else if((*it)->GetClassName == "Rectangle")
+		{
+
+		}
+
+		output[numShapes] = tempShapeObject;
+
+		numShapes++;
 	}
 
 	return output;
