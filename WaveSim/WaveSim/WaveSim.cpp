@@ -87,9 +87,9 @@ void WaveSim::createToolBarButtons()
 void WaveSim::connectMenuActions()
 {
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
-	//connect(ui.actionNew, &QAction::triggered, this, DO SOMETHING);
-	//connect(ui.actionOpen, &QAction::triggered, this, DO SOMETHING);
-	//connect(ui.actionSave, &QAction::triggered, this, DO SOMETHING);
+	connect(ui.actionNew, &QAction::triggered, this, &WaveSim::New);
+	connect(ui.actionOpen, &QAction::triggered, this, &WaveSim::Load);
+	connect(ui.actionSave, &QAction::triggered, this, &WaveSim::Save);
 }
 
 void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
@@ -131,3 +131,49 @@ void WaveSim::ResetField()
 	solver->ResetField();
 }
 
+
+void WaveSim::Save()
+{
+	QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Choose Location to Save"), "/home/", tr("JSON File (*.json)"));
+
+	json saveJson = getJsonFromStore();
+
+	std::ofstream outputFile;
+	outputFile.open(fileName.toStdString());
+
+	if (outputFile.is_open())
+	{
+		outputFile << saveJson;
+	}
+
+	outputFile.close();
+
+}
+
+void WaveSim::Load()
+{
+	QString fileName = QFileDialog::getOpenFileName(this,
+		tr("Choose File to Open"), "/home/", tr("JSON File (*.json)"));
+}
+
+void WaveSim::New()
+{
+	rc->pauseCalculation();
+	WaveSim::ClearShapes();
+	WaveSim::ResetField();
+}
+
+json WaveSim::getJsonFromStore()
+{
+	json output = {};
+	//ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
+	//auto shapeVector = shapes->GetShapes();
+
+	//for (auto it = shapeVector.begin(); it != shapeVector.end(); ++it)
+	{
+
+	}
+
+	return output;
+}
