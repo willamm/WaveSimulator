@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
 #include <QGraphicsView>
+#include <QMessageBox>
 #include <QVector>
 #include <QWidget>
 
@@ -43,6 +44,8 @@ private:
 	unique_ptr<QGraphicsPixmapItem> mPixItem;
 	unique_ptr<QGraphicsView> mView;
 
+	bool validateRect(const int x, const int y, const int w, const int h);
+	bool validateCircle(const int x, const int y, const int r);
 
 private slots:
 	void afterPainting();

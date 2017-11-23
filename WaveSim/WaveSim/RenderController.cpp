@@ -60,16 +60,30 @@ void RenderController::stopCalculation()
 
 void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
 {
-	mShapes->AddRect(x, y, width, height, vel);
-	mSolver->AddRectangle(x, y, width, height, vel);
-	emit rectAdded(x, y, width, height);
+	if (validateRect(x, y, width, height))
+	{
+		mShapes->AddRect(x, y, width, height, vel);
+		mSolver->AddRectangle(x, y, width, height, vel);
+		emit rectAdded(x, y, width, height);
+	}
+	else
+	{
+		QMessageBox::warning(this, "Out of Bounds", "The rectangle you are trying to add exceeds the allowed boundaries");
+	}
 }
 
 void RenderController::AddCircle(const int x, const int y, const int radius, const double vel)
 {
-	mShapes->AddCircle(x, y, radius, vel);
-	mSolver->AddCircle(x, y, radius, vel);
-	emit circleAdded(x, y, radius);
+	if (validateCircle(x, y, radius))
+	{
+		mShapes->AddCircle(x, y, radius, vel);
+		mSolver->AddCircle(x, y, radius, vel);
+		emit circleAdded(x, y, radius);
+	}
+	else
+	{
+		QMessageBox::warning(this, "Out of Bounds", "The circle you are trying to add exceeds the allowed boundaries");
+	}
 }
 
 void RenderController::ClearShapes()
@@ -84,8 +98,25 @@ void RenderController::ResetField()
 	mSolver->ResetField();
 }
 
+bool RenderController::validateRect(const int x, const int y, const int w, const int h)
+{
+	if (x + w > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
+	if (y + h > mSettings.GetValue(SettingsManager::KEY_SIZE_Y)) return false;
+	return true;
+}
+
+bool RenderController::validateCircle(const int x, const int y, const int r)
+{
+	if (x - r < 0) return false;
+	if (y - r < 0) return false;
+	if (x + r > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
+	if (y + r > mSettings.GetValue(SettingsManager::KEY_SIZE_Y)) return false;
+	return true;
+}
+
 void RenderController::afterPainting()
 {
 	mPixItem->setPixmap(*mPix);
 	mView->show();
 }
+
