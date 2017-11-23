@@ -39,6 +39,7 @@ void SettingsManager::saveSettingsToFile()
 		string key(it->first);
 		settings.setValue(key.c_str(), it->second);
 	}
+	settings.sync();
 }
 
 void SettingsManager::loadSettingsFromFile()
