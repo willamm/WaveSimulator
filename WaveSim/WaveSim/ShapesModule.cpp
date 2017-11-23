@@ -90,7 +90,7 @@ const bool ShapesModule::ClearAllShapes()
 */
 json ShapesModule::GetJson()
 {
-	json output = {};
+	json output;
 	int numShapes = 0;
 
 	for (auto it = mShapes.begin(); it != mShapes.end(); ++it)
