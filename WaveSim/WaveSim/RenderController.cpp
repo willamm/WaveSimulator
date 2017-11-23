@@ -100,6 +100,8 @@ void RenderController::ResetField()
 
 bool RenderController::validateRect(const int x, const int y, const int w, const int h)
 {
+	if (x < 1) return false;
+	if (y < 1) return false;
 	if (x + w > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
 	if (y + h > mSettings.GetValue(SettingsManager::KEY_SIZE_Y)) return false;
 	return true;
