@@ -33,10 +33,6 @@ public:
 	~WaveSim() = default;
 
 public slots:
-	void AddRect(const int x, const int y, const int width, const int height, const double vel);
-	void AddCircle(const int x, const int y, const int radius, const double vel);
-	void ClearShapes();
-	void ResetField();
 	void New();
 	void Save();
 	void Load();
@@ -57,10 +53,4 @@ private:
 	void createDialogs();
 	void setLayout();
 	void connectMenuActions();
-
-
-signals:
-	void rectAdded(const int x, const int y, const int width, const int height);
-	void circleAdded(const int x, const int y, const int radius);
-	void shapesCleared();
 };
