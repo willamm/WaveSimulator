@@ -12,19 +12,19 @@
 #include "LCircle.h"
 #include "LRect.h"
 #include "LShape.h"
+#include "SettingsManager.h"
 #include "ShapesModule.h"
 #include "WaveSolver.h"
 #include "values.h"
 
 using namespace std;
 
-class PaintThread
-	: public QThread
+class PaintThread : public QThread
 {
 	Q_OBJECT
 public:
 	
-	PaintThread(const DatabaseRef& dbr, QPixmap* pix, const int fps, QObject* parent = nullptr);
+	PaintThread(const DatabaseRef& dbr, QPixmap* pix, SettingsManager& settings, QObject* parent = nullptr);
 	PaintThread(const PaintThread& pt);
 	~PaintThread();
 
@@ -35,11 +35,10 @@ protected:
 
 private:
 	bool mRunning;
-	int mFPS;
 
+	SettingsManager mSettings;
 	WaveSolver<double>* mSolver;
 	shared_ptr<ShapesModule> mShapes;
-
 	QPixmap* mPix;
 	unique_ptr<QPainter> mPainter;
 

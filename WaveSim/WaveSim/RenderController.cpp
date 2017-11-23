@@ -4,20 +4,31 @@ using namespace std;
 
 RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	: QWidget(parent)
-	, mPix(std::make_unique<QPixmap>(X * PIXEL_SIZE, Y * PIXEL_SIZE))
-	, mScene(std::make_unique<QGraphicsScene>(this))
-	, mPixItem(mScene->addPixmap(*mPix))
-	, mView(std::make_unique<QGraphicsView>(mScene.get(), this))
 {
-	mCThread = make_unique<CalcThread>(((SolverModule*)dbr.GetModule(DatabaseRef::SOLVER_KEY).get())->GetField(), 1000 / FPS, this);
-	mPThread = make_unique<PaintThread>(dbr, mPix.get(), 1000 / FPS, this);
+	mSettings.SetDefaultSettings();
+
+	const int x = mSettings.GetValue(SettingsManager::KEY_SIZE_X);
+	const int y = mSettings.GetValue(SettingsManager::KEY_SIZE_Y);
+	const int pixelSize = mSettings.GetValue(SettingsManager::KEY_PIXEL_SIZE);
+	mPix = make_unique<QPixmap>(x * pixelSize, y * pixelSize);
+	mScene = make_unique<QGraphicsScene>(this);
+	mPixItem = make_unique<QGraphicsPixmapItem>(mScene->addPixmap(*mPix));
+	mView = make_unique<QGraphicsView>(mScene.get(), this);
+
+	mCThread = make_unique<CalcThread>(((SolverModule*)dbr.GetModule(DatabaseRef::SOLVER_KEY).get())->GetField(), mSettings, this);
+	mPThread = make_unique<PaintThread>(dbr, mPix.get(), mSettings, this);
 
 	connect(mPThread.get(), &PaintThread::paintDone, this, &RenderController::afterPainting);
 
-	setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-	mView->resize(WINDOW_WIDTH + 2, WINDOW_HEIGHT + 2);
+	const int windowWidth = mSettings.GetValue(SettingsManager::KEY_WINDOW_WIDTH);
+	const int windowHeight = mSettings.GetValue(SettingsManager::KEY_WINDOW_HEIGHT);
+
+	setFixedSize(windowWidth, windowHeight);
+	mView->resize(windowWidth + 2, windowHeight + 2);
 
 	mPThread->start(QThread::HighPriority);
+
+	mSettings.saveSettingsToFile();
 }
 
 void RenderController::startCalculation()

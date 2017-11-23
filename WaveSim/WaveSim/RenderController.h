@@ -14,7 +14,7 @@
 #include "LCircle.h"
 #include "LShape.h"
 #include "LRect.h"
-#include "values.h"
+#include "SettingsManager.h"
 
 using namespace std;
 
@@ -35,6 +35,8 @@ private:
 	unique_ptr<QGraphicsScene> mScene;
 	unique_ptr<QGraphicsPixmapItem> mPixItem;
 	unique_ptr<QGraphicsView> mView;
+
+	SettingsManager mSettings;
 
 private slots:
 	void afterPainting();
