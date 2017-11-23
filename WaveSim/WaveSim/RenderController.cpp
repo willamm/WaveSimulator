@@ -5,9 +5,10 @@ using namespace std;
 RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	: QWidget(parent)
 {
-	mSettings.SetDefaultSettings();
-	mShapes = dbr.GetModule(DatabaseRef::SHAPES_KEY);
-	mSolver = dbr.GetModule(DatabaseRef::SOLVER_KEY);
+	mSettings.LoadSettingsFromFile();
+
+	mShapes = dynamic_pointer_cast<ShapesModule>(dbr.GetModule(DatabaseRef::SHAPES_KEY));
+	mSolver = dynamic_pointer_cast<SolverModule>(dbr.GetModule(DatabaseRef::SOLVER_KEY));
 
 	const int x = mSettings.GetValue(SettingsManager::KEY_SIZE_X);
 	const int y = mSettings.GetValue(SettingsManager::KEY_SIZE_Y);
@@ -30,7 +31,7 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 
 	mPThread->start(QThread::HighPriority);
 
-	mSettings.saveSettingsToFile();
+	mSettings.SaveSettingsToFile();
 }
 
 void RenderController::startCalculation()

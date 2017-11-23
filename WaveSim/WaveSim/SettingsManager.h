@@ -29,7 +29,6 @@ public:
 	SettingsManager();
 	~SettingsManager() = default;
 
-	void SetDefaultSettings();
 	inline int GetValue(const string& key)
 	{
 		string k = key;
@@ -42,8 +41,8 @@ public:
 	}
 
 public slots:
-	void saveSettingsToFile();
-	void loadSettingsFromFile();
+	void SaveSettingsToFile();
+	void LoadSettingsFromFile();
 
 private:
 	QString mSettingsFilename;

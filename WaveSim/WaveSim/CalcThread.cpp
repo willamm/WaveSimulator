@@ -16,7 +16,7 @@ CalcThread::~CalcThread()
 
 void CalcThread::run()
 {
-	int frametime = mSettings.GetValue(SettingsManager::KEY_FPS) / 1000;
+	int frametime = 1000 / mSettings.GetValue(SettingsManager::KEY_FPS);
 	while (mRunning) 
 	{
 		while (mDoCalculation)
