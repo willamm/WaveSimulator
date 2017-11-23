@@ -52,5 +52,5 @@ void SettingsManager::loadSettingsFromFile()
 	mSettingsMap[KEY_COLOR_CONTRAST] = settings.value(KEY_COLOR_CONTRAST.c_str()).toInt();
 	mSettingsMap[KEY_SHAPE_OPACITY] = settings.value(KEY_SHAPE_OPACITY.c_str()).toInt();
 	mSettingsMap[KEY_WINDOW_WIDTH] = mSettingsMap[KEY_SIZE_X] * mSettingsMap[KEY_PIXEL_SIZE];
-	mSettingsMap[KEY_WINDOW_HEIGHT] = mSettingsMap[KEY_SIZE_Y] * mSettingsMap[KEY_PIXEL_SIZE]
+	mSettingsMap[KEY_WINDOW_HEIGHT] = mSettingsMap[KEY_SIZE_Y] * mSettingsMap[KEY_PIXEL_SIZE];
 }
