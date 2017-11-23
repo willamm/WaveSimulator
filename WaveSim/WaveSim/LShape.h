@@ -4,6 +4,9 @@
 #include <QPainter>
 
 #include "values.h"
+#include "json.hpp"
+
+using json = nlohmann::json;
 
 template<typename T>
 class LShape
@@ -14,7 +17,7 @@ public:
 	int GetX() const;
 	int GetY() const;
 	T GetVel() const;
-	virtual json getJson() = 0;
+	virtual json GetJson() = 0;
 
 	virtual void Draw(QPainter* painter) const = 0;
 

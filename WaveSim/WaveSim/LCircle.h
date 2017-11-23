@@ -10,6 +10,7 @@ public:
 
 	void Draw(QPainter* painter) const;
 	const std::string GetClassName() const override;
+	json GetJson() override;
 private:
 	const int mRadius;
 };

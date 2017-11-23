@@ -96,22 +96,7 @@ json ShapesModule::GetJson()
 	for (auto it = mShapes.begin(); it != mShapes.end(); ++it)
 	{
 		//TODO: parse shapes to JSON
-		json tempShapeObject;
-
-		if ((*it)->GetClassName == "Circle")
-		{
-			LCircle<double> tempCircle = static_cast<LCircle<double>>(*it);
-			tempShapeObject["Classname"] = (*it)->GetClassName;
-			tempShapeObject["X"] = ( *it)
-			tempShapeObject["Y"]
-			tempShapeObject["Velocity"]
-			tempShapeObject["Radius"]
-
-		}
-		else if((*it)->GetClassName == "Rectangle")
-		{
-
-		}
+		json tempShapeObject = (*it)->GetJson();
 
 		output[numShapes] = tempShapeObject;
 
