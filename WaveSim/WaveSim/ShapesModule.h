@@ -6,7 +6,9 @@
 #include "LShape.h"
 #include "LRect.h"
 #include "Module.h"
+#include "json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 class ShapesModule final : public Module
@@ -20,6 +22,7 @@ public:
 
 	const vector<unique_ptr<LShape<double>>>& GetShapes() const;
 	const bool ClearAllShapes();
+	json GetJson();
 
 private:
 	vector<unique_ptr<LShape<double>>> mShapes;

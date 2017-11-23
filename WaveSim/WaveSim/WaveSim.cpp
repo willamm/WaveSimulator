@@ -134,10 +134,11 @@ void WaveSim::ResetField()
 
 void WaveSim::Save()
 {
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	QString fileName = QFileDialog::getSaveFileName(this,
-		tr("Choose Location to Save"), "/home/", tr("JSON File (*.json)"));
+		tr("Choose Location to Save"), "./Saves", tr("JSON File (*.json)"));
 
-	json saveJson = getJsonFromStore();
+	json saveJson = shapes->GetJson();
 
 	std::ofstream outputFile;
 	outputFile.open(fileName.toStdString());
@@ -145,7 +146,7 @@ void WaveSim::Save()
 	if (outputFile.is_open())
 	{
 		outputFile << saveJson;
-	}
+	} //TODO: ADD FAILURE MESSAGE
 
 	outputFile.close();
 
@@ -153,8 +154,22 @@ void WaveSim::Save()
 
 void WaveSim::Load()
 {
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	QString fileName = QFileDialog::getOpenFileName(this,
-		tr("Choose File to Open"), "/home/", tr("JSON File (*.json)"));
+		tr("Choose File to Open"), "./Saves", tr("JSON File (*.json)"));
+
+	json loadJson;
+
+	std::ifstream inputFile;
+	inputFile.open(fileName.toStdString());
+
+	if (inputFile.is_open())
+	{
+		inputFile >> loadJson;
+	} //TODO: ADD FAILURE MESSAGE
+
+	//TODO: ADD FUNCTIONALITY TO READ JSON INTO SHAPES MODULE 
+	//shapes->LoadJson(importedJson)
 }
 
 void WaveSim::New()
@@ -162,18 +177,4 @@ void WaveSim::New()
 	rc->pauseCalculation();
 	WaveSim::ClearShapes();
 	WaveSim::ResetField();
-}
-
-json WaveSim::getJsonFromStore()
-{
-	json output = {};
-	//ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
-	//auto shapeVector = shapes->GetShapes();
-
-	//for (auto it = shapeVector.begin(); it != shapeVector.end(); ++it)
-	{
-
-	}
-
-	return output;
 }

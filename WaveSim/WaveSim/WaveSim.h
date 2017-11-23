@@ -57,7 +57,6 @@ private:
 	void createDialogs();
 	void setLayout();
 	void connectMenuActions();
-	json getJsonFromStore();
 
 
 signals:

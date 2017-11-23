@@ -79,3 +79,23 @@ const bool ShapesModule::ClearAllShapes()
 	mShapes.clear();
 	return mShapes.empty();
 }
+
+
+/**
+ *	GetJson()
+ *
+ *  Parses shape data and adds to a json object
+ *
+ *	Returns the json object that the shapes were parsed to
+*/
+json ShapesModule::GetJson()
+{
+	json output = {};
+
+	for (auto it = mShapes.begin(); it != mShapes.end(); ++it)
+	{
+		//parse shapes to JSON
+	}
+
+	return output;
+}
