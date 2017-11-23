@@ -55,7 +55,7 @@ const void SolverModule::AddRectangle(const int x, const int y, const int width,
 */
 const void SolverModule::AddCircle(const int x, const int y, const int radius, const double vel)
 {
-	mSolver.addCircle(x - 1, y - 1, radius, vel);
+	mSolver.addCircle(x, y, radius - 1, vel);
 }
 
 /**
