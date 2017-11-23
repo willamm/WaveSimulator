@@ -32,12 +32,20 @@ void CalcThread::run()
 	
 }
 
-void CalcThread::setDoCalculation(bool state)
+void CalcThread::PerformOneTimestep()
+{
+	QMutex mutex;
+	mutex.lock();
+	mSolver->doTimestep();
+	mutex.unlock();
+}
+
+void CalcThread::SetDoCalculation(bool state)
 {
 	mDoCalculation = state;
 }
 
-void CalcThread::setRunning(bool state)
+void CalcThread::SetRunning(bool state)
 {
 	mRunning = state;
 }

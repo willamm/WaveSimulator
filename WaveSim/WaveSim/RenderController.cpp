@@ -22,20 +22,25 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 
 void RenderController::startCalculation()
 {
-	mCThread->setDoCalculation(true);
-	mCThread->setRunning(true);
+	mCThread->SetDoCalculation(true);
+	mCThread->SetRunning(true);
 	mCThread->start(QThread::HighPriority);
+}
+
+void RenderController::doOneTimestep()
+{
+	mCThread->PerformOneTimestep();
 }
 
 void RenderController::pauseCalculation()
 {
-	mCThread->setDoCalculation(false);
+	mCThread->SetDoCalculation(false);
 }
 
 void RenderController::stopCalculation()
 {
-	mCThread->setDoCalculation(false);
-	mCThread->setRunning(false);
+	mCThread->SetDoCalculation(false);
+	mCThread->SetRunning(false);
 	mCThread->exit();
 }
 
