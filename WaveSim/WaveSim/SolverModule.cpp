@@ -39,7 +39,7 @@ shared_ptr<WaveSolver<double>> SolverModule::GetSolver() const
 */
 const void SolverModule::AddRectangle(const int x, const int y, const int width, const int height, const double vel)
 {
-	mSolver.addRectangle(x, y, x + width, y + height, vel);
+	mSolver.addRectangle(x - 1, y - 1, x + width - 1, y + height - 1, vel);
 }
 
 
@@ -55,7 +55,7 @@ const void SolverModule::AddRectangle(const int x, const int y, const int width,
 */
 const void SolverModule::AddCircle(const int x, const int y, const int radius, const double vel)
 {
-	mSolver.addCircle(x, y, radius, vel);
+	mSolver.addCircle(x, y, radius - 1, vel);
 }
 
 /**
