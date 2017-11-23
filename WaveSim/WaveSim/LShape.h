@@ -17,7 +17,7 @@ public:
 	int GetX() const;
 	int GetY() const;
 	T GetVel() const;
-	virtual json GetJson() = 0;
+	virtual json GetJson() const = 0;
 
 	virtual void Draw(QPainter* painter) const = 0;
 
