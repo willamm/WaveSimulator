@@ -13,8 +13,6 @@ class SettingsManager
 {
 public:
 
-	const static QString SETTINGS_FILENAME;
-
 	const static string KEY_FPS;
 
 	const static string KEY_SIZE_X;
@@ -28,18 +26,27 @@ public:
 	const static string KEY_WINDOW_WIDTH;
 	const static string KEY_WINDOW_HEIGHT;
 
-	SettingsManager() = default;
+	SettingsManager();
 	~SettingsManager() = default;
 
 	void SetDefaultSettings();
-	inline int GetValue(const string& key) const;
-	inline void SetValue(const string& key, const int value);
+	inline int GetValue(const string& key)
+	{
+		string k = key;
+		return mSettingsMap.at(k);
+	}
+
+	inline void SetValue(const string& key, const int value)
+	{
+		mSettingsMap[key] = value;
+	}
 
 public slots:
 	void saveSettingsToFile();
 	void loadSettingsFromFile();
 
 private:
+	QString mSettingsFilename;
 	unordered_map<string, int> mSettingsMap;
 };
 

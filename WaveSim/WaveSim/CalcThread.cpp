@@ -1,8 +1,8 @@
 #include "CalcThread.h"
 
-CalcThread::CalcThread(WaveSolver<double>* solver, const int fps, QObject* parent)
+CalcThread::CalcThread(WaveSolver<double>* solver, SettingsManager& settings, QObject* parent)
 	: mSolver(solver)
-	, mFPS(fps)
+	, mSettings(settings)
 {
 	mRunning = true;
 	mDoCalculation = true;
@@ -16,6 +16,7 @@ CalcThread::~CalcThread()
 
 void CalcThread::run()
 {
+	int frametime = mSettings.GetValue(SettingsManager::KEY_FPS) / 1000;
 	while (mRunning) 
 	{
 		while (mDoCalculation)
@@ -24,9 +25,9 @@ void CalcThread::run()
 			mSolver->doTimestep();
 			mMutex.unlock();
 			emit calculated();
-			msleep(mFPS);
+			msleep(frametime);
 		}
-		msleep(mFPS);
+		msleep(frametime);
 	}
 	
 }

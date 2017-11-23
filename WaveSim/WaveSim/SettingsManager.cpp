@@ -1,7 +1,5 @@
 #include "SettingsManager.h"
 
-const QString SettingsManager::SETTINGS_FILENAME = QApplication::applicationDirPath().left(1) + ":/WaveSim.ini";
-
 const string SettingsManager::KEY_FPS = "fps";
 
 const string SettingsManager::KEY_SIZE_X = "size_x";
@@ -14,6 +12,11 @@ const string SettingsManager::KEY_SHAPE_OPACITY = "color_opacity";
 
 const string SettingsManager::KEY_WINDOW_WIDTH = "window_width";
 const string SettingsManager::KEY_WINDOW_HEIGHT = "window_height";
+
+SettingsManager::SettingsManager()
+	: mSettingsFilename(QApplication::applicationDirPath() + "/WaveSim.ini")
+{
+}
 
 void SettingsManager::SetDefaultSettings()
 {
@@ -28,20 +31,9 @@ void SettingsManager::SetDefaultSettings()
 	mSettingsMap[KEY_WINDOW_HEIGHT] = mSettingsMap[KEY_SIZE_Y] * mSettingsMap[KEY_PIXEL_SIZE];
 }
 
-int SettingsManager::GetValue(const string& key) const
-{
-	string k = key;
-	return mSettingsMap.at(k);
-}
-
-void SettingsManager::SetValue(const string& key, const int value)
-{
-	mSettingsMap[key] = value;
-}
-
 void SettingsManager::saveSettingsToFile()
 {
-	QSettings settings(SETTINGS_FILENAME, QSettings::NativeFormat);
+	QSettings settings(mSettingsFilename, QSettings::NativeFormat);
 	for (auto it = mSettingsMap.begin(); it != mSettingsMap.end(); ++it)
 	{
 		string key(it->first);
@@ -51,5 +43,5 @@ void SettingsManager::saveSettingsToFile()
 
 void SettingsManager::loadSettingsFromFile()
 {
-	QSettings settings(SETTINGS_FILENAME, QSettings::NativeFormat);
+	QSettings settings(mSettingsFilename, QSettings::NativeFormat);
 }

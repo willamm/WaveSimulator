@@ -15,8 +15,8 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	mPixItem = make_unique<QGraphicsPixmapItem>(mScene->addPixmap(*mPix));
 	mView = make_unique<QGraphicsView>(mScene.get(), this);
 
-	mCThread = make_unique<CalcThread>(((SolverModule*)dbr.GetModule(DatabaseRef::SOLVER_KEY).get())->GetField(), 1000 / 60, this);
-	mPThread = make_unique<PaintThread>(dbr, mPix.get(), 1000 / 60, this);
+	mCThread = make_unique<CalcThread>(((SolverModule*)dbr.GetModule(DatabaseRef::SOLVER_KEY).get())->GetField(), mSettings, this);
+	mPThread = make_unique<PaintThread>(dbr, mPix.get(), mSettings, this);
 
 	connect(mPThread.get(), &PaintThread::paintDone, this, &RenderController::afterPainting);
 
