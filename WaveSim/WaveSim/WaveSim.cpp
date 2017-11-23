@@ -87,9 +87,9 @@ void WaveSim::createToolBarButtons()
 void WaveSim::connectMenuActions()
 {
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
-	//connect(ui.actionNew, &QAction::triggered, this, DO SOMETHING);
-	//connect(ui.actionOpen, &QAction::triggered, this, DO SOMETHING);
-	//connect(ui.actionSave, &QAction::triggered, this, DO SOMETHING);
+	connect(ui.actionNew, &QAction::triggered, this, &WaveSim::New);
+	connect(ui.actionOpen, &QAction::triggered, this, &WaveSim::Load);
+	connect(ui.actionSave, &QAction::triggered, this, &WaveSim::Save);
 }
 
 void WaveSim::AddRect(const int x, const int y, const int width, const int height, const double vel)
@@ -131,3 +131,49 @@ void WaveSim::ResetField()
 	solver->ResetField();
 }
 
+
+void WaveSim::Save()
+{
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
+	QString fileName = QFileDialog::getSaveFileName(this,
+		tr("Choose Location to Save"), "./Saves", tr("JSON File (*.json)"));
+
+	json saveJson = shapes->GetJson();
+
+	std::ofstream outputFile;
+	outputFile.open(fileName.toStdString());
+
+	if (outputFile.is_open())
+	{
+		outputFile << saveJson;
+	} //TODO: ADD FAILURE MESSAGE
+
+	outputFile.close();
+
+}
+
+void WaveSim::Load()
+{
+	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
+	QString fileName = QFileDialog::getOpenFileName(this,
+		tr("Choose File to Open"), "./Saves", tr("JSON File (*.json)"));
+
+	json loadJson;
+
+	std::ifstream inputFile;
+	inputFile.open(fileName.toStdString());
+
+	if (inputFile.is_open())
+	{
+		inputFile >> loadJson;
+	} //TODO: ADD FAILURE MESSAGE
+
+	shapes->LoadJson(loadJson);
+}
+
+void WaveSim::New()
+{
+	rc->pauseCalculation();
+	WaveSim::ClearShapes();
+	WaveSim::ResetField();
+}
