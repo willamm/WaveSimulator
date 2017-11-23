@@ -20,6 +20,7 @@ private:
 	bool mRunning;
 	bool mDoCalculation;
 	const int mFPS;
+	QMutex mMutex;
 	WaveSolver<double>* mSolver;
 
 protected:

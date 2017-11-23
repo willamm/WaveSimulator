@@ -131,6 +131,7 @@
     <ClCompile Include="LShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectTree.cpp" />
+    <ClCompile Include="SettingsManager.cpp" />
     <ClCompile Include="ShapesModule.cpp" />
     <ClCompile Include="PaintThread.cpp" />
     <ClCompile Include="RenderController.cpp" />
@@ -196,6 +197,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DWIN64 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
+    <ClInclude Include="SettingsManager.h" />
     <ClInclude Include="ShapesModule.h" />
     <ClInclude Include="SolverModule.h" />
     <ClInclude Include="values.h" />

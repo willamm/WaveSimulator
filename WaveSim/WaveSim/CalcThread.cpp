@@ -16,14 +16,13 @@ CalcThread::~CalcThread()
 
 void CalcThread::run()
 {
-	QMutex mutex;
 	while (mRunning) 
 	{
 		while (mDoCalculation)
 		{
-			mutex.lock();
+			mMutex.lock();
 			mSolver->doTimestep();
-			mutex.unlock();
+			mMutex.unlock();
 			emit calculated();
 			msleep(mFPS);
 		}
@@ -34,10 +33,9 @@ void CalcThread::run()
 
 void CalcThread::PerformOneTimestep()
 {
-	QMutex mutex;
-	mutex.lock();
+	mMutex.lock();
 	mSolver->doTimestep();
-	mutex.unlock();
+	mMutex.unlock();
 }
 
 void CalcThread::SetDoCalculation(bool state)
