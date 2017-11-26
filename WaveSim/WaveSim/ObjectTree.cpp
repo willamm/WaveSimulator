@@ -76,7 +76,6 @@ void ObjectTree::showContextMenu(const ObjectTreeItem* item, const QPoint& pos) 
 	QDialog* dialog;
 	if (LCircle<double>* circle = dynamic_cast<LCircle<double>*>(item->getShape()))
 	{
-		
 		circleDialog->setCircle(circle);
 		dialog = circleDialog;
 	}

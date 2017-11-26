@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>387</width>
-    <height>197</height>
+    <width>199</width>
+    <height>147</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,58 +16,54 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>192</width>
-     <height>131</height>
+     <x>10</x>
+     <y>10</y>
+     <width>181</width>
+     <height>129</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="xLabel">
-        <property name="text">
-         <string>X</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="xLineEdit"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="yLabel">
-        <property name="text">
-         <string>Y</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="yLineEdit"/>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="velocityLabel">
-        <property name="text">
-         <string>Velocity </string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QLineEdit" name="velocityLineEdit"/>
-      </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="radiusLabel">
-        <property name="text">
-         <string>Radius</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="radiusLineEdit"/>
-      </item>
-     </layout>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="xLabel">
+      <property name="text">
+       <string>X</string>
+      </property>
+     </widget>
     </item>
-    <item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="xLineEdit"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="yLabel">
+      <property name="text">
+       <string>Y</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="yLineEdit"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="radiusLabel">
+      <property name="text">
+       <string>Radius</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="radiusLineEdit"/>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="velocityLabel">
+      <property name="text">
+       <string>Velocity </string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="velocityLineEdit"/>
+    </item>
+    <item row="4" column="0" colspan="2">
      <widget class="QDialogButtonBox" name="buttonBox">
       <property name="standardButtons">
        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
@@ -78,6 +74,12 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>xLineEdit</tabstop>
+  <tabstop>yLineEdit</tabstop>
+  <tabstop>radiusLineEdit</tabstop>
+  <tabstop>velocityLineEdit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

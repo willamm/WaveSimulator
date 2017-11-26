@@ -1,0 +1,6 @@
+Root	Root
+ Geometry	Group
+  Rectangle	Structure
+  Circle	Structure
+ Solvers	Group
+  Wave		Solver

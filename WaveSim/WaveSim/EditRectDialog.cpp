@@ -21,8 +21,8 @@ void EditRectDialog::setRect(LRect<double>* rect)
 
 void EditRectDialog::fillFields()
 {
-	ui.xLineEdit->setText(QString::number(m_rect->GetX()));
-	ui.yLineEdit->setText(QString::number(m_rect->GetY()));
+	ui.xLineEdit->setText(QString::number(m_rect->GetX() + 1));
+	ui.yLineEdit->setText(QString::number(m_rect->GetY() + 1));
 	ui.velocityLineEdit->setText(QString::number(m_rect->GetVel()));
 	ui.widthLineEdit->setText(QString::number(m_rect->GetWidth()));
 	ui.heightLineEdit->setText(QString::number(m_rect->GetHeight()));
