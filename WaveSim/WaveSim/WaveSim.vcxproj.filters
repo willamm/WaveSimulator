@@ -153,33 +153,6 @@
     <ClCompile Include="ObjectTree.cpp">
       <Filter>Object tree</Filter>
     </ClCompile>
-    <ClCompile Include="DatabaseRef.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectTreeItem.cpp">
-      <Filter>Object tree</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_EditCircleDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_EditCircleDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_EditRectDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_EditRectDialog.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditCircleDialog.cpp">
-      <Filter>Dialog</Filter>
-    </ClCompile>
-    <ClCompile Include="EditRectDialog.cpp">
-      <Filter>Dialog</Filter>
-    </ClCompile>
-    <ClCompile Include="SettingsManager.cpp">
-      <Filter>SettingsManager</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="WaveSim.h">
@@ -235,9 +208,6 @@
     <ClInclude Include="GeneratedFiles\ui_WaveSim.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="values.h">
-      <Filter>Model\Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="LCircle.h">
       <Filter>Model\Shapes</Filter>
     </ClInclude>
@@ -270,15 +240,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_EditCircleDialog.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_EditRectDialog.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SettingsManager.h">
-      <Filter>SettingsManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
