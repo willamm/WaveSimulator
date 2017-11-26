@@ -112,6 +112,10 @@ void WaveSim::Save()
 
 void WaveSim::Load()
 {
+	rc->pauseCalculation();
+	rc->ClearShapes();
+	rc->ResetField();
+
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	QString fileName = QFileDialog::getOpenFileName(this,
 		tr("Choose File to Open"), "./Saves", tr("JSON File (*.json)"));
@@ -126,7 +130,19 @@ void WaveSim::Load()
 		inputFile >> loadJson;
 	} //TODO: ADD FAILURE MESSAGE
 
-	shapes->LoadJson(loadJson);
+		for (json::iterator it = loadJson.begin(); it != loadJson.end(); ++it) {
+			json temp = *it;
+			qDebug("%s\n", temp.dump().c_str());
+
+			if (temp["Classname"] == "Circle")
+			{
+				rc->AddCircle(temp["X"], temp["Y"], temp["Radius"], temp["Velocity"]);
+			}
+			else if (temp["Classname"] == "Rectangle")
+			{
+				rc->AddRect(temp["X"], temp["Y"], temp["Width"], temp["Height"], temp["Velocity"]);
+			}
+		}
 }
 
 void WaveSim::New()

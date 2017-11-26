@@ -1,5 +1,6 @@
 #include "ShapesModule.h"
 
+
 using namespace std;
 
 /**
@@ -104,18 +105,4 @@ json ShapesModule::GetJson()
 	}
 
 	return output;
-}
-
-
-/**
- *	LoadJson()
- *
- *  Parses a json object and loads that data to the shapes module
- *
- *	Returns true if succesful, otherwise returns false
-*/
-const bool ShapesModule::LoadJson(json inputFromFile)
-{
-	//TODO: READ DATA INTO SHAPES MODULE
-	return false;
 }
