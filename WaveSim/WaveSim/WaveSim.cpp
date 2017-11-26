@@ -127,7 +127,15 @@ void WaveSim::Load()
 
 	if (inputFile.is_open())
 	{
-		inputFile >> loadJson;
+		try
+		{
+			inputFile >> loadJson;
+		}
+		catch(std::invalid_argument)
+		{
+			QMessageBox::warning(this, "Invalid JSON", "The JSON file you are trying to load is invalid");
+		}
+		
 	} //TODO: ADD FAILURE MESSAGE
 
 		for (json::iterator it = loadJson.begin(); it != loadJson.end(); ++it) {
