@@ -21,12 +21,6 @@ const std::string LRect<T>::GetClassName() const
 }
 
 template<typename T>
-const int LRect<T>::GetShapeType() const
-{
-	return LShape<T>::GetShapeType() + 1;
-}
-
-template<typename T>
 int LRect<T>::GetWidth() const
 {
 	return mWidth;

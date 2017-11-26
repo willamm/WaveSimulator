@@ -32,7 +32,7 @@ void EditRectDialog::accept()
 {
 	m_rect->SetX(ui.xLineEdit->text().toInt());
 	m_rect->SetY(ui.yLineEdit->text().toInt());
-	m_rect->SetVel(ui.velocityLineEdit->text().toInt());
+	m_rect->SetVel(ui.velocityLineEdit->text().toDouble());
 	m_rect->SetWidth(ui.widthLineEdit->text().toInt());
 	m_rect->SetHeight(ui.heightLineEdit->text().toInt());
 	QDialog::accept();

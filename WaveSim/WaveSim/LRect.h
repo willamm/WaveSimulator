@@ -12,8 +12,6 @@ public:
 	const std::string GetClassName() const override;
 	json GetJson() const override;
 
-	const int GetShapeType() const override;
-
 	int GetWidth() const;
 	int GetHeight() const;
 

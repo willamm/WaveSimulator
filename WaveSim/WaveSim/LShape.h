@@ -43,8 +43,6 @@ public:
 	virtual void Draw(QPainter* painter, const int pixelSize) const = 0;
 
 	virtual const std::string GetClassName() const = 0;
-
-	virtual const int GetShapeType() const = 0;
 private:
 	int mX;
 	int mY;

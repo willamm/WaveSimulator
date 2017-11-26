@@ -13,8 +13,6 @@ WaveSim::WaveSim(QWidget *parent)
 	setLayout();
 	createToolBarButtons();
 	connectMenuActions();
-
-	
 }
 
 void WaveSim::createRenderer()

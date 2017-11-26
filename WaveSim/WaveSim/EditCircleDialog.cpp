@@ -30,7 +30,7 @@ void EditCircleDialog::accept()
 {
 	m_circle->SetX(ui.xLineEdit->text().toInt());
 	m_circle->SetY(ui.yLineEdit->text().toInt());
-	m_circle->SetVel(ui.velocityLineEdit->text().toInt());
+	m_circle->SetVel(ui.velocityLineEdit->text().toDouble());
 	m_circle->SetRadius(ui.radiusLineEdit->text().toInt());
 	QDialog::accept();
 }
