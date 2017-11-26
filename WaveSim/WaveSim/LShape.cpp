@@ -26,4 +26,29 @@ T LShape<T>::GetVel() const
 	return mVel;
 }
 
+template<typename T>
+void LShape<T>::SetX(int x)
+{
+	mX = x;
+}
+
+template<typename T>
+void LShape<T>::SetY(int y)
+{
+	mY = y;
+}
+
+template<typename T>
+void LShape<T>::SetVel(T vel)
+{
+	mVel = vel;
+}
+
+template<typename T>
+const int LShape<T>::GetShapeType() const
+{
+	const int shapeType = QTreeWidgetItem::UserType;
+	return shapeType;
+}
+
 template class LShape<double>;

@@ -8,8 +8,12 @@ class LCircle :
 public:
 	LCircle(const int x, const int y, const int radius, const T vel);
 
-	void Draw(QPainter* painter) const;
+	int GetRadius() const;
+	void SetRadius(int radius);
+
+	void Draw(QPainter* painter) const override;
 	const std::string GetClassName() const override;
+	const int GetShapeType() const override;
 private:
-	const int mRadius;
+	int mRadius;
 };

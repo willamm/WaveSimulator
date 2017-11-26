@@ -35,7 +35,7 @@ shared_ptr<WaveSolver<double>> SolverModule::GetSolver() const
  *		vel:	The amount of influence the shape will have over its area, 1 having no effect and 0 completely
  *				blocking all movement
  *
- *	Addes a rectangle to the current WaveSovler
+ *	Adds a rectangle to the current WaveSolver
 */
 const void SolverModule::AddRectangle(const int x, const int y, const int width, const int height, const double vel)
 {
