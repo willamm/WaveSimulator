@@ -117,9 +117,6 @@
     <ClCompile Include="LShape.cpp">
       <Filter>Model\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="DatabaseRef.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="ShapesModule.cpp">
       <Filter>Model\Module</Filter>
     </ClCompile>
@@ -155,6 +152,30 @@
     </ClCompile>
     <ClCompile Include="ObjectTree.cpp">
       <Filter>Object tree</Filter>
+    </ClCompile>
+    <ClCompile Include="DatabaseRef.cpp">
+      <Filter>Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectTreeItem.cpp">
+      <Filter>Object tree</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EditCircleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EditCircleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EditRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EditRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditCircleDialog.cpp">
+      <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="EditRectDialog.cpp">
+      <Filter>Dialog</Filter>
     </ClCompile>
     <ClCompile Include="SettingsManager.cpp">
       <Filter>SettingsManager</Filter>
@@ -194,10 +215,28 @@
     <CustomBuild Include="ObjectTree.h">
       <Filter>Object tree</Filter>
     </CustomBuild>
+    <CustomBuild Include="ObjectTreeItem.h">
+      <Filter>Object tree</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EditCircleDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EditRectDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EditCircleDialog.h">
+      <Filter>Dialog</Filter>
+    </CustomBuild>
+    <CustomBuild Include="EditRectDialog.h">
+      <Filter>Dialog</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_WaveSim.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="values.h">
+      <Filter>Model\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="LCircle.h">
       <Filter>Model\Shapes</Filter>
@@ -230,6 +269,12 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AddCircleDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_EditCircleDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_EditRectDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="SettingsManager.h">

@@ -21,6 +21,36 @@ const std::string LRect<T>::GetClassName() const
 }
 
 template<typename T>
+const int LRect<T>::GetShapeType() const
+{
+	return LShape<T>::GetShapeType() + 1;
+}
+
+template<typename T>
+int LRect<T>::GetWidth() const
+{
+	return mWidth;
+}
+
+template<typename T>
+int LRect<T>::GetHeight() const
+{
+	return mHeight;
+}
+
+template<typename T>
+void LRect<T>::SetWidth(int width)
+{
+	mWidth = width;
+}
+
+template<typename T>
+void LRect<T>::SetHeight(int height)
+{
+	mHeight = height;
+}
+
+template<typename T>
 json LRect<T>::GetJson() const
 {
 	json output;

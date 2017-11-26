@@ -2,6 +2,7 @@
 
 #include <QColor>
 #include <QPainter>
+#include <qtreewidget.h>
 
 #include "json.hpp"
 
@@ -35,12 +36,18 @@ public:
 
 	virtual json GetJson() const = 0;
 
+	void SetX(int x);
+	void SetY(int y);
+	void SetVel(T vel);
+
 	virtual void Draw(QPainter* painter, const int pixelSize) const = 0;
 
 	virtual const std::string GetClassName() const = 0;
+
+	virtual const int GetShapeType() const = 0;
 private:
-	const int mX;
-	const int mY;
-	const T mVel;
+	int mX;
+	int mY;
+	T mVel;
 };
 
