@@ -132,7 +132,6 @@ void WaveSim::Load()
 
 		for (json::iterator it = loadJson.begin(); it != loadJson.end(); ++it) {
 			json temp = *it;
-			qDebug("%s\n", temp.dump().c_str());
 
 			if (temp["Classname"] == "Circle")
 			{
