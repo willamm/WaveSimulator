@@ -168,9 +168,6 @@
     <ClCompile Include="ObjectTreeItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SettingsManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DatabaseRef.cpp">
       <Filter>Model</Filter>
     </ClCompile>
@@ -179,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="EditRectDialog.cpp">
       <Filter>Dialog</Filter>
+    </ClCompile>
+    <ClCompile Include="SettingsManager.cpp">
+      <Filter>SettingsManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -275,12 +275,7 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SettingsManager.h">
-      <Filter>Header Files</Filter>
+      <Filter>SettingsManager</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="default.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
   </ItemGroup>
 </Project>

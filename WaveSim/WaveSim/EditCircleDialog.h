@@ -7,7 +7,8 @@
 class EditCircleDialog : public QDialog
 {
 	Q_OBJECT
-
+signals:
+	void circleEdited();
 public:
 	EditCircleDialog(QWidget *parent = Q_NULLPTR);
 	~EditCircleDialog();

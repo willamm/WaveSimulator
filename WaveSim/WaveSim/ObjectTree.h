@@ -22,7 +22,7 @@ public:
 	~ObjectTree();
 
 signals:
-	void sendShapeData(int shapeType);
+	void shapeEdited();
 
 public slots:
 	void onContextMenuRequested(const QPoint& pos);
@@ -34,14 +34,12 @@ private:
 
 	// Initialization
 
-	QTreeWidgetItem* dummyRoot; // might have to override this class to store a reference to each shape
+	QTreeWidgetItem* dummyRoot;
 	QTreeWidgetItem* geometryRoot;
 	QTreeWidgetItem* solverRoot;
 
 	EditRectDialog* rectDialog;
 	EditCircleDialog* circleDialog;
-
-	int shapeType;
 
 	const DatabaseRef databaseRef;
 };

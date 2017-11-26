@@ -301,9 +301,6 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="default.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <CustomBuild Include="AddRectDialog.ui">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(QTDIR)\bin\uic.exe;%(AdditionalInputs)</AdditionalInputs>
       <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Uic%27ing %(Identity)...</Message>

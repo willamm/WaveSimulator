@@ -85,7 +85,6 @@ void ObjectTree::showContextMenu(const ObjectTreeItem* item, const QPoint& pos) 
 		rectDialog->setRect(rect);
 		dialog = rectDialog;
 	}
-	qDebug() << item->getShape()->GetX() << " " << item->getShape()->GetY();
 	QAction* edit = menu.addAction(actionName, dialog, &QDialog::exec);
 	menu.exec(pos);
 }
