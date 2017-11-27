@@ -88,6 +88,8 @@ void WaveSim::connectMenuActions()
 	connect(ui.actionNew, &QAction::triggered, this, &WaveSim::New);
 	connect(ui.actionOpen, &QAction::triggered, this, &WaveSim::Load);
 	connect(ui.actionSave, &QAction::triggered, this, &WaveSim::Save);
+	connect(ui.actionAbout_Wave_Simulator, &QAction::triggered, this, &WaveSim::sendToReadme);
+	connect(ui.actionWiki, &QAction::triggered, this, &WaveSim::sendToWiki);
 }
 
 void WaveSim::Save()
@@ -104,7 +106,7 @@ void WaveSim::Save()
 	if (outputFile.is_open())
 	{
 		outputFile << saveJson;
-	} //TODO: ADD FAILURE MESSAGE
+	}
 
 	outputFile.close();
 
@@ -112,10 +114,6 @@ void WaveSim::Save()
 
 void WaveSim::Load()
 {
-	rc->pauseCalculation();
-	rc->ClearShapes();
-	rc->ResetField();
-
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	QString fileName = QFileDialog::getOpenFileName(this,
 		tr("Choose File to Open"), "./Saves", tr("JSON File (*.json)"));
@@ -130,32 +128,48 @@ void WaveSim::Load()
 		try
 		{
 			inputFile >> loadJson;
+
+			//If JSON is successfully deserialized, pause and clear the solver so we have a blank canvas to add shapes to
+			rc->pauseCalculation();
+			rc->ClearShapes();
+			rc->ResetField();
 		}
-		catch(std::invalid_argument)
+		catch (std::invalid_argument)
 		{
-			QMessageBox::warning(this, "Invalid JSON", "The JSON file you are trying to load is invalid");
+			QMessageBox::warning(this, "Invalid JSON", "The file you are trying to load is invalid");
 		}
-		
-	} //TODO: ADD FAILURE MESSAGE
 
-		for (json::iterator it = loadJson.begin(); it != loadJson.end(); ++it) {
-			json temp = *it;
+		inputFile.close();
+	}
 
-			if (temp["Classname"] == "Circle")
-			{
-				rc->AddCircle(temp["X"], temp["Y"], temp["Radius"], temp["Velocity"]);
-			}
-			else if (temp["Classname"] == "Rectangle")
-			{
-				rc->AddRect(temp["X"], temp["Y"], temp["Width"], temp["Height"], temp["Velocity"]);
-			}
+	for (json::iterator it = loadJson.begin(); it != loadJson.end(); ++it) {
+		json temp = *it;
+
+		if (temp["Classname"] == "Circle")
+		{
+			rc->AddCircle(temp["X"], temp["Y"], temp["Radius"], temp["Velocity"]);
 		}
+		else if (temp["Classname"] == "Rectangle")
+		{
+			rc->AddRect(temp["X"], temp["Y"], temp["Width"], temp["Height"], temp["Velocity"]);
+		}
+	}
+
 }
 
 void WaveSim::New()
 {
-	
 	rc->pauseCalculation();
 	rc->ClearShapes();
 	rc->ResetField();
+}
+
+void WaveSim::sendToReadme()
+{
+	QDesktopServices::openUrl(QUrl("https://github.com/willamm/WaveSimulator#wavesimulator", QUrl::TolerantMode));
+}
+
+void WaveSim::sendToWiki()
+{
+	QDesktopServices::openUrl(QUrl("https://github.com/willamm/WaveSimulator/wiki", QUrl::TolerantMode));
 }

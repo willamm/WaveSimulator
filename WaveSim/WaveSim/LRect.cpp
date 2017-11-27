@@ -55,6 +55,7 @@ json LRect<T>::GetJson() const
 	output["Velocity"] = LShape::GetVel();
 	output["Width"] = mWidth;
 	output["Height"] = mHeight;
+
 	return output;
 }
 

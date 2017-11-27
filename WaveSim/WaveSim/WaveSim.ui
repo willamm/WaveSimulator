@@ -26,7 +26,7 @@
      <x>0</x>
      <y>0</y>
      <width>1100</width>
-     <height>31</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -42,6 +42,8 @@
     <property name="title">
      <string>About</string>
     </property>
+    <addaction name="actionAbout_Wave_Simulator"/>
+    <addaction name="actionWiki"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuAbout"/>
@@ -73,6 +75,16 @@
   <action name="actionExit">
    <property name="text">
     <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionAbout_Wave_Simulator">
+   <property name="text">
+    <string>About Wave Simulator</string>
+   </property>
+  </action>
+  <action name="actionWiki">
+   <property name="text">
+    <string>Wiki</string>
    </property>
   </action>
  </widget>

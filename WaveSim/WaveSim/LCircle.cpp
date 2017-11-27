@@ -44,6 +44,7 @@ json LCircle<T>::GetJson() const
 	output["Y"] = LShape::GetY();
 	output["Velocity"] = LShape::GetVel();
 	output["Radius"] = mRadius;
+
 	return output;
 }
 
