@@ -12,6 +12,7 @@
 #include <QObject>
 #include <QPushButton>
 #include <QFileDialog>
+#include <QDesktopServices>
 #include <iostream>
 #include <fstream>
 
@@ -36,6 +37,8 @@ public slots:
 	void New();
 	void Save();
 	void Load();
+	void sendToReadme();
+	void sendToWiki();
 
 private:
 	Ui::WaveSimClass ui;
