@@ -84,7 +84,8 @@ public:
         mField(mCenterX, mCenterY) = 1.0;
 	}
 
-    void doTimestep() {
+    void doTimestep() 
+	{
         const T dx2 = 1;
         const T dy2 = 1;
         const T dt2 =1./2.;
@@ -107,6 +108,11 @@ public:
         swapData(mFieldPrev, mField);
         swapData(mField, mFieldNext);
     }
+
+	void setNewSource(int x, int y)
+	{
+		mField(x, y) = 1.0;
+	}
 
 private:
 	int mCenterX;

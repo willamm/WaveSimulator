@@ -19,6 +19,8 @@ public:
 	const void ResetField();
 
 	WaveSolver<double>* GetField();
+
+	const void setNewSource(int x, int y);
 	
 private:
 	WaveSolver<double> mSolver;

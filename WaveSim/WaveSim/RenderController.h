@@ -8,6 +8,7 @@
 #include <QMessageBox>
 #include <QVector>
 #include <QWidget>
+#include <QMouseEvent>
 
 #include "CalcThread.h"
 #include "DatabaseRef.h"
@@ -46,6 +47,7 @@ private:
 
 	bool validateRect(const int x, const int y, const int w, const int h);
 	bool validateCircle(const int x, const int y, const int r);
+	void mousePressEvent(QMouseEvent *event) override;
 
 private slots:
 	void afterPainting();

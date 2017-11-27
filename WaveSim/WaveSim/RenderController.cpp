@@ -183,6 +183,27 @@ bool RenderController::validateCircle(const int x, const int y, const int r)
 }
 
 /**
+*
+*/
+void RenderController::mousePressEvent(QMouseEvent * event)
+{
+	QPoint mouseLocation = QWidget::mapFromGlobal(QCursor::pos());
+	int x = mouseLocation.x() / 3;
+	int y = mouseLocation.y() / 3;
+
+	if (event->button() == Qt::RightButton)
+	{
+		mSolver->setNewSource(x, y);
+	}
+	else if ((event->button() == Qt::LeftButton))
+	{
+		AddRect(x - 2, y - 2, 5, 5, 0);
+	}
+
+	
+}
+
+/**
 * 
 */
 void RenderController::afterPainting()

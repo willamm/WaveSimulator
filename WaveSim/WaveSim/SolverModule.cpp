@@ -88,3 +88,9 @@ WaveSolver<double>* SolverModule::GetField()
 {
 	return &mSolver;
 }
+
+
+const void SolverModule::setNewSource(int x, int y)
+{
+	mSolver.setNewSource(x, y);
+}
