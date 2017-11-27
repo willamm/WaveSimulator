@@ -21,8 +21,8 @@ void EditCircleDialog::setCircle(LCircle<double>* circle)
 
 void EditCircleDialog::fillFields()
 {
-	ui.xLineEdit->setText(QString::number(m_circle->GetX()));
-	ui.yLineEdit->setText(QString::number(m_circle->GetY()));
+	ui.xLineEdit->setText(QString::number(m_circle->GetX() + 1));
+	ui.yLineEdit->setText(QString::number(m_circle->GetY() + 1));
 	ui.velocityLineEdit->setText(QString::number(m_circle->GetVel()));
 	ui.radiusLineEdit->setText(QString::number(m_circle->GetRadius()));
 }

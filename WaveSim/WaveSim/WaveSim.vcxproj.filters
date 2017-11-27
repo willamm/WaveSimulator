@@ -67,6 +67,12 @@
     <Filter Include="SettingsManager">
       <UniqueIdentifier>{7c90eae3-2d55-4b9b-9505-32631657f5de}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Dialog\EditCircleDialog">
+      <UniqueIdentifier>{39f10c52-d9c0-4ec0-82c2-4778fe4a93d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Dialog\EditRectDialog">
+      <UniqueIdentifier>{971f5122-26c8-4fa6-b92a-0b11ea109b7a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -171,14 +177,14 @@
     <ClCompile Include="DatabaseRef.cpp">
       <Filter>Model</Filter>
     </ClCompile>
-    <ClCompile Include="EditCircleDialog.cpp">
-      <Filter>Dialog</Filter>
-    </ClCompile>
-    <ClCompile Include="EditRectDialog.cpp">
-      <Filter>Dialog</Filter>
-    </ClCompile>
     <ClCompile Include="SettingsManager.cpp">
       <Filter>SettingsManager</Filter>
+    </ClCompile>
+    <ClCompile Include="EditCircleDialog.cpp">
+      <Filter>Dialog\EditCircleDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="EditRectDialog.cpp">
+      <Filter>Dialog\EditRectDialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -225,10 +231,10 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="EditCircleDialog.h">
-      <Filter>Dialog</Filter>
+      <Filter>Dialog\EditCircleDialog</Filter>
     </CustomBuild>
     <CustomBuild Include="EditRectDialog.h">
-      <Filter>Dialog</Filter>
+      <Filter>Dialog\EditRectDialog</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
