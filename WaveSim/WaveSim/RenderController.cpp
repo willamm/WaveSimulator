@@ -2,6 +2,12 @@
 
 using namespace std;
 
+/**
+* Constructor for the RenderController class.
+*
+* @param parent The parent object of the RenderController.
+* @param dbr Reference to the database.
+*/
 RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	: QWidget(parent)
 {
@@ -34,6 +40,10 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 	mSettings.SaveSettingsToFile();
 }
 
+/**
+* Starts the calculation thread. Also makes the tool bar blue while 
+* the calculation is going.
+*/
 void RenderController::startCalculation()
 {
 	qApp->setStyleSheet("QToolBar { background-color: #5fc3fc }");
@@ -42,16 +52,25 @@ void RenderController::startCalculation()
 	mCThread->start(QThread::HighPriority);
 }
 
+/**
+* Make the solver perform 1 timestep. 
+*/
 void RenderController::doOneTimestep()
 {
 	mCThread->PerformOneTimestep();
 }
 
+/**
+* Pauses the calculation.
+*/
 void RenderController::pauseCalculation()
 {
 	mCThread->SetDoCalculation(false);
 }
 
+/**
+* Stops the calculation thread, and changes the style of the tool bar.
+*/
 void RenderController::stopCalculation()
 {
 	qApp->setStyleSheet("");
@@ -60,6 +79,17 @@ void RenderController::stopCalculation()
 	mCThread->exit();
 }
 
+/**
+* Adds a rectangle to the renderer.
+*
+* @param x The top left X-coordinate of the rectangle.
+* @param y The top left Y-coordinate of the rectangle.
+* @param w The width of the rectangle.
+* @param h The height of the rectangle.
+* @param vel The velocity of the rectangle. A higher velocity will make the
+*			wave travel more slowly through the rectangle. A lower velocity
+*			will do the opposite.
+*/
 void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
 {
 	if (validateRect(x, y, width, height))
@@ -74,6 +104,15 @@ void RenderController::AddRect(const int x, const int y, const int width, const 
 	}
 }
 
+/**
+* Adds a circle the renderer.
+* 
+* @param x The X-coordinate of the center of the circle.
+* @param y The Y-coordinate of the center of the circle.
+* @param radius The radius of the circle.
+* @param vel The velocity of the circle. Affects the behaviour of the wave when it
+*			passes through the circle.
+*/
 void RenderController::AddCircle(const int x, const int y, const int radius, const double vel)
 {
 	if (validateCircle(x, y, radius))
@@ -88,6 +127,9 @@ void RenderController::AddCircle(const int x, const int y, const int radius, con
 	}
 }
 
+/**
+* Clears all of the shapes from the renderer.
+*/
 void RenderController::ClearShapes()
 {
 	mShapes->ClearAllShapes();
@@ -95,11 +137,24 @@ void RenderController::ClearShapes()
 	emit shapesCleared();
 }
 
+/**
+* Resets the field. This causes the simulator to restart.
+*/
 void RenderController::ResetField()
 {
 	mSolver->ResetField();
 }
 
+/**
+* Validates a rectangle before adding it to the renderer.
+* 
+* @param x The top left X-coordinate of the rectangle.
+* @param y The top left Y-coordinate of the rectangle.
+* @param w The width of the rectangle.
+* @param h The height of the rectangle.
+*
+* @return True if the rectangle is valid, false otherwise.
+*/
 bool RenderController::validateRect(const int x, const int y, const int w, const int h)
 {
 	if (x < 1) return false;
@@ -109,6 +164,15 @@ bool RenderController::validateRect(const int x, const int y, const int w, const
 	return true;
 }
 
+/**
+* Validates a circle before adding it to the renderer.
+*
+* @param x The X-coordinate of the center of the circle.
+* @param y The Y-coordinate of the center of the circle.
+* @param r The radius of the circle.
+*
+* @return True if the circle is valid, false otherwise.
+*/
 bool RenderController::validateCircle(const int x, const int y, const int r)
 {
 	if (x - r < 1) return false;
@@ -118,6 +182,9 @@ bool RenderController::validateCircle(const int x, const int y, const int r)
 	return true;
 }
 
+/**
+* 
+*/
 void RenderController::afterPainting()
 {
 	mPixItem->setPixmap(*mPix);
