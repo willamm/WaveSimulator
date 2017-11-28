@@ -47,20 +47,20 @@ void PaintThread::paint()
 	{
 		for (int j = 0; j < numOfY; j++)
 		{
-				double rgb = (mSolver->getField()(i, j) * 255 * contrast) + neutralColor;
-				if (rgb > 255)
-				{
-					rgb = 255;
-				}
-				if (rgb < 0)
-				{
-					rgb = 0;
-				}
-				mPainter->fillRect(
-					i * pixelSize, j * pixelSize
-					, pixelSize, pixelSize
-					, QColor(rgb, rgb, rgb)
-				);
+			double rgb = (mSolver->getField()(i, j) * 255 * contrast) + neutralColor;
+			if (rgb > 255)
+			{
+				rgb = 255;
+			}
+			if (rgb < 0)
+			{
+				rgb = 0;
+			}
+			mPainter->fillRect(
+				i * pixelSize, j * pixelSize
+				, pixelSize, pixelSize
+				, QColor(rgb, rgb, rgb)
+			);
 		}
 	}
 
