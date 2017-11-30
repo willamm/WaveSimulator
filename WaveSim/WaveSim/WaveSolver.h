@@ -84,6 +84,13 @@ public:
         mField(mCenterX, mCenterY) = 1.0;
 	}
 
+	void clearField()
+	{
+		mFieldPrev.setToValue(0);
+		mField.setToValue(0);
+		mFieldNext.setToValue(0);
+	}
+
     void doTimestep() 
 	{
         const T dx2 = 1;
@@ -111,6 +118,7 @@ public:
 
 	void setNewSource(int x, int y)
 	{
+		clearField();
 		mField(x, y) = 1.0;
 	}
 

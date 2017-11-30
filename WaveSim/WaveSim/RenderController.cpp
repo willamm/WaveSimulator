@@ -184,6 +184,10 @@ bool RenderController::validateCircle(const int x, const int y, const int r)
 
 /**
 *
+* On left click, adds a 1, 1 square to the cursor coordinates.
+* On right click, sets the source (clearing the field) to the cursor coordinates.
+*
+* @param event The mouse click event
 */
 void RenderController::mousePressEvent(QMouseEvent * event)
 {
@@ -197,7 +201,7 @@ void RenderController::mousePressEvent(QMouseEvent * event)
 	}
 	else if ((event->button() == Qt::LeftButton))
 	{
-		AddRect(x - 2, y - 2, 5, 5, 0);
+		AddRect(x, y, 1, 1, 0);
 	}
 
 	
