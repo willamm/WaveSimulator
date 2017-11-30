@@ -197,7 +197,7 @@ void RenderController::mousePressEvent(QMouseEvent * event)
 
 	if (event->button() == Qt::RightButton)
 	{
-		mSolver->setNewSource(x, y);
+		mSolver->SetNewSource(x, y);
 	}
 	else if ((event->button() == Qt::LeftButton))
 	{

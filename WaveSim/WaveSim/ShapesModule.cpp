@@ -17,17 +17,17 @@ ShapesModule::ShapesModule()
 }
 
 /**
- *	AddRect(const int x, const int y, const int w, const int h, const double vel)
+ *  Adds a rectangle to the Shapes Module
  *	
+ *	Adds a LRect to the vector of LShapes. 
+ *
  *	@param x The x location of the top left corner of the LRect to be added
  *	@param y The y location of the top left corner of the LRect to be added
  *	@param w The width of the LRect to be added
  *	@param h The height of the LRect to be added
  *	@param vel The velocity of squares covered by the LRect to be added, 1 is full velocity and 0 is no movement
  *
- *	Adds a LRect to the vector of LShapes. 
- *
- *  Returns a boolean based on if the LRect was added successfully
+ *  @return A boolean based on if the LRect was added successfully
 */
 const bool ShapesModule::AddRect(const int x, const int y, const int w, const int h, const double vel)
 {
@@ -38,15 +38,16 @@ const bool ShapesModule::AddRect(const int x, const int y, const int w, const in
 }
 
 /**
- *	AddCircle(const int x, const int y, const int r, const double vel)
+ *  Adds a circle to the shapes module.
+ *
+ *	Adds a LCircle to the vector of LShapes. 
+ *
  *  @param x The x location of the center of the LCircle	
  *	@param y The y location of the center of the LCircle	
  *	@param r The radius of the LCircle to be added
  *	@param vel	The velocity of squares covered by the LCircle to be added, 1 is full velocity and 0 is no movement
  *
- *	Adds a LCircle to the vector of LShapes. 
- *
- *  Returns a boolean based on if the LCircle was added successfully
+ *  @return A boolean based on if the LCircle was added successfully
 */
 const bool ShapesModule::AddCircle(const int x, const int y, const int r, const double vel)
 {
@@ -57,11 +58,11 @@ const bool ShapesModule::AddCircle(const int x, const int y, const int r, const 
 }
 
 /**
- *	GetShapes()
+ *	Get the shapes in the ShapesModule
  *
  *	Gives a reference to the vector of LShapes so that the shapes can be read. 
  *
- *  Returns a const reference to the current vector of LShapes
+ *  @return A const reference to the current vector of LShapes
 */
 const vector<unique_ptr<LShape<double>>>& ShapesModule::GetShapes() const
 {
@@ -69,11 +70,11 @@ const vector<unique_ptr<LShape<double>>>& ShapesModule::GetShapes() const
 }
 
 /**
- *	ClearAllShapes()
+ * Clears all the shapes
  *
  *  Removes all LShapes in the LShapes vector
  *
- *	Returns true if the vector was cleared properly
+ *	@return True if the vector was cleared properly
 */
 const bool ShapesModule::ClearAllShapes()
 {
@@ -83,11 +84,11 @@ const bool ShapesModule::ClearAllShapes()
 
 
 /**
- *	GetJson()
+ *	Get the json representation of the shapes
  *
- *  Parses shape data and adds to a json object
+ *  Parses shape data into a single json object. 
  *
- *	Returns the json object that the shapes were parsed to
+ *	@return The json object that the shapes were parsed to
 */
 json ShapesModule::GetJson()
 {

@@ -20,7 +20,7 @@ public:
 
 	WaveSolver<double>* GetField();
 
-	const void setNewSource(int x, int y);
+	const void SetNewSource(int x, int y);
 	
 private:
 	WaveSolver<double> mSolver;
