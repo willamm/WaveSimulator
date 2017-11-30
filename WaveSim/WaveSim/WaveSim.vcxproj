@@ -140,9 +140,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_WaveSim.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="LCircle.cpp" />
-    <ClCompile Include="LRect.cpp" />
-    <ClCompile Include="LShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectTree.cpp" />
     <ClCompile Include="ObjectTreeItem.cpp" />

@@ -114,15 +114,6 @@
     <ClCompile Include="RenderController.cpp">
       <Filter>Renderer\Controller</Filter>
     </ClCompile>
-    <ClCompile Include="LCircle.cpp">
-      <Filter>Model\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="LRect.cpp">
-      <Filter>Model\Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="LShape.cpp">
-      <Filter>Model\Shapes</Filter>
-    </ClCompile>
     <ClCompile Include="ShapesModule.cpp">
       <Filter>Model\Module</Filter>
     </ClCompile>

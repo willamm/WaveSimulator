@@ -2,21 +2,59 @@
 #include "LShape.h"
 
 template<typename T>
-class LRect: public LShape<T>
+class LRect : public LShape<T>
 {
 public:
-	LRect(const int x, const int y, const int width, const int height, const T vel);
+	LRect(const int x, const int y, const int width, const int height, const T vel)
+		: LShape(x, y, vel)
+		, mWidth(width)
+		, mHeight(height)
+	{
+	}
 
-	void Draw(QPainter* painter, const int pixelSize) const;
+	int GetWidth() const
+	{
+		return mWidth;
+	}
 
-	const std::string GetClassName() const override;
-	json GetJson() const override;
+	int GetHeight() const
+	{
+		return mHeight;
+	}
 
-	int GetWidth() const;
-	int GetHeight() const;
+	void SetWidth(int width)
+	{
+		mWidth = width;
+	}
 
-	void SetWidth(int width);
-	void SetHeight(int height);
+	void SetHeight(int height)
+	{
+		mHeight = height;
+	}
+
+	void Draw(QPainter* painter, const int pixelSize) const
+	{
+		painter->fillRect(LShape::GetX() * pixelSize, LShape::GetY() * pixelSize, mWidth * pixelSize, mHeight * pixelSize, QColor(255, 0, 0, 125));
+	}
+
+	const std::string GetClassName() const override
+	{
+		return std::string("Rectangle");
+	}
+
+	json GetJson() const override
+	{
+		json output;
+
+		output["Classname"] = "Rectangle";
+		output["X"] = LShape::GetX();
+		output["Y"] = LShape::GetY();
+		output["Velocity"] = LShape::GetVel();
+		output["Width"] = mWidth;
+		output["Height"] = mHeight;
+
+		return output;
+	}
 
 private:
 	int mWidth;

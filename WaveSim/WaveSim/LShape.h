@@ -34,18 +34,27 @@ public:
 		return mVel;
 	}
 
-	virtual json GetJson() const = 0;
+	inline void SetX(int x)
+	{
+		mX = x;
+	}
 
-	void SetX(int x);
-	void SetY(int y);
-	void SetVel(T vel);
+	inline void SetY(int y)
+	{
+		mY = y;
+	}
+
+	inline void SetVel(T vel)
+	{
+		mVel = vel;
+	}
 
 	virtual void Draw(QPainter* painter, const int pixelSize) const = 0;
-
 	virtual const std::string GetClassName() const = 0;
+	virtual json GetJson() const = 0;
+
 private:
 	int mX;
 	int mY;
 	T mVel;
 };
-
