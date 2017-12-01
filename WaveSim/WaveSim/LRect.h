@@ -11,10 +11,12 @@ public:
 	*
 	*	Creates a data objec that represents a rectangle. The retangle is specified by its top left corner,
 	*	its width, and its height.
-	
+	*	
 	*	@param x The x position.
 	*	@param y The y position.
-	*	@param vel The velocity of the shape.
+	*	@param width The width of the rectangle.	
+	*	@param height The height of the rectangle.
+	*	@param vel The velocity of the rectangle.
 	*/
 	LRect(const int x, const int y, const int width, const int height, const T vel)
 		: LShape(x, y, vel)
