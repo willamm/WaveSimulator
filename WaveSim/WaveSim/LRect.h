@@ -12,8 +12,8 @@ public:
 	*	Creates a data objec that represents a rectangle. The retangle is specified by its top left corner,
 	*	its width, and its height.
 	*	
-	*	@param x The x position.
-	*	@param y The y position.
+	*	@param x The x position of the top left corner.
+	*	@param y The y position of the top left corner.
 	*	@param width The width of the rectangle.	
 	*	@param height The height of the rectangle.
 	*	@param vel The velocity of the rectangle.
