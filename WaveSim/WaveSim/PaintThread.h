@@ -34,13 +34,13 @@ protected:
 	void run();
 
 private:
-	bool mRunning;
+	bool mRunning;	/*! The state of the main run thread. */
 
-	SettingsManager mSettings;
-	WaveSolver<double>* mSolver;
-	shared_ptr<ShapesModule> mShapes;
-	QPixmap* mPix;
-	unique_ptr<QPainter> mPainter;
+	SettingsManager mSettings;	/*! An object that handles all the misc settings like FPS and size. */
+	WaveSolver<double>* mSolver;	/*! The wave solver that handles all the physics calculations. */
+	shared_ptr<ShapesModule> mShapes;	/*! A reference to the shapes module. */
+	QPixmap* mPix;	/*! The surface that is drawn on. */
+	unique_ptr<QPainter> mPainter;	/*! The QPainting device that performs the drawing. */
 
 	void paint();
 

@@ -1,8 +1,17 @@
 #include "PaintThread.h"
-#include <QDebug> 
 
 using namespace std;
 
+/**
+*	Contructor.
+*	
+*	Creates a thread that handles painting pixels in Qt.
+*	
+*	@param dbr A reference to the database.
+*	@param pix The Qt pixmap to draw on.
+*	@param settings The object containing settings about the viewport's meta data.
+*	@param parent The parent Qt object.
+*/
 PaintThread::PaintThread(const DatabaseRef& dbr, QPixmap* pix, SettingsManager& settings, QObject* parent)
 	: QThread(parent)
 	, mRunning(true)
@@ -14,12 +23,22 @@ PaintThread::PaintThread(const DatabaseRef& dbr, QPixmap* pix, SettingsManager& 
 {
 }
 
+/**
+*	Deconstructor.
+*
+*	Sets the running variable to false to stop the thread.
+*/
 PaintThread::~PaintThread()
 {
 	mRunning = false;
 	wait(1000);
 }
 
+/**
+*	The main entry point for the thread.
+*	
+*	Performs a paint operation once evert FPS / 1000 ms.
+*/
 void PaintThread::run()
 {
 	int frametime = 1000 / mSettings.GetValue(SettingsManager::KEY_FPS);
@@ -35,6 +54,13 @@ void PaintThread::run()
 	}
 }
 
+
+/**
+*	The painting function.
+*
+*	Colors every cell a gray scale value from 0 - 255. 0 is mapped to 127 by default.
+*	After drawing the thread, all shapes are drawn on top.
+*/
 void PaintThread::paint()
 {
 	int numOfX = mSolver->getField().numCellsX();
