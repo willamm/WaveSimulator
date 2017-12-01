@@ -71,7 +71,6 @@ public:
 		return std::string("Circle");
 	}
 
-
 	/**
 	*	Serialize the object to json.
 	*	This is a virtual method.
