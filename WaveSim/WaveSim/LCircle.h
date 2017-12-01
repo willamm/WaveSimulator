@@ -1,4 +1,5 @@
 #pragma once
+
 #include "LShape.h"
 
 template<typename T>
@@ -21,7 +22,6 @@ public:
 		, mRadius(radius)
 	{
 	}
-
 
 	/**
 	*	Accessor method for radius.

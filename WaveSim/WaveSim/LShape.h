@@ -2,7 +2,7 @@
 
 #include <QColor>
 #include <QPainter>
-#include <qtreewidget.h>
+#include <QTreeWidget>
 
 #include "json.hpp"
 
@@ -123,6 +123,7 @@ public:
 	virtual json GetJson() const = 0;
 
 private:
+
 	int mX;	/*! The shapes x position. */
 	int mY;	/*! The shapes y position. */
 	T mVel; /*! The velocity modifier of the shape, 0 means no movement and 1 means full movement. */

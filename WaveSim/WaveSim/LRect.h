@@ -1,4 +1,5 @@
 #pragma once
+
 #include "LShape.h"
 
 template<typename T>
@@ -114,6 +115,7 @@ public:
 	}
 
 private:
+
 	int mWidth; /*! The width of the rectangle. */
 	int mHeight; /*! The height of the rectangle. */
 };
