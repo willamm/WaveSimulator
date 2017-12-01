@@ -13,11 +13,19 @@ const string SettingsManager::KEY_SHAPE_OPACITY = "color_opacity";
 const string SettingsManager::KEY_WINDOW_WIDTH = "window_width";
 const string SettingsManager::KEY_WINDOW_HEIGHT = "window_height";
 
+/**
+*	Constructor.
+*
+*	Grabs the path to the settings save file.
+*/
 SettingsManager::SettingsManager()
 	: mSettingsFilename(QApplication::applicationDirPath() + "/WaveSim.ini")
 {
 }
 
+/**
+*	Saves settings to persistant file.
+*/
 void SettingsManager::SaveSettingsToFile()
 {
 	QSettings settings(mSettingsFilename, QSettings::NativeFormat);
@@ -29,6 +37,9 @@ void SettingsManager::SaveSettingsToFile()
 	settings.sync();
 }
 
+/**
+*	Load settings from peristant file storage.
+*/
 void SettingsManager::LoadSettingsFromFile()
 {
 	QSettings settings(mSettingsFilename, QSettings::NativeFormat);
