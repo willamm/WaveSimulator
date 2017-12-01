@@ -77,7 +77,6 @@
     <ClCompile Include="AddCircleDialog.cpp" />
     <ClCompile Include="AddRectDialog.cpp" />
     <ClCompile Include="CalcThread.cpp" />
-    <ClCompile Include="DatabaseRef.cpp" />
     <ClCompile Include="EditCircleDialog.cpp" />
     <ClCompile Include="EditRectDialog.cpp" />
     <ClCompile Include="GeneratedFiles\Debug\moc_AddCircleDialog.cpp">

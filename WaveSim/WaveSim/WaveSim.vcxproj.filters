@@ -165,9 +165,6 @@
     <ClCompile Include="ObjectTreeItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DatabaseRef.cpp">
-      <Filter>Model</Filter>
-    </ClCompile>
     <ClCompile Include="SettingsManager.cpp">
       <Filter>SettingsManager</Filter>
     </ClCompile>
