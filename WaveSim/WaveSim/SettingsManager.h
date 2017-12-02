@@ -40,7 +40,7 @@ public:
 		mSettingsMap[key] = value;
 	}
 
-public slots:
+	public slots:
 	void SaveSettingsToFile();
 	void LoadSettingsFromFile();
 

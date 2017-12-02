@@ -23,7 +23,7 @@ class PaintThread : public QThread
 {
 	Q_OBJECT
 public:
-	
+
 	PaintThread(const DatabaseRef& dbr, QPixmap* pix, SettingsManager& settings, QObject* parent = nullptr);
 	PaintThread(const PaintThread& pt);
 	~PaintThread();
@@ -48,7 +48,7 @@ signals:
 	void paintDone();
 };
 
-class PaintThread::ThreadBuilder 
+class PaintThread::ThreadBuilder
 {
 public:
 private:

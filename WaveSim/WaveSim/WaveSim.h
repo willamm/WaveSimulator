@@ -1,27 +1,28 @@
 #pragma once
 
+#include <fstream>
+#include <iostream>
 #include <memory>
 
 #include <QtWidgets/QMainWindow>
 #include <QApplication>
-#include <QFile>
-#include <QTreeView>
-#include <QVBoxLayout>
 #include <QContextMenuEvent>
-#include <QStandardItemModel>
-#include <QObject>
-#include <QPushButton>
-#include <QFileDialog>
 #include <QDesktopServices>
-#include <iostream>
-#include <fstream>
+#include <QFile>
+#include <QFileDialog>
+#include <QObject>
+#include <QStandardItemModel>
+#include <QTreeView>
+#include <QPushButton>
+#include <QVBoxLayout>
 
+#include "json.hpp"
+
+#include "AddCircleDialog.h"
 #include "AddRectDialog.h"
 #include "ObjectTree.h"
-#include "AddCircleDialog.h"
-#include "ui_WaveSim.h"
 #include "RenderController.h"
-#include "json.hpp"
+#include "ui_WaveSim.h"
 
 using json = nlohmann::json;
 using namespace std;
@@ -33,7 +34,7 @@ public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
 	~WaveSim() = default;
 
-public slots:
+	public slots:
 	void New();
 	void Save();
 	void Load();
@@ -41,14 +42,14 @@ public slots:
 	void sendToWiki();
 
 private:
-	Ui::WaveSimClass ui;
-	unique_ptr<AddRectDialog> mAddRectDialog;
-	unique_ptr<AddCircleDialog> mAddCircleDialog;
+	Ui::WaveSimClass ui;	/*! The main Qt ui object. */
+	unique_ptr<AddRectDialog> mAddRectDialog;	/*! The dialog window for entering a rectangle. */
+	unique_ptr<AddCircleDialog> mAddCircleDialog;	/*! The dialog window for entering a cirle. */
 
-	unique_ptr<RenderController> rc;
-	DatabaseRef databaseRef;
+	DatabaseRef databaseRef;	/*! A reference to a singleton flyweight object that contians all the data about the solver. */
 
-	unique_ptr<ObjectTree> objectTree;
+	unique_ptr<RenderController> rc;	/*! The rendering viewport object. */
+	unique_ptr<ObjectTree> objectTree;	/*! The object tree object. */
 
 	void createToolBarButtons();
 	void createRenderer();

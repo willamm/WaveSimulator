@@ -41,7 +41,7 @@ RenderController::RenderController(QWidget *parent, const DatabaseRef& dbr)
 }
 
 /**
-*	Starts the calculation thread. Also makes the tool bar blue while 
+*	Starts the calculation thread. Also makes the tool bar blue while
 *	the calculation is going.
 */
 void RenderController::startCalculation()
@@ -53,7 +53,7 @@ void RenderController::startCalculation()
 }
 
 /**
-*	Make the solver perform 1 timestep. 
+*	Make the solver perform 1 timestep.
 */
 void RenderController::doOneTimestep()
 {
@@ -106,7 +106,7 @@ void RenderController::AddRect(const int x, const int y, const int width, const 
 
 /**
 *	Adds a circle the renderer.
-* 
+*
 *	@param x The X-coordinate of the center of the circle.
 *	@param y The Y-coordinate of the center of the circle.
 *	@param radius The radius of the circle.
@@ -147,7 +147,7 @@ void RenderController::ResetField()
 
 /**
 *	Validates a rectangle before adding it to the renderer.
-* 
+*
 *	@param x The top left X-coordinate of the rectangle.
 *	@param y The top left Y-coordinate of the rectangle.
 *	@param w The width of the rectangle.

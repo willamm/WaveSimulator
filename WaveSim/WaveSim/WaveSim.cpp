@@ -2,6 +2,9 @@
 
 using namespace std;
 
+/**
+*	Constructor for the main parent window of the program.
+*/
 WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)
 	, databaseRef(DatabaseRef::GetInstance())
@@ -15,11 +18,17 @@ WaveSim::WaveSim(QWidget *parent)
 	connectMenuActions();
 }
 
+/**
+*	Creates the viewport for the renderer.
+*/
 void WaveSim::createRenderer()
 {
 	rc = make_unique<RenderController>(this, databaseRef);
 }
 
+/**
+*	Creates the object tree component.
+*/
 void WaveSim::createObjectTree()
 {
 	objectTree = std::make_unique<ObjectTree>();
@@ -28,6 +37,9 @@ void WaveSim::createObjectTree()
 	connect(rc.get(), &RenderController::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
 }
 
+/**
+*	Sets up the layout for the entire window.
+*/
 void WaveSim::setLayout()
 {
 	QHBoxLayout* layout = new QHBoxLayout(this);
@@ -40,6 +52,11 @@ void WaveSim::setLayout()
 	setCentralWidget(window);
 }
 
+/**
+*	Creates the dialog boxes.
+*
+*	Instantiates the AddRect and AddCircle dialog boxes so they can be shown when needed.
+*/
 void WaveSim::createDialogs()
 {
 	mAddRectDialog = make_unique<AddRectDialog>(this);
@@ -52,6 +69,12 @@ void WaveSim::createDialogs()
 	connect(mAddCircleDialog.get(), &AddCircleDialog::CircleSpecifiedSignal, rc.get(), &RenderController::AddCircle);
 }
 
+/**
+*	Creates the buttons for the toolbar.
+*
+*	The buttons are created in this order:
+*	[Start][Stop][Step][Add Rect][Add Circle][Reset Field][Clear Shapes]
+*/
 void WaveSim::createToolBarButtons()
 {
 	QToolBar* toolbar = ui.mainToolBar;
@@ -82,6 +105,9 @@ void WaveSim::createToolBarButtons()
 	toolbar->addWidget(clearShapesButton);
 }
 
+/**
+*	Sets up the connections for the menu actions.
+*/
 void WaveSim::connectMenuActions()
 {
 	connect(ui.actionExit, &QAction::triggered, this, &QMainWindow::close);
@@ -92,6 +118,9 @@ void WaveSim::connectMenuActions()
 	connect(ui.actionWiki, &QAction::triggered, this, &WaveSim::sendToWiki);
 }
 
+/**
+*	Saves the current set of shapes to a json file.
+*/
 void WaveSim::Save()
 {
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
@@ -112,6 +141,9 @@ void WaveSim::Save()
 
 }
 
+/**
+*	Loads a json file and populates the shapes from the json file.
+*/
 void WaveSim::Load()
 {
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
@@ -157,6 +189,9 @@ void WaveSim::Load()
 
 }
 
+/**
+*	Resets the state of the program to the default state.
+*/
 void WaveSim::New()
 {
 	rc->pauseCalculation();
@@ -164,11 +199,17 @@ void WaveSim::New()
 	rc->ResetField();
 }
 
+/**
+*	Links the user to the readme file.
+*/
 void WaveSim::sendToReadme()
 {
 	QDesktopServices::openUrl(QUrl("https://github.com/willamm/WaveSimulator#wavesimulator", QUrl::TolerantMode));
 }
 
+/**
+*	Links the user to the wiki page.
+*/
 void WaveSim::sendToWiki()
 {
 	QDesktopServices::openUrl(QUrl("https://github.com/willamm/WaveSimulator/wiki", QUrl::TolerantMode));

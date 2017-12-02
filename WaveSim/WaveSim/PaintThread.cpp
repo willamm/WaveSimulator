@@ -4,9 +4,9 @@ using namespace std;
 
 /**
 *	Contructor.
-*	
+*
 *	Creates a thread that handles painting pixels in Qt.
-*	
+*
 *	@param dbr A reference to the database.
 *	@param pix The Qt pixmap to draw on.
 *	@param settings The object containing settings about the viewport's meta data.
@@ -36,7 +36,7 @@ PaintThread::~PaintThread()
 
 /**
 *	The main entry point for the thread.
-*	
+*
 *	Performs a paint operation once evert FPS / 1000 ms.
 */
 void PaintThread::run()

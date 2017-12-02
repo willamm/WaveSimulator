@@ -2,9 +2,9 @@
 
 /**
 *	Constructor.
-*	
+*
 *	Creates a thread that handles all phyics calculations.
-*	
+*
 *	@param solver The module that contians the solver.
 *	@param settings	The object that contains settings about misc data like FPS an size.
 *	@param parent The parent QObject.
@@ -36,7 +36,7 @@ CalcThread::~CalcThread()
 void CalcThread::run()
 {
 	int frametime = 1000 / mSettings.GetValue(SettingsManager::KEY_FPS);
-	while (mRunning) 
+	while (mRunning)
 	{
 		while (mDoCalculation)
 		{
@@ -48,7 +48,7 @@ void CalcThread::run()
 		}
 		msleep(frametime);
 	}
-	
+
 }
 
 /**

@@ -150,21 +150,6 @@
     <ClCompile Include="ObjectTree.cpp">
       <Filter>Object tree</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_EditCircleDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_EditRectDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_EditCircleDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_EditRectDialog.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectTreeItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SettingsManager.cpp">
       <Filter>SettingsManager</Filter>
     </ClCompile>
@@ -173,6 +158,21 @@
     </ClCompile>
     <ClCompile Include="EditRectDialog.cpp">
       <Filter>Dialog\EditRectDialog</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EditCircleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EditCircleDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_EditRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_EditRectDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectTreeItem.cpp">
+      <Filter>Object tree</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

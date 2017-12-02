@@ -48,14 +48,14 @@ private:
 	bool validateCircle(const int x, const int y, const int r);
 	void mousePressEvent(QMouseEvent *event) override;
 
-private slots:
+	private slots:
 	void afterPainting();
 
-public slots:
+	public slots:
 	void startCalculation();
 	void doOneTimestep();
 	void pauseCalculation();
-	void stopCalculation();	
+	void stopCalculation();
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
 	void AddCircle(const int x, const int y, const int radius, const double vel);
 	void ClearShapes();
