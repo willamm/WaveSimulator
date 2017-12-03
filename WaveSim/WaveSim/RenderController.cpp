@@ -92,7 +92,7 @@ void RenderController::stopCalculation()
 */
 void RenderController::AddRect(const int x, const int y, const int width, const int height, const double vel)
 {
-	if (validateRect(x, y, width, height))
+	if (isValidRect(x, y, width, height))
 	{
 		mShapes->AddRect(x, y, width, height, vel);
 		mSolver->AddRectangle(x, y, width, height, vel);
@@ -100,7 +100,7 @@ void RenderController::AddRect(const int x, const int y, const int width, const 
 	}
 	else
 	{
-		QMessageBox::warning(this, "Out of Bounds", "The rectangle you are trying to add exceeds the allowed boundaries");
+		QMessageBox::warning(this, "Out of Bounds", "The rectangle you are trying to add exceeds the allowed boundaries.");
 	}
 }
 
@@ -115,7 +115,7 @@ void RenderController::AddRect(const int x, const int y, const int width, const 
 */
 void RenderController::AddCircle(const int x, const int y, const int radius, const double vel)
 {
-	if (validateCircle(x, y, radius))
+	if (isValidCircle(x, y, radius))
 	{
 		mShapes->AddCircle(x, y, radius, vel);
 		mSolver->AddCircle(x, y, radius, vel);
@@ -123,7 +123,56 @@ void RenderController::AddCircle(const int x, const int y, const int radius, con
 	}
 	else
 	{
-		QMessageBox::warning(this, "Out of Bounds", "The circle you are trying to add exceeds the allowed boundaries");
+		QMessageBox::warning(this, "Out of Bounds", "The circle you are trying to add exceeds the allowed boundaries.");
+	}
+}
+
+/**
+*	A Qt slot that gets triggered after a user attempts to edit a rectangle.
+*
+*	If the rectangle the user entered if a valid rectangle, the application gets updated to reflect the changes.
+*	
+*	@param rect The rectangle attempting to be changed.
+*	@param x The desired new x position.
+*	@param y The desired new y position.
+*	@param width The desired new width.
+*	@param height The desired new height.
+*	@param vel The desired new velocity. 
+*/
+void RenderController::EditRect(LRect<double>* rect, const int x, const int y, const int width, const int height, const double vel)
+{
+	if (isValidRect(x, y, width, height))
+	{
+		rect->SetNewParams(x, y, width, height, vel);
+		mSolver->RepopulateShapes(mShapes->GetShapes());
+	}
+	else
+	{
+		QMessageBox::warning(this, "Out of Bounds", "The changed rectangle exceeds the allowed boundaries.");
+	}
+}
+
+/**
+*	A Qt slot that gets triggered after a user attempts to edit a circle.
+*
+*	If the circle the user entered if a valid circle, the application gets updated to reflect the changes.
+*	
+*	@param circle The circle attempting to be changed.
+*	@param x The desired new x position.
+*	@param y The desired new y position.
+*	@param radius The desired new radius.
+*	@param vel The desired new velocity. 
+*/
+void RenderController::EditCircle(LCircle<double>* circle, const int x, const int y, const int radius, const double vel)
+{
+	if (isValidCircle(x, y, radius))
+	{
+		circle->SetNewParams(x, y, radius, vel);
+		mSolver->RepopulateShapes(mShapes->GetShapes());
+	}
+	else
+	{
+		QMessageBox::warning(this, "Out of Bounds", "The changed circle exceesd the allowed boundaries.");
 	}
 }
 
@@ -155,7 +204,7 @@ void RenderController::ResetField()
 *
 *	@return True if the rectangle is valid, false otherwise.
 */
-bool RenderController::validateRect(const int x, const int y, const int w, const int h)
+bool RenderController::isValidRect(const int x, const int y, const int w, const int h)
 {
 	if (x < 1) return false;
 	if (y < 1) return false;
@@ -173,7 +222,7 @@ bool RenderController::validateRect(const int x, const int y, const int w, const
 *
 *	@return True if the circle is valid, false otherwise.
 */
-bool RenderController::validateCircle(const int x, const int y, const int r)
+bool RenderController::isValidCircle(const int x, const int y, const int r)
 {
 	if (x - r < 1) return false;
 	if (y - r < 1) return false;

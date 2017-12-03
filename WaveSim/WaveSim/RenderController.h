@@ -44,20 +44,22 @@ private:
 	unique_ptr<QGraphicsPixmapItem> mPixItem;
 	unique_ptr<QGraphicsView> mView;
 
-	bool validateRect(const int x, const int y, const int w, const int h);
-	bool validateCircle(const int x, const int y, const int r);
+	bool isValidRect(const int x, const int y, const int w, const int h);
+	bool isValidCircle(const int x, const int y, const int r);
 	void mousePressEvent(QMouseEvent *event) override;
 
-	private slots:
+private slots:
 	void afterPainting();
 
-	public slots:
+public slots:
 	void startCalculation();
 	void doOneTimestep();
 	void pauseCalculation();
 	void stopCalculation();
 	void AddRect(const int x, const int y, const int width, const int height, const double vel);
 	void AddCircle(const int x, const int y, const int radius, const double vel);
+	void EditRect(LRect<double>* rect, const int x, const int y, const int widht, const int height, const double vel);
+	void EditCircle(LCircle<double>* circle, const int x, const int y, const int radius, const double vel);
 	void ClearShapes();
 	void ResetField();
 

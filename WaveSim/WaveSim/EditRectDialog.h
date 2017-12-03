@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+
 #include "ui_EditRectDialog.h"
 #include "LRect.h"
 
@@ -10,17 +11,21 @@ class EditRectDialog : public QDialog
 
 public:
 	EditRectDialog(QWidget *parent = Q_NULLPTR);
-	~EditRectDialog();
+	~EditRectDialog() = default;
 
 	void setRect(LRect<double>* rect);
-
-public slots:
-	void accept() override;
 
 private:
 	void fillFields();
 
 	Ui::EditRectDialog ui;
 
-	LRect<double>* m_rect;
+	LRect<double>* mRect;
+
+signals:
+	void RectEdited(LRect<double>* rect, const int x, const int y, const int w, const int h, const int vel);
+
+public slots:
+	void accept() override;
+
 };

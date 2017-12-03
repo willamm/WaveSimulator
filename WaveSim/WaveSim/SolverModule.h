@@ -1,7 +1,12 @@
 #pragma once
 
+#include <vector>
+
 #include "Module.h"
 #include "WaveSolver.h"
+#include "LShape.h"
+#include "LRect.h"
+#include "LCircle.h"
 
 using namespace std;
 
@@ -15,6 +20,7 @@ public:
 
 	const void AddRectangle(const int x, const int y, const int width, const int height, const double vel);
 	const void AddCircle(const int x, const int y, const int radius, const double vel);
+	const void RepopulateShapes(const vector<unique_ptr<LShape<double>>>& shapes);
 	const void ResetMaterials();
 	const void ResetField();
 

@@ -1,11 +1,9 @@
 #pragma once
 
-#include <QTreeWidget>
-#include <QHeaderView>
 #include <QDialog>
+#include <QHeaderView>
 #include <QMenu>
-// for debugging
-#include <QDebug>
+#include <QTreeWidget>
 
 #include "DatabaseRef.h"
 #include "ObjectTreeItem.h"
@@ -21,8 +19,15 @@ public:
 	ObjectTree(QWidget* parent = 0);
 	~ObjectTree();
 
-signals:
-	void shapeEdited();
+	inline EditRectDialog* GetEditRectDialog()
+	{
+		return mRectDialog;
+	}
+
+	inline EditCircleDialog* GetEditCircleDialog()
+	{
+		return mCircleDialog;
+	}
 
 public slots:
 	void onContextMenuRequested(const QPoint& pos);
@@ -34,12 +39,12 @@ private:
 
 	// Initialization
 
-	QTreeWidgetItem* dummyRoot;
-	QTreeWidgetItem* geometryRoot;
-	QTreeWidgetItem* solverRoot;
+	QTreeWidgetItem* mDummyRoot;
+	QTreeWidgetItem* mGeometryRoot;
+	QTreeWidgetItem* mSolverRoot;
 
-	EditRectDialog* rectDialog;
-	EditCircleDialog* circleDialog;
+	EditRectDialog* mRectDialog;
+	EditCircleDialog* mCircleDialog;
 
 	const DatabaseRef databaseRef;
 };

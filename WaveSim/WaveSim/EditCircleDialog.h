@@ -1,27 +1,32 @@
 #pragma once
 
 #include <QDialog>
+
 #include "ui_EditCircleDialog.h"
 #include "LCircle.h"
 
 class EditCircleDialog : public QDialog
 {
 	Q_OBJECT
-signals:
-	void circleEdited();
+
 public:
 	EditCircleDialog(QWidget *parent = Q_NULLPTR);
-	~EditCircleDialog();
+	~EditCircleDialog() = default;
 
 	void setCircle(LCircle<double>* circle);
-
-public slots:
-	void accept() override;
 
 private:
 	void fillFields();
 
 	Ui::EditCircleDialog ui;
 
-	LCircle<double>* m_circle;
+	LCircle<double>* mCircle;
+
+signals:
+	void CircleEdited(LCircle<double>* circle, const int x, const int y, const int r, const int vel);
+
+public slots:
+	void accept() override;
+
 };
+

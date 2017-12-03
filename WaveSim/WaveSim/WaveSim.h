@@ -30,16 +30,10 @@ using namespace std;
 class WaveSim : public QMainWindow
 {
 	Q_OBJECT
+
 public:
 	WaveSim(QWidget *parent = Q_NULLPTR);
 	~WaveSim() = default;
-
-	public slots:
-	void New();
-	void Save();
-	void Load();
-	void sendToReadme();
-	void sendToWiki();
 
 private:
 	Ui::WaveSimClass ui;	/*! The main Qt ui object. */
@@ -57,4 +51,11 @@ private:
 	void createDialogs();
 	void setLayout();
 	void connectMenuActions();
+
+public slots:
+	void New();
+	void Save();
+	void Load();
+	void sendToReadme();
+	void sendToWiki();
 };

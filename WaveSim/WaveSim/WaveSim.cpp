@@ -31,10 +31,12 @@ void WaveSim::createRenderer()
 */
 void WaveSim::createObjectTree()
 {
-	objectTree = std::make_unique<ObjectTree>();
+	objectTree = make_unique<ObjectTree>();
 	connect(rc.get(), &RenderController::rectAdded, objectTree.get(), &ObjectTree::addItem);
 	connect(rc.get(), &RenderController::circleAdded, objectTree.get(), &ObjectTree::addItem);
 	connect(rc.get(), &RenderController::shapesCleared, objectTree.get(), &ObjectTree::clearShapes);
+	connect(objectTree->GetEditRectDialog(), &EditRectDialog::RectEdited, rc.get(), &RenderController::EditRect);
+	connect(objectTree->GetEditCircleDialog(), &EditCircleDialog::CircleEdited, rc.get(), &RenderController::EditCircle);
 }
 
 /**

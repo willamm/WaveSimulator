@@ -67,6 +67,28 @@ public:
 	}
 
 	/**
+	*	Changes the values of the shape to new values
+	*
+	*	The new paramaters are entered in the range of [1, X][1, Y] but get 
+	*	converted to [0, X-1][0, Y-1] where X and Y are the width and height 
+	*	of the solver.
+	*	
+	*	@param x The new x position.
+	*	@param y The new y position.
+	*	@param width The new width.
+	*	@param height The new height.
+	*	@param vel The new velocity.
+	*/
+	void SetNewParams(const int x, const int y, const int width, const int height, const double vel)
+	{
+		LShape::SetX(x - 1);
+		LShape::SetY(y - 1);
+		LShape::SetVel(vel);
+		mWidth = width;
+		mHeight = height;
+	}
+
+	/**
 	*	Draws the rectangle.
 	*
 	*	Draws the shape on a QPainter surface.

@@ -64,6 +64,12 @@ const void SolverModule::AddCircle(const int x, const int y, const int radius, c
 	mSolver.addCircle(x - 1, y - 1, radius, vel);
 }
 
+const void SolverModule::RepopulateShapes(const vector<unique_ptr<LShape<double>>>& shapes)
+{
+	// Delete current WaveSim
+	// Iterate through shapes and add
+}
+
 /**
  *	Removes all shapes
  *

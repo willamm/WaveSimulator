@@ -1,16 +1,16 @@
 #include "ObjectTree.h"
 
 /**
-* Constructor for ObjectTree.
+*	Constructor for ObjectTree.
 * 
-* @param parent The QWidget object that is the parent of this object.
+*	@param parent The QWidget object that is the parent of this object.
 */
 ObjectTree::ObjectTree(QWidget *parent)
 	: QTreeWidget(parent)
-	, dummyRoot(new QTreeWidgetItem(this))
+	, mDummyRoot(new QTreeWidgetItem(this))
 	, databaseRef(DatabaseRef::GetInstance())
-	, circleDialog(new EditCircleDialog(this))
-	, rectDialog(new EditRectDialog(this))
+	, mCircleDialog(new EditCircleDialog(this))
+	, mRectDialog(new EditRectDialog(this))
 {
 	QStringList headerLabels;
 	headerLabels << "Name" << "Type";
@@ -19,28 +19,28 @@ ObjectTree::ObjectTree(QWidget *parent)
 	header()->setSectionResizeMode(QHeaderView::ResizeToContents);
 	setContextMenuPolicy(Qt::CustomContextMenu);
 
-	addTopLevelItem(dummyRoot);
-	dummyRoot->setText(0, "Root");
-	dummyRoot->setText(1, "Root");
-	dummyRoot->setExpanded(true);
+	addTopLevelItem(mDummyRoot);
+	mDummyRoot->setText(0, "Root");
+	mDummyRoot->setText(1, "Root");
+	mDummyRoot->setExpanded(true);
 	
-	geometryRoot = new QTreeWidgetItem(dummyRoot);
-	geometryRoot->setText(0, "Geometry");
-	geometryRoot->setText(1, "Group");
-	geometryRoot->setExpanded(true);
+	mGeometryRoot = new QTreeWidgetItem(mDummyRoot);
+	mGeometryRoot->setText(0, "Geometry");
+	mGeometryRoot->setText(1, "Group");
+	mGeometryRoot->setExpanded(true);
 
-	solverRoot = new QTreeWidgetItem(dummyRoot);
-	solverRoot->setText(0, "Solver");
-	solverRoot->setText(1, "Group");
-	solverRoot->setExpanded(true);
+	mSolverRoot = new QTreeWidgetItem(mDummyRoot);
+	mSolverRoot->setText(0, "Solver");
+	mSolverRoot->setText(1, "Group");
+	mSolverRoot->setExpanded(true);
 
 	connect(this, &ObjectTree::customContextMenuRequested, this, &ObjectTree::onContextMenuRequested);
 }
 
 ObjectTree::~ObjectTree()
 {
-	delete geometryRoot;
-	delete dummyRoot;
+	delete mGeometryRoot;
+	delete mDummyRoot;
 	// throws exception
 	//delete solverRoot;
 }
@@ -58,15 +58,15 @@ void ObjectTree::addItem()
 {
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
 	LShape<double>* end = shapes->GetShapes().back().get();
-	ObjectTreeItem* shapeNode = new ObjectTreeItem(geometryRoot, end);
+	ObjectTreeItem* shapeNode = new ObjectTreeItem(mGeometryRoot, end);
 	shapeNode->setText(0, QString::fromStdString(shapeNode->getShapeName()));
 	shapeNode->setText(1, "Structure");
-	geometryRoot->setExpanded(true);
+	mGeometryRoot->setExpanded(true);
 }
 
 void ObjectTree::clearShapes()
 {
-	geometryRoot->takeChildren();
+	mGeometryRoot->takeChildren();
 }
 
 void ObjectTree::showContextMenu(const ObjectTreeItem* item, const QPoint& pos) const
@@ -74,16 +74,18 @@ void ObjectTree::showContextMenu(const ObjectTreeItem* item, const QPoint& pos) 
 	QMenu menu;
 	QString actionName = "Edit " + QString::fromStdString(item->getShapeName());
 	QDialog* dialog;
+
 	if (LCircle<double>* circle = dynamic_cast<LCircle<double>*>(item->getShape()))
 	{
-		circleDialog->setCircle(circle);
-		dialog = circleDialog;
+		mCircleDialog->setCircle(circle);
+		dialog = mCircleDialog;
 	}
 	else if (LRect<double>* rect = dynamic_cast<LRect<double>*>(item->getShape()))
 	{
-		rectDialog->setRect(rect);
-		dialog = rectDialog;
+		mRectDialog->setRect(rect);
+		dialog = mRectDialog;
 	}
-	QAction* edit = menu.addAction(actionName, dialog, &QDialog::exec);
+
+	QAction* edit = menu.addAction(actionName, dialog, &QDialog::show);
 	menu.exec(pos);
 }

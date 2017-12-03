@@ -9,29 +9,28 @@ EditCircleDialog::EditCircleDialog(QWidget *parent)
 	connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
-EditCircleDialog::~EditCircleDialog()
-{
-}
-
 void EditCircleDialog::setCircle(LCircle<double>* circle)
 {
-	m_circle = circle;
+	mCircle = circle;
 	fillFields();
 }
 
 void EditCircleDialog::fillFields()
 {
-	ui.xLineEdit->setText(QString::number(m_circle->GetX() + 1));
-	ui.yLineEdit->setText(QString::number(m_circle->GetY() + 1));
-	ui.velocityLineEdit->setText(QString::number(m_circle->GetVel()));
-	ui.radiusLineEdit->setText(QString::number(m_circle->GetRadius()));
+	ui.xLineEdit->setText(QString::number(mCircle->GetX() + 1));
+	ui.yLineEdit->setText(QString::number(mCircle->GetY() + 1));
+	ui.velocityLineEdit->setText(QString::number(mCircle->GetVel()));
+	ui.radiusLineEdit->setText(QString::number(mCircle->GetRadius()));
 }
+
 void EditCircleDialog::accept()
 {
-	m_circle->SetX(ui.xLineEdit->text().toInt());
-	m_circle->SetY(ui.yLineEdit->text().toInt());
-	m_circle->SetVel(ui.velocityLineEdit->text().toDouble());
-	m_circle->SetRadius(ui.radiusLineEdit->text().toInt());
-	emit circleEdited();
+	const int x = ui.xLineEdit->text().toInt();
+	const int y = ui.yLineEdit->text().toInt();
+	const int r = ui.radiusLineEdit->text().toInt();
+	const int vel = ui.velocityLineEdit->text().toDouble();
+
+	emit CircleEdited(mCircle, x, y, r, vel);
+
 	QDialog::accept();
 }

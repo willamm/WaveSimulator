@@ -9,31 +9,30 @@ EditRectDialog::EditRectDialog(QWidget *parent)
 	connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
-EditRectDialog::~EditRectDialog()
-{
-}
-
 void EditRectDialog::setRect(LRect<double>* rect)
 {
-	m_rect = rect;
+	mRect = rect;
 	fillFields();
 }
 
 void EditRectDialog::fillFields()
 {
-	ui.xLineEdit->setText(QString::number(m_rect->GetX() + 1));
-	ui.yLineEdit->setText(QString::number(m_rect->GetY() + 1));
-	ui.velocityLineEdit->setText(QString::number(m_rect->GetVel()));
-	ui.widthLineEdit->setText(QString::number(m_rect->GetWidth()));
-	ui.heightLineEdit->setText(QString::number(m_rect->GetHeight()));
+	ui.xLineEdit->setText(QString::number(mRect->GetX() + 1));
+	ui.yLineEdit->setText(QString::number(mRect->GetY() + 1));
+	ui.velocityLineEdit->setText(QString::number(mRect->GetVel()));
+	ui.widthLineEdit->setText(QString::number(mRect->GetWidth()));
+	ui.heightLineEdit->setText(QString::number(mRect->GetHeight()));
 }
 
 void EditRectDialog::accept()
 {
-	m_rect->SetX(ui.xLineEdit->text().toInt());
-	m_rect->SetY(ui.yLineEdit->text().toInt());
-	m_rect->SetVel(ui.velocityLineEdit->text().toDouble());
-	m_rect->SetWidth(ui.widthLineEdit->text().toInt());
-	m_rect->SetHeight(ui.heightLineEdit->text().toInt());
+	const int x = ui.xLineEdit->text().toInt();
+	const int y = ui.yLineEdit->text().toInt();
+	const int w = ui.widthLineEdit->text().toInt();
+	const int h = ui.heightLineEdit->text().toInt();
+	const int vel = ui.velocityLineEdit->text().toDouble();
+
+	emit RectEdited(mRect, x, y, w, h, vel);
+
 	QDialog::accept();
 }
