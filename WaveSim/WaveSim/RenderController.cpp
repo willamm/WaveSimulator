@@ -100,7 +100,7 @@ void RenderController::AddRect(const int x, const int y, const int width, const 
 	}
 	else
 	{
-		QMessageBox::warning(this, "Out of Bounds", "The rectangle you are trying to add exceeds the allowed boundaries.");
+		QMessageBox::warning(this, "Error", "The new rectangle is not allowed.");
 	}
 }
 
@@ -123,7 +123,7 @@ void RenderController::AddCircle(const int x, const int y, const int radius, con
 	}
 	else
 	{
-		QMessageBox::warning(this, "Out of Bounds", "The circle you are trying to add exceeds the allowed boundaries.");
+		QMessageBox::warning(this, "Error", "The new circle is not allowed.");
 	}
 }
 
@@ -148,7 +148,7 @@ void RenderController::EditRect(LRect<double>* rect, const int x, const int y, c
 	}
 	else
 	{
-		QMessageBox::warning(this, "Out of Bounds", "The changed rectangle exceeds the allowed boundaries.");
+		QMessageBox::warning(this, "Error", "The new rectangle is not allowed.");
 	}
 }
 
@@ -172,7 +172,7 @@ void RenderController::EditCircle(LCircle<double>* circle, const int x, const in
 	}
 	else
 	{
-		QMessageBox::warning(this, "Out of Bounds", "The changed circle exceesd the allowed boundaries.");
+		QMessageBox::warning(this, "Error", "The new circlej is not allowed.");
 	}
 }
 
@@ -206,6 +206,8 @@ void RenderController::ResetField()
 */
 bool RenderController::isValidRect(const int x, const int y, const int w, const int h)
 {
+	if (w < 1) return false;
+	if (h < 1) return false;
 	if (x < 1) return false;
 	if (y < 1) return false;
 	if (x + w > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
@@ -224,6 +226,7 @@ bool RenderController::isValidRect(const int x, const int y, const int w, const 
 */
 bool RenderController::isValidCircle(const int x, const int y, const int r)
 {
+	if (r < 1) return false;
 	if (x - r < 1) return false;
 	if (y - r < 1) return false;
 	if (x + r > mSettings.GetValue(SettingsManager::KEY_SIZE_X)) return false;
