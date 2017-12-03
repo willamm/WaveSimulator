@@ -18,7 +18,6 @@ public:
         mFieldNext(numCellsX, numCellsY, 0),
         mVelocity(numCellsX, numCellsY, defaultVelocity)
     {
-        // Add a single (source) peak in the middle of the current field
         mField(mCenterX, mCenterY) = 1.0;
     }
 

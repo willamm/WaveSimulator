@@ -54,7 +54,6 @@ void PaintThread::run()
 	}
 }
 
-
 /**
 *	The painting function.
 *

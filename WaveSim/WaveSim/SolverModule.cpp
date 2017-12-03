@@ -1,5 +1,9 @@
 #include "SolverModule.h"
 
+// Use SettingsManager instead of this for resizable viewport
+#define WIDTH 200
+#define HEIGHT 200
+
 using namespace std;
 
 /**
@@ -10,7 +14,7 @@ using namespace std;
  *	to other controller classes as needed.
 */
 SolverModule::SolverModule()
-	: mSolver(WaveSolver<double>(200, 200))
+	: mSolver(WaveSolver<double>(WIDTH, HEIGHT))
 {
 	// TODO: Get the size from SettingsManager
 }
@@ -64,10 +68,35 @@ const void SolverModule::AddCircle(const int x, const int y, const int radius, c
 	mSolver.addCircle(x - 1, y - 1, radius, vel);
 }
 
+/**
+*	Updates the solver when a shape is edited.
+*
+*	To update the solver, all shapes are cleared off the field. Then they are all recreated
+*	from the list.
+*	
+*	@param shapes The list of shapes to be placed on the solver.
+*/
 const void SolverModule::RepopulateShapes(const vector<unique_ptr<LShape<double>>>& shapes)
 {
-	// Delete current WaveSim
-	// Iterate through shapes and add
+	mSolver.resetMaterials();
+	for (auto const& shape : shapes)
+	{
+		const int x = shape->GetX();
+		const int y = shape->GetY();
+		const int vel = shape->GetVel();
+
+		if (shape->GetClassName() == "Rectangle")
+		{
+			const LRect<double>* rect = (LRect<double>*)shape.get();
+			AddRectangle(x, y, rect->GetWidth(), rect->GetHeight(), vel);
+		}
+
+		if (shape->GetClassName() == "Circle")
+		{
+			const LCircle<double>* circle = (LCircle<double>*)shape.get();
+			AddCircle(x, y, circle->GetRadius(), vel) ;
+		}
+	}
 }
 
 /**
