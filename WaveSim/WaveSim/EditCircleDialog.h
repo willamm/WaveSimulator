@@ -20,7 +20,7 @@ private:
 
 	Ui::EditCircleDialog ui;
 
-	LCircle<double>* mCircle;
+	LCircle<double>* mCircle;	/*! The LCircle that is being edited. */
 
 signals:
 	void CircleEdited(LCircle<double>* circle, const int x, const int y, const int r, const int vel);

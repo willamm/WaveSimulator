@@ -1,9 +1,9 @@
 #include "ObjectTree.h"
 
 /**
- *	Constructor for ObjectTree.
- * 
- *	@param parent The QWidget object that is the parent of this object.
+*	Constructor for ObjectTree.
+* 
+*	@param parent The QWidget object that is the parent of this object.
 */
 ObjectTree::ObjectTree(QWidget *parent)
 	: QTreeWidget(parent)
@@ -38,7 +38,7 @@ ObjectTree::ObjectTree(QWidget *parent)
 }
 
 /**
- *	Destructor for object tree. Deletes the roots.
+*	Destructor for object tree. Deletes the roots.
 */
 ObjectTree::~ObjectTree()
 {
@@ -46,11 +46,10 @@ ObjectTree::~ObjectTree()
 	delete mDummyRoot;
 }
 
-
 /**
- *	Shows a context menu on the object tree.
- *
- *	@param pos The position of the cursor when the context menu is requested.
+*	Shows a context menu on the object tree.
+*
+*	@param pos The position of the cursor when the context menu is requested.
 */
 void ObjectTree::onContextMenuRequested(const QPoint& pos)
 {
@@ -63,7 +62,7 @@ void ObjectTree::onContextMenuRequested(const QPoint& pos)
 
 
 /**
- *	Adds an item to the object tree.
+*	Adds an item to the object tree.
 */
 void ObjectTree::addItem()
 {
@@ -75,9 +74,8 @@ void ObjectTree::addItem()
 	mGeometryRoot->setExpanded(true);
 }
 
-
 /**
- *	Clears the shape from the object tree.
+*	Clears the shape from the object tree.
 */
 void ObjectTree::clearShapes()
 {
@@ -85,10 +83,10 @@ void ObjectTree::clearShapes()
 }
 
 /**
- *	Spawns the right click context menu with an edit option.
- *
- *	@param item Which item the user clicked on.
- *	@param pos The position of the mouse cursor.
+*	Spawns the right click context menu with an edit option.
+*
+*	@param item Which item the user clicked on.
+*	@param pos The position of the mouse cursor.
 */
 void ObjectTree::showContextMenu(const ObjectTreeItem* item, const QPoint& pos) const
 {

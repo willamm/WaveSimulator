@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+
 #include "ui_AddCircleDialog.h"
 
 class AddCircleDialog : public QDialog

@@ -20,7 +20,7 @@ private:
 
 	Ui::EditRectDialog ui;
 
-	LRect<double>* mRect;
+	LRect<double>* mRect;	/*! The LRect that is being edited. */
 
 signals:
 	void RectEdited(LRect<double>* rect, const int x, const int y, const int w, const int h, const int vel);

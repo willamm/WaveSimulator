@@ -1,6 +1,11 @@
 #include "AddCircleDialog.h"
 
-AddCircleDialog::AddCircleDialog(QWidget *parent)
+/**
+*	Constructor for Add Cicle Dialog box.
+*	
+*	@param parent The parent QWidget
+*/
+AddCircleDialog::AddCircleDialog(QWidget* parent)
 	: QDialog(parent)
 {
 	ui.setupUi(this);
@@ -9,6 +14,9 @@ AddCircleDialog::AddCircleDialog(QWidget *parent)
 	connect(ui.pushButtonCancel, &QPushButton::pressed, this, &QDialog::hide);
 }
 
+/**
+*	Emits a signal containing the parameters of the desired circle.
+*/
 void AddCircleDialog::sendCircle()
 {
 	int x = ui.lineEditX->text().toInt();
@@ -19,6 +27,9 @@ void AddCircleDialog::sendCircle()
 	emit CircleSpecifiedSignal(x, y, r, vel * 0.01);
 }
 
+/**
+*	Clears all the input fields in this dialog box.
+*/
 void AddCircleDialog::clearFields()
 {
 	ui.lineEditX->setText("");
@@ -27,6 +38,12 @@ void AddCircleDialog::clearFields()
 	ui.lineEditVel->setText("");
 }
 
+/**
+*	A Qt Slot.
+*
+*	When Okay is clicked by the user this slot gets triggered. This function
+*	will specify a circle, clear the input fields and hide the dialog box.
+*/
 void AddCircleDialog::apply()
 {
 	sendCircle();

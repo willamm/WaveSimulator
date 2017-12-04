@@ -39,12 +39,12 @@ private:
 
 	// Initialization
 
-	QTreeWidgetItem* mDummyRoot;
-	QTreeWidgetItem* mGeometryRoot;
-	QTreeWidgetItem* mSolverRoot;
+	QTreeWidgetItem* mDummyRoot;	/*! Title root item. */
+	QTreeWidgetItem* mGeometryRoot;	/*! The root for shapes. */
+	QTreeWidgetItem* mSolverRoot;	/*! The root for the solver. */
 
-	EditRectDialog* mRectDialog;
-	EditCircleDialog* mCircleDialog;
+	EditRectDialog* mRectDialog;	/*! The dialog for editing rectangles. */
+	EditCircleDialog* mCircleDialog;/*! The dialog for editing circles. */
 
-	const DatabaseRef databaseRef;
+	const DatabaseRef databaseRef;	/*! Reference to the database. */
 };

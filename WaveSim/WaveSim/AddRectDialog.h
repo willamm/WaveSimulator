@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QDialog>
+
 #include "ui_AddRectDialog.h"
 
 class AddRectDialog : public QDialog
