@@ -97,7 +97,6 @@ json ShapesModule::GetJson()
 
 	for (auto it = mShapes.begin(); it != mShapes.end(); ++it)
 	{
-		//TODO: parse shapes to JSON
 		json tempShapeObject = (*it)->GetJson();
 
 		output[numShapes] = tempShapeObject;
