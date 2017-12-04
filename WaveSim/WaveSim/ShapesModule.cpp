@@ -70,7 +70,7 @@ const vector<unique_ptr<LShape<double>>>& ShapesModule::GetShapes() const
 }
 
 /**
- * Clears all the shapes
+ *	Clears all the shapes
  *
  *  Removes all LShapes in the LShapes vector
  *
