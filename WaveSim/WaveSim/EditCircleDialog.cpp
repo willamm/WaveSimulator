@@ -1,5 +1,10 @@
 #include "EditCircleDialog.h"
 
+/**
+*	Constructor for the edit circle dialog box.
+*
+*	@param parent The parent QWidget.
+*/
 EditCircleDialog::EditCircleDialog(QWidget *parent)
 	: QDialog(parent)
 {
@@ -9,12 +14,20 @@ EditCircleDialog::EditCircleDialog(QWidget *parent)
 	connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
+/**
+*	Assigns the circle the user wants to edit to this dialog.
+*
+*	@param circle A raw pointer to the circle to edit.
+*/
 void EditCircleDialog::setCircle(LCircle<double>* circle)
 {
 	mCircle = circle;
 	fillFields();
 }
 
+/**
+*	Populates the fields with the values from the current shape.
+*/
 void EditCircleDialog::fillFields()
 {
 	ui.xLineEdit->setText(QString::number(mCircle->GetX() + 1));
@@ -23,6 +36,10 @@ void EditCircleDialog::fillFields()
 	ui.radiusLineEdit->setText(QString::number(mCircle->GetRadius()));
 }
 
+/**
+*	Emits a signal containing the circle that the user wants to change
+*	and the desired values.
+*/
 void EditCircleDialog::accept()
 {
 	const int x = ui.xLineEdit->text().toInt();

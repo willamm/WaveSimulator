@@ -3,7 +3,7 @@
 /**
 *	Constructor for the dialog box for adding rectangles.
 *	
-*	@param parent The parent QObject.
+*	@param parent The parent QWidget.
 */
 AddRectDialog::AddRectDialog(QWidget *parent)
 	: QDialog(parent)

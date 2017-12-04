@@ -1,5 +1,10 @@
 #include "EditRectDialog.h"
 
+/**
+*	Constructor for the edit rectangle dialog box.
+*
+*	@param parent The parent QWidget.
+*/
 EditRectDialog::EditRectDialog(QWidget *parent)
 	: QDialog(parent)
 {
@@ -9,12 +14,20 @@ EditRectDialog::EditRectDialog(QWidget *parent)
 	connect(ui.buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 }
 
+/**
+*	Assigns the rectangle the user wants to edit to this dialog.
+*
+*	@param rect A raw pointer to the rectangle to edit.
+*/
 void EditRectDialog::setRect(LRect<double>* rect)
 {
 	mRect = rect;
 	fillFields();
 }
 
+/**
+*	Populates the fields with the values from the current shape.
+*/
 void EditRectDialog::fillFields()
 {
 	ui.xLineEdit->setText(QString::number(mRect->GetX() + 1));
@@ -24,6 +37,10 @@ void EditRectDialog::fillFields()
 	ui.heightLineEdit->setText(QString::number(mRect->GetHeight()));
 }
 
+/**
+*	Emits a signal containing the rect that the user wants to change
+*	and the desired values.
+*/
 void EditRectDialog::accept()
 {
 	const int x = ui.xLineEdit->text().toInt();
