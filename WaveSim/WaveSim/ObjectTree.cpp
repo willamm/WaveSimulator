@@ -37,14 +37,21 @@ ObjectTree::ObjectTree(QWidget *parent)
 	connect(this, &ObjectTree::customContextMenuRequested, this, &ObjectTree::onContextMenuRequested);
 }
 
+/**
+* Destructor for object tree. Deletes the roots.
+*/
 ObjectTree::~ObjectTree()
 {
 	delete mGeometryRoot;
 	delete mDummyRoot;
-	// throws exception
-	//delete solverRoot;
 }
 
+
+/**
+* Shows a context menu on the object tree.
+*
+* @param pos The position of the cursor when the context menu is requested
+*/
 void ObjectTree::onContextMenuRequested(const QPoint& pos)
 {
 	ObjectTreeItem* item = dynamic_cast<ObjectTreeItem*>(itemAt(pos));
@@ -54,6 +61,10 @@ void ObjectTree::onContextMenuRequested(const QPoint& pos)
 	}
 }
 
+
+/**
+* Adds an item to the object tree.
+*/
 void ObjectTree::addItem()
 {
 	ShapesModule* shapes = (ShapesModule*)databaseRef.GetModule(DatabaseRef::SHAPES_KEY).get();
@@ -64,11 +75,21 @@ void ObjectTree::addItem()
 	mGeometryRoot->setExpanded(true);
 }
 
+
+/**
+* Clears the shape from the object tree.
+*/
 void ObjectTree::clearShapes()
 {
 	mGeometryRoot->takeChildren();
 }
 
+/**
+* Spawns the right click context menu with an edit option.
+*
+* @param item Which item the user clicked on
+* @param pos The position of the mouse cursor
+*/
 void ObjectTree::showContextMenu(const ObjectTreeItem* item, const QPoint& pos) const
 {
 	QMenu menu;
