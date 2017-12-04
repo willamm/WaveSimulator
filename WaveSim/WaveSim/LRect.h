@@ -138,6 +138,6 @@ public:
 
 private:
 
-	int mWidth; /*! The width of the rectangle. */
-	int mHeight; /*! The height of the rectangle. */
+	int mWidth;		/*! The width of the rectangle. */
+	int mHeight;	/*! The height of the rectangle. */
 };

@@ -13,11 +13,11 @@ class SettingsManager
 {
 public:
 
-	const static string KEY_FPS;	/*! The key to access the FPS setting. */
+	const static string KEY_FPS;			/*! The key to access the FPS setting. */
 
-	const static string KEY_SIZE_X;	/*! The key to access the size of X. */
-	const static string KEY_SIZE_Y;	/*! The key to access the size of Y. */
-	const static string KEY_PIXEL_SIZE;	/*! The key to access the size of a pixel. */
+	const static string KEY_SIZE_X;			/*! The key to access the size of X. */
+	const static string KEY_SIZE_Y;			/*! The key to access the size of Y. */
+	const static string KEY_PIXEL_SIZE;		/*! The key to access the size of a pixel. */
 
 	const static string KEY_NEUTRAL_COLOR;	/*! The key to access the color assigne to 0 in the wave solver. */
 	const static string KEY_COLOR_CONTRAST;	/*! The value from the wave solver is multplied by this value before being converted to a color. */
@@ -45,7 +45,7 @@ public:
 	void LoadSettingsFromFile();
 
 private:
-	QString mSettingsFilename;	/*! The name of the file that settings are saved too. */
+	QString mSettingsFilename;					/*! The name of the file that settings are saved too. */
 	unordered_map<string, int> mSettingsMap;	/*! The hashmap of settings. */
 };
 

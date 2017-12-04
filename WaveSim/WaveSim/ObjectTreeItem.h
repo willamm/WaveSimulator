@@ -1,7 +1,8 @@
 #pragma once
 
-#include <QTreeWidgetItem>
 #include <memory>
+
+#include <QTreeWidgetItem>
 
 #include "LShape.h"
 

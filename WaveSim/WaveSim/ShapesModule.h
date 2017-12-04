@@ -1,12 +1,14 @@
 #pragma once
+
 #include <memory>
 #include <vector>
+
+#include "json.hpp"
 
 #include "LCircle.h"
 #include "LShape.h"
 #include "LRect.h"
 #include "Module.h"
-#include "json.hpp"
 
 using json = nlohmann::json;
 using namespace std;
@@ -23,8 +25,7 @@ public:
 	const vector<unique_ptr<LShape<double>>>& GetShapes() const;
 	const bool ClearAllShapes();
 	json GetJson();
-	const bool LoadJson(json inputFromFile);
 
 private:
-	vector<unique_ptr<LShape<double>>> mShapes;
+	vector<unique_ptr<LShape<double>>> mShapes;	/*! List of shapes for drawing. */
 };

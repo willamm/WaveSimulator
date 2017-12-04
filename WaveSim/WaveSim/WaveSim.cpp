@@ -4,6 +4,8 @@ using namespace std;
 
 /**
 *	Constructor for the main parent window of the program.
+*	
+*	@param parent The parent QWidget.
 */
 WaveSim::WaveSim(QWidget *parent)
 	: QMainWindow(parent)

@@ -3,6 +3,7 @@
 #include <QDialog>
 
 #include "ui_EditRectDialog.h"
+
 #include "LRect.h"
 
 class EditRectDialog : public QDialog

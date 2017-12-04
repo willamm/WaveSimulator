@@ -1,6 +1,11 @@
 #include "ObjectTreeItem.h"
-#include <QDebug>
 
+/**
+*	The constructor for a single row in the object tree.
+*
+*	@param parent The parent QWidget.
+*	@param shape The same being represented in this row.
+*/
 ObjectTreeItem::ObjectTreeItem(QTreeWidgetItem* parent, LShape<double>* shape)
 	: QTreeWidgetItem(parent)
 	, m_shape(shape)

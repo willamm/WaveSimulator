@@ -2,11 +2,11 @@
 
 #include <vector>
 
-#include "Module.h"
-#include "WaveSolver.h"
 #include "LShape.h"
 #include "LRect.h"
 #include "LCircle.h"
+#include "Module.h"
+#include "WaveSolver.h"
 
 using namespace std;
 
@@ -29,5 +29,5 @@ public:
 	const void SetNewSource(int x, int y);
 	
 private:
-	WaveSolver<double> mSolver;
+	WaveSolver<double> mSolver;	/*! The phyics engine. */
 };

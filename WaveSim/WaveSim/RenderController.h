@@ -31,13 +31,13 @@ public:
 	~RenderController() = default;
 
 private:
-	SettingsManager mSettings;	/*! Manages settings specific to meta data about the solver like size and fps. */
+	SettingsManager mSettings;				/*! Manages settings specific to meta data about the solver like size and fps. */
 
-	shared_ptr<ShapesModule> mShapes; /*! A reference to the shapes module. */
-	shared_ptr<SolverModule> mSolver; /*! A reference to the solver module. */
+	shared_ptr<ShapesModule> mShapes;		/*! A reference to the shapes module. */
+	shared_ptr<SolverModule> mSolver;		/*! A reference to the solver module. */
 
-	unique_ptr<CalcThread> mCThread; /*! A thread that handles all WaveSolver calcuations. */
-	unique_ptr<PaintThread> mPThread; /*! A thread that handles all the GUI calculations. */
+	unique_ptr<CalcThread> mCThread;		/*! A thread that handles all WaveSolver calcuations. */
+	unique_ptr<PaintThread> mPThread;		/*! A thread that handles all the GUI calculations. */
 
 	unique_ptr<QPixmap> mPix;
 	unique_ptr<QGraphicsScene> mScene;

@@ -3,6 +3,7 @@
 #include <QDialog>
 
 #include "ui_EditCircleDialog.h"
+
 #include "LCircle.h"
 
 class EditCircleDialog : public QDialog

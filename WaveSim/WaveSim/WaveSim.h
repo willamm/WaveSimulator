@@ -36,14 +36,14 @@ public:
 	~WaveSim() = default;
 
 private:
-	Ui::WaveSimClass ui;	/*! The main Qt ui object. */
-	unique_ptr<AddRectDialog> mAddRectDialog;	/*! The dialog window for entering a rectangle. */
+	Ui::WaveSimClass ui;							/*! The main Qt ui object. */
+	unique_ptr<AddRectDialog> mAddRectDialog;		/*! The dialog window for entering a rectangle. */
 	unique_ptr<AddCircleDialog> mAddCircleDialog;	/*! The dialog window for entering a cirle. */
 
-	DatabaseRef databaseRef;	/*! A reference to a singleton flyweight object that contians all the data about the solver. */
+	DatabaseRef databaseRef;						/*! A reference to a singleton flyweight object that contians all the data about the solver. */
 
-	unique_ptr<RenderController> rc;	/*! The rendering viewport object. */
-	unique_ptr<ObjectTree> objectTree;	/*! The object tree object. */
+	unique_ptr<RenderController> rc;				/*! The rendering viewport object. */
+	unique_ptr<ObjectTree> objectTree;				/*! The object tree object. */
 
 	void createToolBarButtons();
 	void createRenderer();

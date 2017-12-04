@@ -1,6 +1,5 @@
 #include "ShapesModule.h"
 
-
 using namespace std;
 
 /**
@@ -81,7 +80,6 @@ const bool ShapesModule::ClearAllShapes()
 	mShapes.clear();
 	return mShapes.empty();
 }
-
 
 /**
  *	Get the json representation of the shapes

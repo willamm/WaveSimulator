@@ -6,9 +6,9 @@
 #include <QTreeWidget>
 
 #include "DatabaseRef.h"
-#include "ObjectTreeItem.h"
 #include "EditCircleDialog.h"
 #include "EditRectDialog.h"
+#include "ObjectTreeItem.h"
 
 
 class ObjectTree : public QTreeWidget

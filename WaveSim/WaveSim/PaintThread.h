@@ -1,6 +1,5 @@
 #pragma once
 
-#include <exception>
 #include <memory>
 
 #include <QMutex>
@@ -35,13 +34,13 @@ protected:
 	void run();
 
 private:
-	bool mRunning;	/*! The state of the main run thread. */
+	bool mRunning;						/*! The state of the main run thread. */
 
-	SettingsManager mSettings;	/*! An object that handles all the misc settings like FPS and size. */
-	WaveSolver<double>* mSolver;	/*! The wave solver that handles all the physics calculations. */
+	SettingsManager mSettings;			/*! An object that handles all the misc settings like FPS and size. */
+	WaveSolver<double>* mSolver;		/*! The wave solver that handles all the physics calculations. */
 	shared_ptr<ShapesModule> mShapes;	/*! A reference to the shapes module. */
-	QPixmap* mPix;	/*! The surface that is drawn on. */
-	unique_ptr<QPainter> mPainter;	/*! The QPainting device that performs the drawing. */
+	QPixmap* mPix;						/*! The surface that is drawn on. */
+	unique_ptr<QPainter> mPainter;		/*! The QPainting device that performs the drawing. */
 
 	void paint();
 
@@ -53,5 +52,4 @@ class PaintThread::ThreadBuilder
 {
 public:
 private:
-
 };
